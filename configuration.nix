@@ -110,6 +110,7 @@
     git
     helix
     fish
+    pinentry
   ];
 
   # Font settings
