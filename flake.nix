@@ -39,6 +39,10 @@
         modules = [
           ./configuration.nix
 
+          {
+            nixpkgs.overlays = [ emacs-overlay.overlay ];
+          }
+
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

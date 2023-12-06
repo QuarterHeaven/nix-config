@@ -1,6 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+#  nixpkgs.overlays = [ 
+#    (import (builtins.fetchGit {
+#      url = "https://github.com/nix-community/emacs-overlay.git";
+#      ref = "master";
+#    }))
+#  ];
   # 注意修改这里的用户名与用户目录
   home.username = "taka";
   home.homeDirectory = "/home/taka";
@@ -95,6 +101,8 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+
+    librime
   ];
 
   # 启用 starship，这是一个漂亮的 shell 提示符
@@ -116,14 +124,14 @@
     '';
   };
 
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs-gtk;
-  };
-
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs-git;
   };
 
   # This value determines the Home Manager release that your
