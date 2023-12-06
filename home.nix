@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-#  nixpkgs.overlays = [ 
+#  nixpkgs.overlays = [
 #    (import (builtins.fetchGit {
 #      url = "https://github.com/nix-community/emacs-overlay.git";
 #      ref = "master";
@@ -46,6 +46,7 @@
     # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
     neofetch
     nnn # terminal file manager
+    ncdu
 
     # archives
     zip
@@ -103,6 +104,13 @@
     usbutils # lsusb
 
     librime
+    tdlib
+
+    # Dropbox third-party client
+    maestral-gui
+
+    # Language settings
+    clang
   ];
 
   # 启用 starship，这是一个漂亮的 shell 提示符
@@ -122,6 +130,11 @@
     interactiveShellInit = ''
       starship init fish | source
     '';
+    shellAliases = {
+      ls = "eza";
+      l = "eza";
+      la = "eza -la";
+    };
   };
 
   programs.direnv = {
@@ -131,7 +144,7 @@
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-git;
+    package = pkgs.emacs-unstable;
   };
 
   # This value determines the Home Manager release that your
