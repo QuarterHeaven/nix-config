@@ -47,6 +47,7 @@
     neofetch
     nnn # terminal file manager
     ncdu
+    gparted
 
     # archives
     zip
