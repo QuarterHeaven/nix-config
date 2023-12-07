@@ -111,18 +111,21 @@
     helix
     fish
     pinentry
+    open-vm-tools
   ];
 
   # Font settings
   fonts.packages = with pkgs; [
+    fira-code
+    fira-code-symbols
+    ibm-plex
+    lxgw-wenkai
+    liberation_ttf
     noto-fonts
     noto-fonts-cjk
     noto-fonts-color-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-    lxgw-wenkai
-    ibm-plex
+    unifont_upper
+    symbola
     (nerdfonts.override { fonts = [ "FiraCode" "IBMPlexMono"]; })
   ];
 

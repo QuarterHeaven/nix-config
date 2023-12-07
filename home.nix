@@ -1,12 +1,12 @@
 { config, pkgs, lib, ... }:
 
 {
-#  nixpkgs.overlays = [
-#    (import (builtins.fetchGit {
-#      url = "https://github.com/nix-community/emacs-overlay.git";
-#      ref = "master";
-#    }))
-#  ];
+  #  nixpkgs.overlays = [
+  #    (import (builtins.fetchGit {
+  #      url = "https://github.com/nix-community/emacs-overlay.git";
+  #      ref = "master";
+  #    }))
+  #  ];
   # 注意修改这里的用户名与用户目录
   home.username = "taka";
   home.homeDirectory = "/home/taka";
@@ -60,6 +60,7 @@
     yq-go # yaml processer https://github.com/mikefarah/yq
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
+    fd # alternative of find
 
     # networking tools
     mtr # A network diagnostic tool
@@ -111,7 +112,16 @@
     maestral-gui
 
     # Language settings
-    clang
+    llvmPackages.libcxxClang
+    llvmPackages.libcxxStdenv
+    clang-tools
+    libtool
+    gnumake
+    cmake
+    typst
+    typst-lsp
+    typstfmt
+    typst-live
   ];
 
   # 启用 starship，这是一个漂亮的 shell 提示符
