@@ -167,10 +167,10 @@ export LD_LIBRARY_PATH=${libcxx:1:0-1}:$LD_LIBRARY_PATH
     nix-direnv.enable = true;
   };
 
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs-unstable;
-  };
+#  programs.emacs = {
+#    enable = true;
+#    package = pkgs.emacs-unstable;
+#  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
