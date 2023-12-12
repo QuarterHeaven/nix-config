@@ -125,13 +125,6 @@
   # 启用 starship，这是一个漂亮的 shell 提示符
   programs.starship = {
     enable = true;
-    # 自定义配置
-    settings = {
-      add_newline = false;
-      aws.disabled = true;
-      gcloud.disabled = true;
-      line_break.disabled = true;
-    };
   };
 
   programs.fish = {
@@ -150,12 +143,6 @@
 
   programs.bash = {
     enable = true;
-    initExtra = ''
-libcxxabi=$(nix eval nixpkgs#libcxxabi.outPath)
-libcxx=$(nix eval nixpkgs#libcxx.outPath)
-export LD_LIBRARY_PATH=${libcxxabi:1:0-1}:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=${libcxx:1:0-1}:$LD_LIBRARY_PATH
-'';
     shellAliases = {
       gcc = "clang";
       "g++" = "clang++";
@@ -167,10 +154,10 @@ export LD_LIBRARY_PATH=${libcxx:1:0-1}:$LD_LIBRARY_PATH
     nix-direnv.enable = true;
   };
 
-#  programs.emacs = {
-#    enable = true;
-#    package = pkgs.emacs-unstable;
-#  };
+ programs.emacs = {
+   enable = true;
+   package = pkgs.emacs-unstable;
+ };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

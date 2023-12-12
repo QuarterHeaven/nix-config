@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ../hardware-configuration.nix
-      /${features}/global
     ];
       # Bootloader.
   boot.loader.systemd-boot.enable = true;

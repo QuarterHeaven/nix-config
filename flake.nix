@@ -39,9 +39,38 @@
   outputs = { self, nixpkgs, home-manager, emacs-overlay, nixos-wsl, ... }@inputs: 
   let 
     features = ./features;
+    dotfiles = ./dotfiles;
+    host_wsl = ./hosts/wsl.nix;
+    host_vmware = ./hosts/vmware.nix;
+
+    nixpkgsWithOverlays = with inputs; rec {
+      config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [];
+      };
+      overlays = [
+        emacs-overlay.overlay
+              (self: super: {
+                emacs-unstable = super.emacs-unstable.override {
+                  withXwidgets = true;
+                  withGTK3 = true;
+                };
+              })
+      ];
+    };
+
+    configurationDefaults = args : {
+      nixpkgs = nixpkgsWithOverlays;
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.extraSpecialArgs = args;
+    };
+
+    argDefaults = {
+        inherit inputs dotfiles features;
+    };
   in
   {
-
     devModules = import ./dev.nix;
 
     nixosConfigurations = {
@@ -51,29 +80,12 @@
         modules = [
           ./configuration.nix
 
-          # {
-          #   nixpkgs.overlays = [
-          #     emacs-overlay.overlay
-          #     (self: super: {
-          #       emacs-unstable = super.emacs-unstable.override {
-          #         withXwidgets = true;
-          #         withGTK3 = true;
-          #       };
-          #     })
-          #   ];
-          # }
-          ./hosts/vmware.nix
-          
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+          (configurationDefaults argDefaults)
 
-            home-manager.users.taka = import ./home.nix;
+          host_vmware
 
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-            };
+          home-manager.nixosModules.home-manager {
+            home-manager.users.taka = import /${features}/global;
           }
         ];
       };
@@ -83,21 +95,13 @@
 
         modules = [
           ./configuration.nix
-
-          nixos-wsl.nixosModules.wsl
-
-          ./hosts/wsl.nix
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.users.taka = import ./home.nix;
-
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-            };
+          nixos-wsl.nixosModules.wsl {
+            wsl.enable = true;
+            wsl.defaultUser = "taka";
+          }
+          (configurationDefaults argDefaults)
+          home-manager.nixosModules.home-manager {
+            home-manager.users.taka = import host_wsl;
           }
         ];
       };

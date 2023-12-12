@@ -1,3 +1,7 @@
 { ... }:
 
-{}
+{
+  imports = [
+    ./dotfiles.nix
+  ];
+}

@@ -1,12 +1,9 @@
-{ config, lib, pkgs, features, ... }:
+{ config, lib, pkgs, features, home-manager, dotfiles, ... }:
 
 {
-  networking.hostName = "wsl";
   imports = [
-    <nixos-wsl/modules>
-    # /${features}/global
+    # <nixos-wsl/modules>
+    ../features
+    ../home.nix
   ];
-
-  wsl.enable = true;
-  wsl.defaultUser = "taka";
 }
