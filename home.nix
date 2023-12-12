@@ -1,12 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  #  nixpkgs.overlays = [
-  #    (import (builtins.fetchGit {
-  #      url = "https://github.com/nix-community/emacs-overlay.git";
-  #      ref = "master";
-  #    }))
-  #  ];
   # 注意修改这里的用户名与用户目录
   home.username = "taka";
   home.homeDirectory = "/home/taka";
@@ -43,7 +37,6 @@
   # 这些软件将仅在当前用户下可用，不会影响系统级别的配置
   # 建议将所有 GUI 软件，以及与 OS 关系不大的 CLI 软件，都通过 home.packages 安装
   home.packages = with pkgs;[
-    # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
     neofetch
     nnn # terminal file manager
     ncdu
@@ -61,6 +54,7 @@
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
     fd # alternative of find
+    coreutils-prefixed
 
     # networking tools
     mtr # A network diagnostic tool
@@ -106,6 +100,7 @@
     usbutils # lsusb
 
     librime
+    rime-data
     tdlib
 
     # Dropbox third-party client
@@ -122,6 +117,9 @@
     typst-lsp
     typstfmt
     typst-live
+    texliveFull
+
+    xapian
   ];
 
   # 启用 starship，这是一个漂亮的 shell 提示符
@@ -145,6 +143,22 @@
       ls = "eza";
       l = "eza";
       la = "eza -la";
+      gcc = "clang";
+      "g++" = "clang++";
+    };
+  };
+
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+libcxxabi=$(nix eval nixpkgs#libcxxabi.outPath)
+libcxx=$(nix eval nixpkgs#libcxx.outPath)
+export LD_LIBRARY_PATH=${libcxxabi:1:0-1}:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=${libcxx:1:0-1}:$LD_LIBRARY_PATH
+'';
+    shellAliases = {
+      gcc = "clang";
+      "g++" = "clang++";
     };
   };
 

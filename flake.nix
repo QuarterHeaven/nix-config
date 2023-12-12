@@ -32,15 +32,26 @@
   };
 
   outputs = { self, nixpkgs, home-manager, emacs-overlay, ... }@inputs: {
+
+    devModules = import ./dev.nix;
+
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem{
         system = "x86_64-linux";
-  
+
         modules = [
           ./configuration.nix
 
           {
-            nixpkgs.overlays = [ emacs-overlay.overlay ];
+            nixpkgs.overlays = [
+              emacs-overlay.overlay
+              (self: super: {
+                emacs-unstable = super.emacs-unstable.override {
+                  withXwidgets = true;
+                  withGTK3 = true;
+                };
+              })
+            ];
           }
 
           home-manager.nixosModules.home-manager

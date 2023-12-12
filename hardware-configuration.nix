@@ -21,6 +21,15 @@
       fsType = "vfat";
     };
 
+  fileSystems."/mnt/hgfs" = 
+    { device = ".host:/";
+      fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
+      options = [ 
+        "allow_other"
+        "defaults"
+      ];
+    };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

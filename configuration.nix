@@ -116,6 +116,7 @@
 
   # Font settings
   fonts.packages = with pkgs; [
+    corefonts
     fira-code
     fira-code-symbols
     ibm-plex
