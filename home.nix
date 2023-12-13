@@ -113,8 +113,9 @@
     libtool
     gnumake
     cmake
+    rustup
     typst
-    typst-lsp
+    # typst-lsp
     typstfmt
     typst-live
     texliveFull

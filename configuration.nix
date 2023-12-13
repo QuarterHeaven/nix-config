@@ -42,12 +42,19 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.fish.enable = true;
   users.users.taka = {
     isNormalUser = true;
     description = "TakaObsid";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       firefox
       kate
