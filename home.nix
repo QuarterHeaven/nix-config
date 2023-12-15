@@ -31,6 +31,9 @@
     enable = true;
     userName = "QuarterHeaven";
     userEmail = "liaotx2@gmail.com";
+    extraConfig = {
+      github.user = "QuarterHeaven";
+    };
   };
 
   # 通过 home.packages 安装一些常用的软件
@@ -55,6 +58,9 @@
     fzf # A command-line fuzzy finder
     fd # alternative of find
     coreutils-prefixed
+    xclip
+    maestral
+    maestral-gui # Dropbox 3rd party client
 
     # networking tools
     mtr # A network diagnostic tool
@@ -111,8 +117,10 @@
     llvmPackages.libcxxStdenv
     clang-tools
     libtool
+    bintools
     gnumake
     cmake
+    gcc-unwrapped
     rustup
     typst
     # typst-lsp

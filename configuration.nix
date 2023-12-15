@@ -77,6 +77,7 @@
     helix
     fish
     pinentry
+    nix-index
   ];
 
   # Font settings

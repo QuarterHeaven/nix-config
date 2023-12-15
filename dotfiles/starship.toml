@@ -324,8 +324,8 @@ color_shellix_text = "#EDEDED" # color_foreground_light
 
 ## Generic prompt configurations
 [character]
-success_symbol = "[](bg:color_base_green fg:color_background_base)[](fg:color_base_green)"
-error_symbol = "[](bg:color_base_red fg:color_background_base)[](fg:color_base_red)"
+success_symbol = "[´･ω･`](bg:color_base_green fg:color_background_base)[](fg:color_base_green)"
+error_symbol = "[;◔౪◔](bg:color_base_red fg:color_background_base)[](fg:color_base_red)"
 vicmd_symbol = "[](bg:color_background_base fg:color_base_green)[  ](bold bg:color_base_green fg:color_foreground_dark)[](bg:color_base_green fg:color_foreground_dark)"
 vimcmd_visual_symbol = "[](bg:color_background_base fg:color_base_yellow)[  ](bold bg:color_base_yellow fg:color_foreground_dark)[](bg:color_base_yellow fg:color_foreground_dark)"
 vimcmd_replace_symbol = "[](bg:color_background_base fg:color_base_orange)[  ](bold bg:color_base_orange fg:color_foreground_dark)[](bg:color_base_orange fg:color_foreground_dark)"
@@ -340,9 +340,9 @@ disabled = false
 [os]
 # disabled = false
 style = "bg:color_os fg:color_os_text"
-# format = '[$symbol(v$version)(  $edition)(  $codename)(  $type)]($style)'
+format = '[$symbol(v$version)(  $edition)(  $codename)(  $type)]($style)'
 ## uncomment the format above for all available information and comment out the line below
-format = '[$symbol]($style)'
+# format = '[$symbol]($style)'
 ## other variables:
 ##   name = The current operating system name
 ##   type = The current operating system type
@@ -395,18 +395,18 @@ Windows = " " # nf-fa-windows
 
 [shell]
 disabled = false
-bash_indicator = '\$_'
+bash_indicator = '\$_|ω・'
 fish_indicator = "" # Empty string as Fish Shell is my default shell
 # fish_indicator = "⋖⋗⋖" # if Fish Shell is not the default shell
-zsh_indicator = "%_"
-powershell_indicator = "" # nf-seti-powershell
-ion_indicator = '(\$_)'
-elvish_indicator = "󰘧" # nf-md-lambda
-tcsh_indicator = "󰇥 " # nf-md-duck
-nu_indicator = "[󰥭](fg:color_base_green)" # nf-md-greater_than
-xonsh_indicator = "🐚" # seashell emoji
-cmd_indicator = "" # nf-cod-terminal_cmd
-unknown_indicator = " " # nf-fa-question_circle
+zsh_indicator = "%_|ω・"
+powershell_indicator = "|ω・" # nf-seti-powershell
+ion_indicator = '(\$_|ω・)'
+elvish_indicator = "󰘧|ω・" # nf-md-lambda
+tcsh_indicator = "󰇥|ω・ " # nf-md-duck
+nu_indicator = "[󰥭|ω・](fg:color_base_green)" # nf-md-greater_than
+xonsh_indicator = "🐚|ω・" # seashell emoji
+cmd_indicator = "|ω・" # nf-cod-terminal_cmd
+unknown_indicator = " |ω・" # nf-fa-question_circle
 style = "bg:color_foreground_dark fg:color_foreground_light"
 format = "[$indicator]($style)"
 
@@ -1132,7 +1132,7 @@ style = "bold bg:color_background_base fg:color_base_orange"
 format = "[$symbol$number]($style)"
 
 [sudo]
-disabled = false
+disabled = true
 symbol = " 󱫖 " # nf-md-timer_lock_open_outline
 style = "bg:color_sudo fg:color_sudo_text"
 # allow_windows = true
