@@ -36,12 +36,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, emacs-overlay, nixos-wsl, ... }@inputs: 
-  let 
+  outputs = { self, nixpkgs, home-manager, emacs-overlay, nixos-wsl, ... }@inputs:
+  let
     features = ./features;
     dotfiles = ./dotfiles;
-    host_wsl = ./hosts/wsl.nix;
-    host_vmware = ./hosts/vmware.nix;
+    host_wsl = ./hosts/wsl-home.nix;
+    host_vmware = ./hosts/vmware-home.nix;
 
     nixpkgsWithOverlays = with inputs; rec {
       config = {
@@ -82,10 +82,10 @@
 
           (configurationDefaults argDefaults)
 
-          host_vmware
+          ./hosts/vmware.nix
 
           home-manager.nixosModules.home-manager {
-            home-manager.users.taka = import /${features}/global;
+            home-manager.users.taka = import host_vmware;
           }
         ];
       };
@@ -99,7 +99,11 @@
             wsl.enable = true;
             wsl.defaultUser = "taka";
           }
+
           (configurationDefaults argDefaults)
+
+	  ./hosts/wsl.nix
+	  
           home-manager.nixosModules.home-manager {
             home-manager.users.taka = import host_wsl;
           }
