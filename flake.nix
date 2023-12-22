@@ -50,12 +50,12 @@
       };
       overlays = [
         emacs-overlay.overlay
-              (self: super: {
-                emacs-unstable = super.emacs-unstable.override {
-                  withXwidgets = true;
-                  withGTK3 = true;
-                };
-              })
+        (self: super: {
+          emacs-unstable = super.emacs-unstable.override {
+            withXwidgets = true;
+            withGTK3 = true;
+          };
+        })
       ];
     };
 
@@ -67,48 +67,42 @@
     };
 
     argDefaults = {
-        inherit inputs dotfiles features;
+      inherit inputs dotfiles features;
     };
-  in
-  {
-    devModules = import ./dev.nix;
+    in
+    {
+      devModules = import ./dev.nix;
 
-    nixosConfigurations = {
-      vmware = nixpkgs.lib.nixosSystem{
-        system = "x86_64-linux";
+      nixosConfigurations = {
+	vmware = nixpkgs.lib.nixosSystem{
+          system = "x86_64-linux";
 
-        modules = [
-          ./configuration.nix
+          modules = [
+            ./configuration.nix
 
-          (configurationDefaults argDefaults)
+	    home-manager.nixosModules.home-manager
 
-          ./hosts/vmware.nix
+            (configurationDefaults argDefaults)
 
-          home-manager.nixosModules.home-manager {
-            home-manager.users.taka = import host_vmware;
-          }
-        ];
-      };
+            ./hosts/vmware.nix
+	  ];
+	};
 
-      wsl = nixpkgs.lib.nixosSystem{
-        system = "x86_64-linux";
+	wsl = nixpkgs.lib.nixosSystem{
+          system = "x86_64-linux";
 
-        modules = [
-          ./configuration.nix
-          nixos-wsl.nixosModules.wsl {
-            wsl.enable = true;
-            wsl.defaultUser = "taka";
-          }
+          modules = [
+            ./configuration.nix
 
-          (configurationDefaults argDefaults)
+            nixos-wsl.nixosModules.wsl
 
-	  ./hosts/wsl.nix
-	  
-          home-manager.nixosModules.home-manager {
-            home-manager.users.taka = import host_wsl;
-          }
-        ];
+	    home-manager.nixosModules.home-manager
+
+            (configurationDefaults argDefaults)
+
+	    ./hosts/wsl.nix
+          ];
+	};
       };
     };
-  };
 }

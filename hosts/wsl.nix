@@ -1,7 +1,36 @@
-{ features, ... }:
+{ features, inputs, home-manager, ... }:
 
 {
-#   # Enable the X11 windowing system.
+  wsl = {
+    enable = true;
+    wslConf.automount.root = "/mnt";
+    wslConf.interop.appendWindowsPath = false;
+    wslConf.network.generateHosts = false;
+    defaultUser = "taka";
+    startMenuLaunchers = true;
+
+    # Enable integration with Docker Desktop (needs to be installed)
+    docker-desktop.enable = false;
+  };
+
+  services.openssh = {
+    ports = [ 2222 ];
+  };
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    autoPrune.enable = true;
+  };
+
+  home-manager.users.taka = {
+    imports = [
+      ./wsl-home.nix
+    ];
+  };
+
+
+  #   # Enable the X11 windowing system.
 #   services.xserver.enable = true;
 
 #   # Enable the KDE Plasma Desktop Environment.

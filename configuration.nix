@@ -2,11 +2,10 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, options, ... }:
 
 {
-  # networking.hostName = "nixos"; # Define your hostname.
-  # networking.hostName = "wsl";
+  networking.hostName = "taka";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -61,6 +60,9 @@
     #  thunderbird
     ];
     shell = pkgs.fish;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMm976P3b0EigYG7VHxaORw1O4zFL2PvPZ7EUXw1MPRg liaotx2@gmail.com"
+    ];
   };
 
   # Allow unfree packages
@@ -107,7 +109,9 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
+  services.openssh.hostKeys = options.services.openssh.hostKeys.default;
+
   # Enable VMware Tools
   # virtualisation.vmware.guest.enable = true;
 

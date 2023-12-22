@@ -1,15 +1,13 @@
 { features, ... }:
 
 {
-  networking.hostname = "vmware";
-
   networking.networkmanager.enable = true;
-  
+
   imports =
     [ # Include the results of the hardware scan.
       ../hardware-configuration.nix
     ];
-      # Bootloader.
+  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -20,19 +18,25 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
-    # Configure keymap in X11
+  # Configure keymap in X11
   services.xserver = {
     layout = "us";
     xkbVariant = "";
   };
 
-    # Enable automatic login for the user.
+  # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "taka";
 
-    environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     open-vm-tools
   ];
 
-virtualisation.vmware.guest.enable = true;  
+  virtualisation.vmware.guest.enable = true;
+
+  home-manager.users.taka = {
+    imports = [
+      ./vmware-home.nix
+    ];
+  };
 }

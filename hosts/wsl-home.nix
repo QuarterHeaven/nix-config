@@ -1,4 +1,4 @@
-{ config, lib, pkgs, features, home-manager, dotfiles, ... }:
+{ config, lib, pkgs, features, inputs, dotfiles, ... }:
 
 {
   imports = [
@@ -7,4 +7,8 @@
     ../features/wsl
     ../home.nix
   ];
+
+  home.sessionVariables = rec {
+    DISPLAY = "`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0.0";
+  };
 }
