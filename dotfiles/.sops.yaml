@@ -1,0 +1,5 @@
+keys:
+        - &mac BD83D90981352A28
+creation_rules:
+        - pgp:
+          - *mac
