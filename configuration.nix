@@ -5,7 +5,7 @@
 { config, lib, pkgs, options, ... }:
 
 {
-  networking.hostName = "taka";
+  networking.hostName = "Manaward";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -50,7 +50,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.fish.enable = true;
-  users.users.taka = {
+  users.users.takaobsid = {
     isNormalUser = true;
     description = "TakaObsid";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
@@ -127,6 +127,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  nix.settings.substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }
