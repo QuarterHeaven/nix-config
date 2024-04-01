@@ -1,0 +1,9 @@
+{ ... }:
+
+{
+  imports = [
+    ./wayfire
+    ./sway
+    ./hyprland
+  ];
+}

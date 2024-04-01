@@ -34,6 +34,11 @@
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixpkgs-unstable = {
+      url = "github:nixos/nixpkgs/nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, emacs-overlay, nixos-wsl, ... }@inputs:
@@ -42,6 +47,12 @@
     dotfiles = ./dotfiles;
     host_wsl = ./hosts/wsl-home.nix;
     host_vmware = ./hosts/vmware-home.nix;
+
+    add-unstable-packages = final: _prev: {
+      unstable = import inputs.nixpkgs-unstable {
+	system = "x86_64-linux";
+      };
+    };
 
     nixpkgsWithOverlays = with inputs; rec {
       config = {
@@ -56,6 +67,8 @@
             withGTK3 = true;
           };
         })
+
+	add-unstable-packages
       ];
     };
 
@@ -103,19 +116,20 @@
 	    ./hosts/wsl.nix
           ];
 	};
-  macbook = nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
 
-    modules = [
-      ./configuration.nix
+	macbook = nixpkgs.lib.nixosSystem {
+	  system = "x86_64-linux";
 
-      home-manager.nixosModules.home-manager
+	  modules = [
+	    ./configuration.nix
 
-      (configurationDefaults argDefaults)
+	    home-manager.nixosModules.home-manager
 
-      ./hosts/macbook.nix
-    ];
-  };
- };
+	    (configurationDefaults argDefaults)
+
+	    ./hosts/macbook.nix
+	  ];
+	};
+      };
     };
 }

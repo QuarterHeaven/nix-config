@@ -41,7 +41,6 @@
   # 建议将所有 GUI 软件，以及与 OS 关系不大的 CLI 软件，都通过 home.packages 安装
   home.packages = with pkgs;[
     neofetch
-    nnn # terminal file manager
     ncdu
     gparted
 
@@ -110,6 +109,7 @@
     tdlib
 
     # Dropbox third-party client
+    maestral
     maestral-gui
 
     # Language settings
@@ -129,6 +129,8 @@
     texliveFull
 
     xapian
+    sops
+    nil # nix lsp
   ];
 
   # 启用 starship，这是一个漂亮的 shell 提示符
@@ -165,7 +167,15 @@
 
  programs.emacs = {
    enable = true;
-   package = pkgs.emacs-unstable;
+   package = pkgs.emacs-pgtk;
+ };
+
+ programs.bat = {
+   enable = true;
+ };
+
+ programs.htop = {
+   enable = true;
  };
 
   # This value determines the Home Manager release that your
