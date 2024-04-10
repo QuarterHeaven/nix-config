@@ -1,4 +1,3 @@
-{pkgs, config, dotfiles, ...}:
+{ pkgs, config, dotfiles, ... }:
 
-{
-}
+{ }

@@ -1,7 +1,5 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./global
-  ];
+  imports = [ ./global ];
 }

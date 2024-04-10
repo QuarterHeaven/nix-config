@@ -5,8 +5,8 @@
     enable = true;
     settings = {
       General = {
-	disabledTrayIcon = true;
-	showStartupLaunchMessage = true;
+        disabledTrayIcon = true;
+        showStartupLaunchMessage = true;
       };
     };
   };

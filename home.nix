@@ -31,15 +31,13 @@
     enable = true;
     userName = "QuarterHeaven";
     userEmail = "liaotx2@gmail.com";
-    extraConfig = {
-      github.user = "QuarterHeaven";
-    };
+    extraConfig = { github.user = "QuarterHeaven"; };
   };
 
   # 通过 home.packages 安装一些常用的软件
   # 这些软件将仅在当前用户下可用，不会影响系统级别的配置
   # 建议将所有 GUI 软件，以及与 OS 关系不大的 CLI 软件，都通过 home.packages 安装
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     neofetch
     ncdu
     gparted
@@ -58,18 +56,16 @@
     fd # alternative of find
     coreutils-prefixed
     xclip
-    maestral
-    maestral-gui # Dropbox 3rd party client
 
     # networking tools
     mtr # A network diagnostic tool
     iperf3
-    dnsutils  # `dig` + `nslookup`
+    dnsutils # `dig` + `nslookup`
     ldns # replacement of `dig`, it provide the command `drill`
     aria2 # A lightweight multi-protocol & multi-source command-line download utility
     socat # replacement of openbsd-netcat
     nmap # A utility for network discovery and security auditing
-    ipcalc  # it is a calculator for the IPv4/v6 addresses
+    ipcalc # it is a calculator for the IPv4/v6 addresses
 
     # misc
     cowsay
@@ -88,7 +84,7 @@
     # with more details log output
     nix-output-monitor
 
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
 
@@ -113,14 +109,6 @@
     maestral-gui
 
     # Language settings
-    llvmPackages.libcxxClang
-    llvmPackages.libcxxStdenv
-    clang-tools
-    libtool
-    bintools
-    gnumake
-    cmake
-    gcc-unwrapped
     rustup
     typst
     # typst-lsp
@@ -134,9 +122,7 @@
   ];
 
   # 启用 starship，这是一个漂亮的 shell 提示符
-  programs.starship = {
-    enable = true;
-  };
+  programs.starship = { enable = true; };
 
   programs.fish = {
     enable = true;
@@ -165,18 +151,14 @@
     nix-direnv.enable = true;
   };
 
- programs.emacs = {
-   enable = true;
-   package = pkgs.emacs-pgtk;
- };
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs-pgtk;
+  };
 
- programs.bat = {
-   enable = true;
- };
+  programs.bat = { enable = true; };
 
- programs.htop = {
-   enable = true;
- };
+  programs.htop = { enable = true; };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

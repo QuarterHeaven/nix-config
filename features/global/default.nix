@@ -1,8 +1,5 @@
 { ... }:
 
 {
-  imports = [
-    ./dotfiles.nix
-    ./python.nix
-  ];
+  imports = [ ./dotfiles.nix ./python.nix ./joshuto.nix ];
 }

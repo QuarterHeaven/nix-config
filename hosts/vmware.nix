@@ -3,10 +3,9 @@
 {
   networking.networkmanager.enable = true;
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ../hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ../hardware-configuration.nix
+  ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -28,15 +27,9 @@
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "taka";
 
-  environment.systemPackages = with pkgs; [
-    open-vm-tools
-  ];
+  environment.systemPackages = with pkgs; [ open-vm-tools ];
 
   virtualisation.vmware.guest.enable = true;
 
-  home-manager.users.taka = {
-    imports = [
-      ./vmware-home.nix
-    ];
-  };
+  home-manager.users.taka = { imports = [ ./vmware-home.nix ]; };
 }

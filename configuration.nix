@@ -57,7 +57,7 @@
     packages = with pkgs; [
       firefox
       kate
-    #  thunderbird
+      #  thunderbird
     ];
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
@@ -80,6 +80,19 @@
     fish
     pinentry
     nix-index
+    (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
+      extensions = [ "rust-src" "rust-analyzer" ];
+      targets = [ "wasm32-unknown-unknown" ];
+    }))
+    llvmPackages.libcxxClang
+    llvmPackages.libcxxStdenv
+    clang-tools
+    libtool
+    libdrm
+    bintools
+    gnumake
+    cmake
+    gcc-unwrapped
   ];
 
   # Font settings
@@ -95,8 +108,18 @@
     noto-fonts-color-emoji
     unifont_upper
     symbola
-    (nerdfonts.override { fonts = [ "FiraCode" "IBMPlexMono"]; })
+    font-awesome
+    (nerdfonts.override { fonts = [ "FiraCode" "IBMPlexMono" ]; })
   ];
+
+  fonts.fontconfig = {
+    defaultFonts = {
+      emoji = [ "Noto Color Emoji" ];
+      monospace = [ "BlexMono Nerdfont Mono" ];
+      sansSerif = [ "Bookerly" "FZLiuGongQuanKaiShuS" ];
+      serif = [ "Bookerly" "FZLiuGongQuanKaiShuS" ];
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -127,6 +150,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  nix.settings.substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
   system.stateVersion = "23.11"; # Did you read the comment?
 }

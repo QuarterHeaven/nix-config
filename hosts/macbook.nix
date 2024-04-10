@@ -1,140 +1,153 @@
-{ features, inputs, pkgs, ... }:
+{ features, inputs, pkgs, config, ... }:
+let
+  tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
+  sway-session = "${pkgs.sway}/share/wayland-sessions";
+  wayfire-session = "${pkgs.wayfire}/share/wayland-sessions";
 
-{
-  networking.networkmanager.enable = true;
-
-  imports =
-    [ # Include the results of the hardware scan.
-      ../files/hardware/hardware-configuration-macbook.nix
-      "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git";
-      rev = "9a763a7acc4cfbb8603bb0231fec3eda864f81c0"; }}/apple/t2"
-    ];
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  hardware.firmware = [
-    (pkgs.stdenvNoCC.mkDerivation {
-      name = "brcm-firmware";
-
-      buildCommand = ''
-        dir="$out/lib/firmware"
-        mkdir -p "$dir"
-        cp -r ${../files/firmware}/* "$dir"
-      '';
-    })
-  ];
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = false;
-  services.xserver.desktopManager.plasma5.enable = false;
-
-  services.xserver.displayManager.gdm.enable = false;
-  services.xserver.desktopManager.gnome.enable = false;
-
-  programs.wayfire = {
-    enable = true;
-    plugins = with pkgs.wayfirePlugins; [
-      wcm
-      wf-shell
-      wayfire-plugins-extra
-    ];
-  };
-
-  programs.sway = {
-    enable = false;
-    wrapperFeatures.gtk = true;
-  };
-
-  programs.hyprland = {
-    enable = false;
-    xwayland.enable = true;
-  };
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-    libinput = {
+  in {
+    networking.networkmanager = {
       enable = true;
-      touchpad = {
-        disableWhileTyping = true;
+      unmanaged = [ "type:ethernet" ];
+    };
+
+    imports = [ # Include the results of the hardware scan.
+      ../files/hardware/hardware-configuration-macbook.nix
+    ];
+
+    hardware = {
+      firmware = [
+	(pkgs.stdenvNoCC.mkDerivation {
+	  name = "brcm-firmware";
+
+	  buildCommand = ''
+          dir="$out/lib/firmware"
+          mkdir -p "$dir"
+          cp -r ${../files/firmware}/* "$dir"
+        '';
+	})
+      ];
+    };
+
+    # Bootloader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot/efi";
+    boot.kernelParams = [ "hid_apple.swap_opt_cmd=1" "quiet" "udev.log_level=3" ];
+    boot.plymouth.enable = true;
+    boot.plymouth.theme = "breeze";
+    boot.initrd.verbose = false;
+    boot.consoleLogLevel = 0;
+
+    environment.systemPackages = with pkgs; [
+      gnome.gnome-tweaks
+      gnomeExtensions.runcat
+      gnomeExtensions.tray-icons-reloaded
+      gnome-extension-manager
+      solaar
+      keyd
+      libinput
+      greetd.wlgreet
+      greetd.tuigreet
+      elogind
+      lemurs # text-based login manager
+      pavucontrol
+      mesa
+    ];
+
+    services.xserver = {
+      enable = true;
+      xkb.layout = "us";
+      libinput = {
+	enable = true;
+	touchpad = { disableWhileTyping = true; };
       };
     };
-  };
 
-  services.keyd = {
-    enable = true;
-    keyboards =
-      {
-	default = {
-	  ids = [ "*" ];
-	  settings = {
-	    main = {
-	      capslock = "layer(control)";
-	      leftcontrol = "capslock";
-	    };
-	  };
+    services.greetd = {
+      enable = true;
+      settings = rec {
+	auto_login = {
+	  command = "${pkgs.wayfire}/bin/wayfire";
+	  user = "takaobsid";
 	};
-	macbookKeyboard = {
-	  ids = [ "05ac:027e" ];
-	  settings = {
-	    main = {
-	      leftalt = "layer(meta)";
-	      leftmeta = "layer(alt)";
-	      capslock = "layer(control)";
-	      leftcontrol = "capslock";
-	    };
-	    alt = {
-	      e = "command(emacs)";
-	    };
-	  };
+	initial_session_wayfire = {
+	  command = "wayfire --config /etc/greetd/wlgreet-wayfire.ini";
 	};
+	initial_session_sway = {
+	  command = "sway --config /etc/greetd/wlgreet-sway.conf";
+	};
+	initial_session_sway_tui = {
+	  command = "${tuigreet} --time --cmd sway";
+	  user = "greeter";
+	};
+	initial_session_wayfire_tui = {
+	  command = "${tuigreet} --time --cmd wayfire";
+	  user = "greeter";
+	};
+        initial_session_hyprland_tui = {
+	  command = "${tuigreet} --time --cmd Hyprland";
+	  user = "takaobsid";
+	};
+	default_session = initial_session_hyprland_tui;
       };
-  };
+    };
 
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "takaobsid";
+    systemd.services.greetd = {
+      environment = { LANG = "en_US.UTF-8"; };
+      serviceConfig = {
+	StandardInput = "tty";
+	StandardOutput = "tty";
+	TTYPath = "/dev/tty2";
+	TTYReset = "yes";
+	TTYVHangup = "yes";
+	Type = "idle";
+      };
+    };
 
-  environment.systemPackages = with pkgs; [
-    gnome.gnome-tweaks
-    gnomeExtensions.runcat
-    gnomeExtensions.tray-icons-reloaded
-    gnome-extension-manager
-    solaar
-    ibus
-    ibus-engines.rime
-    keyd
-    libinput
-  ];
+    programs.hyprland = {
+      enable = false;
+      xwayland.enable = true;
+    };
 
-  users.users.takaobsid.packages = with pkgs; [
-    wlr-randr
-  ];
-
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [ rime ];
-  };
-
-  services.v2raya.enable = true;
-
-  environment.variables = {
-    GTK_IM_MODULE="ibus";
-    XMODIFIERS="@im=ibus";
-    QT_IM_MODULE="ibus";
-    XIM_PROGRAM="ibus-daemon";
-    ELECTRON_OZONE_PLATFORM_HINT="auto";
-  };
-
-  home-manager.users.takaobsid = {
-    imports = [
-      ./macbook-home.nix
+    users.users.takaobsid.packages = with pkgs; [
+      wlr-randr
+      nixfmt-classic
+      gnome.sushi
+      doublecmd
+      joshuto
+      rofi-wayland
+      hyprpaper
+      easyeffects
+      grim
+      slurp
+      grimblast
+      tmpwatch
     ];
-  };
-}
+
+    i18n = {
+      defaultLocale = "en_US.UTF-8";
+      supportedLocales = [ "zh_CN.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
+    };
+
+    services.v2raya.enable = true;
+
+    environment.variables = {
+      NIXOS_OZONE_WL = "1";
+      INPUT_METHOD="fcitx5";
+      XMODIFIERS = "@im=fcitx";
+      WEBKIT_DISABLE_COMPOSITING_MODE = "1";
+    };
+
+    services.xserver.desktopManager.runXdgAutostartIfNone = true;
+
+    home-manager.users.takaobsid = { imports = [ ./macbook-home.nix ]; };
+
+    # Creates /etc/current-system-packages with list of all packages with their versions
+    environment.etc."current-system-packages".text =
+      let
+	packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
+	sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages);
+	formatted = builtins.concatStringsSep "\n" sortedUnique;
+	in
+	formatted;
+  }

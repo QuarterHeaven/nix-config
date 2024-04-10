@@ -2,8 +2,6 @@
 
 {
   imports = [
-    ./wayfire
-    ./sway
-    ./hyprland
+    ./hyprland.nix
   ];
 }

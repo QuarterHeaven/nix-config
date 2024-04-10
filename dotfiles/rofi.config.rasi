@@ -1,0 +1,10 @@
+configuration {
+cycle: true;
+font: "Bookerly 14";
+location: 0;
+modes: "window,drun,run,ssh,combi";
+show-icons: true;
+terminal: "/etc/profiles/per-user/takaobsid/bin/foot";
+xoffset: 0;
+yoffset: 0;
+}

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... };
+{ config, pkgs, lib, ... }:
 
 {
   stdenv = pkgs.clangStdenv;
