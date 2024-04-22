@@ -11,11 +11,30 @@
 
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  wayland.windowManager.hyprland.systemd.enable = true;
   wayland.windowManager.hyprland.plugins = [
-    inputs.hy3.packages.${pkgs.system}.hy3
+    inputs.hy3.packages.${pkgs.system}.default
+    inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
   ];
 
+  wayland.windowManager.hyprland.systemd.variables = ["--all"];
+
   wayland.windowManager.hyprland.settings = {
+    plugin = {
+      hy3 = {
+	tabs = {
+	  height = 2;
+	  padding = 6;
+	  render_text = "false";
+	};
+
+	autotile = {
+	  enable = "true";
+	  trigger_width = 800;
+	  trigger_height = 500;
+	};
+      };
+    };
     "$mod" = "SUPER";
     "$alt" = "ALT";
     monitor = [ "eDP-1, preferred, auto, 1.600000" ];
@@ -42,6 +61,10 @@
       "$mod SHIFT, L, hy3:movewindow, r"
       "$mod, S, togglespecialworkspace, magic"
       "$mod SHIFT, S, movetoworkspace, special:magic"
+      "ALT, Tab, overview:toggle,"
+      ",XF86AudioRaiseVolume,exec,pw-volume change +2.5%; pkill -RTMIN+8 waybar"
+      ",XF86AudioLowerVolume,exec,pw-volume change -2.5%; pkill -RTMIN+8 waybar"
+      ",XF86AudioMute,exec,pw-volume mute toggle; pkill -RTMIN+8 waybar"
     ] ++ (
       # workspaces
       # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
@@ -57,6 +80,7 @@
       kb_layout = "us";
       kb_options = "ctrl:swapcaps";
       follow_mouse = 1;
+      mouse_refocus = "false";
       touchpad = {
         natural_scroll = "true";
         disable_while_typing = "true";
@@ -111,6 +135,9 @@
   };
 
   wayland.windowManager.hyprland.extraConfig = ''
+exec-once = dbus-update-activation-environment --systemd --all
+exec-once = lxsession
+
     animations {
         enabled = yes
 
@@ -137,27 +164,12 @@
       bind = , escape, submap, reset
       submap = reset
 
-    exec-once = waybar & hyprpaper & keepassxc & fcitx5 -r -d & foot
+    exec-once = waybar & hyprpaper & keepassxc & fcitx5 -r -d & foot & hyprpm reload -n
 
     windowrule = opacity 0.9 override 0.5 override 0.9 override, ^(emacs)$
     windowrule = float, ^(thunderbird)$
-
-
-    plugin {
-        hy3 {
-            tabs {
-                height = 2
-    	          padding = 6
-    	          render_text = false
-            }
-
-            autotile {
-                enable = true
-                trigger_width = 800
-                trigger_height = 500
-            }
-        }
-    }
+    windowrule = float, ^(zotero)$
+    windowrule = float, ^(QQ)$
 
     layerrule = blur, rofi
     layerrule = ignorezero, rofi

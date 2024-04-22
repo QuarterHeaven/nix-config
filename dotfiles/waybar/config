@@ -89,14 +89,23 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pamixer -t"
     },
+
+"custom/pipewire": {
+        "tooltip": false,
+        "max-length": 6,
+        "signal": 8,
+        "restart-interval": 0,
+        "exec": "$HOME/.config/waybar/scripts/pipewire.sh"
+},
 
 	"battery": {
         	"states": {
             		"warning": 30,
             		"critical": 15
         	},
+		"full-at": 84,
         	"format": "{icon} {capacity}%",
         	"format-charging": "󰂄 {capacity}%",
         	"format-plugged": " {capacity}%",

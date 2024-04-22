@@ -57,6 +57,7 @@ window#waybar {
 #mode,
 #custom-power,
 #custom-menu,
+#custom-pipewire,
 #idle_inhibitor {
     padding: 0 10px;
 }
@@ -76,6 +77,9 @@ window#waybar {
 }
 #pulseaudio.muted {
     color: #cc3436;
+}
+#custom-pipewire.muted {
+    color: #cc3436
 }
 #battery.charging {
     color: #2dcc36;

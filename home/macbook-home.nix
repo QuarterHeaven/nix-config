@@ -1,7 +1,7 @@
 { config, lib, pkgs, features, home-manager, dotfiles, ... }:
 
 {
-  imports = [ ../features/global ../features/macbook ../home.nix ];
+  imports = [ ./global ./macbook ../home.nix ];
 
   home.packages = with pkgs; [
     qq
@@ -16,8 +16,6 @@
     spacedrive
     kitty
   ];
-
-
 
   home.pointerCursor = {
     gtk.enable = true;

@@ -15,7 +15,7 @@ configuration {
 }
 
 /* ---- Load pywal colors ---- */
-@theme "~/.cache/wal/colors-rofi-dark.rasi"
+@theme "~/nix-config/dotfiles/rofi/colors/pywal-dark.rasi"
 
 /* ---- Global Properties ---- */
 * {
@@ -101,7 +101,7 @@ listview {
     reverse:                     false;
     fixed-height:                false;
     fixed-columns:               true;
-    
+
     padding:                     10px;
     background-color:            transparent;
 

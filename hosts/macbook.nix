@@ -1,153 +1,159 @@
 { features, inputs, pkgs, config, ... }:
-let
-  tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
-  sway-session = "${pkgs.sway}/share/wayland-sessions";
-  wayfire-session = "${pkgs.wayfire}/share/wayland-sessions";
 
-  in {
-    networking.networkmanager = {
-      enable = true;
-      unmanaged = [ "type:ethernet" ];
-    };
+ {
+   networking.networkmanager = {
+     enable = true;
+     unmanaged = [ "type:ethernet" ];
+   };
 
-    imports = [ # Include the results of the hardware scan.
-      ../files/hardware/hardware-configuration-macbook.nix
-    ];
+   imports = [ # Include the results of the hardware scan.
+     ../files/hardware/hardware-configuration-macbook.nix
+   ];
 
-    hardware = {
-      firmware = [
-	(pkgs.stdenvNoCC.mkDerivation {
-	  name = "brcm-firmware";
+   hardware = {
+     firmware = [
+       (pkgs.stdenvNoCC.mkDerivation {
+	 name = "brcm-firmware";
 
-	  buildCommand = ''
+	 buildCommand = ''
           dir="$out/lib/firmware"
           mkdir -p "$dir"
           cp -r ${../files/firmware}/* "$dir"
         '';
-	})
+       })
+     ];
+
+     bluetooth = {
+       enable = true;
+       powerOnBoot = true;
+     };
+
+	    opengl.enable = true;
+    opengl.driSupport = true;
+    opengl.driSupport32Bit = true;
+
+    opengl.extraPackages = with pkgs; [
+        intel-media-driver
+        vaapiVdpau
+        libvdpau-va-gl
       ];
-    };
 
-    # Bootloader.
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.efi.efiSysMountPoint = "/boot/efi";
-    boot.kernelParams = [ "hid_apple.swap_opt_cmd=1" "quiet" "udev.log_level=3" ];
-    boot.plymouth.enable = true;
-    boot.plymouth.theme = "breeze";
-    boot.initrd.verbose = false;
-    boot.consoleLogLevel = 0;
+   };
 
-    environment.systemPackages = with pkgs; [
-      gnome.gnome-tweaks
-      gnomeExtensions.runcat
-      gnomeExtensions.tray-icons-reloaded
-      gnome-extension-manager
-      solaar
-      keyd
-      libinput
-      greetd.wlgreet
-      greetd.tuigreet
-      elogind
-      lemurs # text-based login manager
-      pavucontrol
-      mesa
-    ];
-
-    services.xserver = {
+   # Bootloader.
+   boot.loader.systemd-boot.enable = true;
+   boot.loader.efi.canTouchEfiVariables = true;
+   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+   boot.kernelParams = [ "hid_apple.swap_opt_cmd=1" "quiet" "udev.log_level=3" ];
+   boot.plymouth.enable = true;
+   boot.plymouth.theme = "breeze";
+   boot.initrd.verbose = false;
+   boot.consoleLogLevel = 0;
+   security.polkit.enable = true;
+   # reboot/poweroff for unprivileged users
+   security.polkit.extraConfig = ''
+  polkit.addRule(function(action, subject) {
+    if (
+      subject.isInGroup("users")
+      && (
+        action.id == "org.freedesktop.login1.reboot" ||
+        action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
+        action.id == "org.freedesktop.login1.power-off" ||
+        action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+      )
+    )
+    {
+      return polkit.Result.YES;
+    }
+  })
+  '';
+	
+   services.xserver = {
       enable = true;
-      xkb.layout = "us";
-      libinput = {
-	enable = true;
-	touchpad = { disableWhileTyping = true; };
-      };
-    };
+      displayManager.lightdm.enable = false;
+   };
 
-    services.greetd = {
-      enable = true;
-      settings = rec {
-	auto_login = {
-	  command = "${pkgs.wayfire}/bin/wayfire";
-	  user = "takaobsid";
-	};
-	initial_session_wayfire = {
-	  command = "wayfire --config /etc/greetd/wlgreet-wayfire.ini";
-	};
-	initial_session_sway = {
-	  command = "sway --config /etc/greetd/wlgreet-sway.conf";
-	};
-	initial_session_sway_tui = {
-	  command = "${tuigreet} --time --cmd sway";
-	  user = "greeter";
-	};
-	initial_session_wayfire_tui = {
-	  command = "${tuigreet} --time --cmd wayfire";
-	  user = "greeter";
-	};
-        initial_session_hyprland_tui = {
-	  command = "${tuigreet} --time --cmd Hyprland";
-	  user = "takaobsid";
-	};
-	default_session = initial_session_hyprland_tui;
-      };
-    };
 
-    systemd.services.greetd = {
-      environment = { LANG = "en_US.UTF-8"; };
-      serviceConfig = {
-	StandardInput = "tty";
-	StandardOutput = "tty";
-	TTYPath = "/dev/tty2";
-	TTYReset = "yes";
-	TTYVHangup = "yes";
-	Type = "idle";
-      };
-    };
+   # reenable keyboard and touch-bar after sleep
+   systemd.services."re-enable-keyboard-and-touchbar-after-sleep" = {
+     description = "re-enable keyboard and touchbar after sleep";
+     wantedBy = [ "suspend.target" ];
+     after = [ "systemd-suspend.service" ];
+     script = ''
+'';
+     serviceConfig.Type = "simple";
+   };
 
-    programs.hyprland = {
-      enable = false;
-      xwayland.enable = true;
-    };
+   environment.systemPackages = with pkgs; [
+     gnome.gnome-tweaks
+     gnome.gnome-shell
+     gnomeExtensions.runcat
+     gnomeExtensions.tray-icons-reloaded
+     gnome-extension-manager
+     solaar
+     keyd
+     libinput
+     mesa
+     blueman
+     # lxqt-policykit-agent
+	lxde.lxsession
+   ];
 
-    users.users.takaobsid.packages = with pkgs; [
-      wlr-randr
-      nixfmt-classic
-      gnome.sushi
-      doublecmd
-      joshuto
-      rofi-wayland
-      hyprpaper
-      easyeffects
-      grim
-      slurp
-      grimblast
-      tmpwatch
-    ];
+   services.xserver = {
+     xkb.layout = "us";
+     libinput = {
+       enable = true;
+       touchpad = { disableWhileTyping = true; };
+     };
+   };
 
-    i18n = {
-      defaultLocale = "en_US.UTF-8";
-      supportedLocales = [ "zh_CN.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
-    };
+   users.users.takaobsid.packages = with pkgs; [
+     wlr-randr
+     nixfmt-classic
+     gnome.sushi
+     doublecmd
+     joshuto
+     rofi-wayland
+     easyeffects
+     grim
+     slurp
+     grimblast
+     tmpwatch
+     libqalculate
+     pamixer
+   ];
 
-    services.v2raya.enable = true;
+   i18n = {
+     defaultLocale = "en_US.UTF-8";
+     supportedLocales = [ "zh_CN.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
+   };
 
-    environment.variables = {
-      NIXOS_OZONE_WL = "1";
-      INPUT_METHOD="fcitx5";
-      XMODIFIERS = "@im=fcitx";
-      WEBKIT_DISABLE_COMPOSITING_MODE = "1";
-    };
+   services.v2raya.enable = true;
 
-    services.xserver.desktopManager.runXdgAutostartIfNone = true;
+   services.upower.enable = true;
 
-    home-manager.users.takaobsid = { imports = [ ./macbook-home.nix ]; };
+   environment.variables = {
+     NIXOS_OZONE_WL = "1";
+     INPUT_METHOD="fcitx5";
+     XMODIFIERS = "@im=fcitx";
+     WEBKIT_DISABLE_COMPOSITING_MODE = "1";
+     RUST_BACKTRACE="1";
+   };
 
-    # Creates /etc/current-system-packages with list of all packages with their versions
-    environment.etc."current-system-packages".text =
-      let
-	packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
-	sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages);
-	formatted = builtins.concatStringsSep "\n" sortedUnique;
-	in
-	formatted;
-  }
+   services.xserver.desktopManager.runXdgAutostartIfNone = true;
+
+   networking.proxy = {
+     httpProxy = "http://127.0.0.1:1080";
+     httpsProxy = "http://127.0.0.1:1080";
+     allProxy = "socks5://127.0.0.1:1081";
+   };
+
+   # Creates /etc/current-system-packages with list of all packages with their versions
+   environment.etc."current-system-packages".text =
+     let
+       packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
+       sortedUnique = builtins.sort builtins.lessThan (pkgs.lib.lists.unique packages);
+       formatted = builtins.concatStringsSep "\n" sortedUnique;
+       in
+       formatted;
+ }

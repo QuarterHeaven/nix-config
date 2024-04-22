@@ -15,11 +15,11 @@ configuration {
     me-accept-entry:            "MousePrimary";
     window-format:              "{w} · {c} · {t}";
 	dpi:						1;
-    
+
 }
 
 /* ---- Load pywal colors ---- */
-@theme "~/.cache/wal/colors-rofi-dark.rasi"
+@theme "~/nix-config/dotfiles/rofi/colors/pywal-dark.rasi"
 
 /* ---- Global Properties ---- */
 * {
@@ -109,7 +109,7 @@ listview {
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-    
+
     spacing:                     10px;
     background-color:            transparent;
 
