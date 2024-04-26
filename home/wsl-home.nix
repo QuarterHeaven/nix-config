@@ -3,9 +3,9 @@
 {
   imports = [
     # <nixos-wsl/modules>
-    ../features/global
-    ../features/wsl
-    ../home.nix
+    ../modules/global
+    ../modules/wsl
+    ./home.nix
   ];
 
   home.sessionVariables = rec {

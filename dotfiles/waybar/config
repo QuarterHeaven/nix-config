@@ -1,6 +1,7 @@
 {
     "margin": "17 17 0 17",
     "layer": "top", // Waybar at top layer
+    "output": "",
     "modules-left": ["hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["clock", "hyprland/window", "idle_inhibitor"],
     /* "modules-right": ["tray", "custom/scratchpad-indicator", "pulseaudio", "custom/power"], */

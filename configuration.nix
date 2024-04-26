@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, options, ... }:
+{ config, lib, pkgs, options, features, inputs, ... }:
 
 {
   networking.hostName = "Manaward";
@@ -80,10 +80,11 @@
     fish
     pinentry
     nix-index
-    (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
-      extensions = [ "rust-src" "rust-analyzer" ];
-      targets = [ "wasm32-unknown-unknown" ];
-    }))
+    (rust-bin.selectLatestNightlyWith (toolchain:
+      toolchain.default.override {
+        extensions = [ "rust-src" "rust-analyzer" ];
+        targets = [ "wasm32-unknown-unknown" ];
+      }))
     llvmPackages.libcxxClang
     llvmPackages.libcxxStdenv
     clang-tools

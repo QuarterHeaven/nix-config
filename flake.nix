@@ -40,9 +40,7 @@
 
     nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-    };
+    hyprland = { url = "github:hyprwm/Hyprland"; };
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -50,7 +48,8 @@
     };
 
     hy3 = {
-      url = "github:outfoxxed/hy3"; # where {version} is the hyprland release version
+      url =
+        "github:outfoxxed/hy3"; # where {version} is the hyprland release version
       # or "github:outfoxxed/hy3" to follow the development branch.
       # (you may encounter issues if you dont do the same for hyprland)
       inputs.hyprland.follows = "hyprland";
@@ -67,9 +66,11 @@
   };
 
   outputs = { self, nixpkgs, nix, home-manager, emacs-overlay, nixos-wsl
-  , nixos-hardware, hyprland, hy3, flake-utils, rust-overlay, nixpkgs-unstable, ... }@inputs:
+    , nixos-hardware, hyprland, hy3, flake-utils, rust-overlay, nixpkgs-unstable
+    , ... }@inputs:
     let
       home = ./home;
+      modules = ./modules;
       dotfiles = ./dotfiles;
       specialArgs = { inherit inputs; };
 
@@ -93,7 +94,7 @@
 
           add-unstable-packages
 
-	  (import rust-overlay)
+          (import rust-overlay)
         ];
       };
 
@@ -106,51 +107,47 @@
 
       argDefaults = { inherit inputs dotfiles home; };
 
-common-modules = [
-	./configuration.nix
-	home-manager.nixosModules.home-manager
-	(configurationDefaults argDefaults)
-];
+      common-modules = [
+        ./configuration.nix
+        home-manager.nixosModules.home-manager
+        (configurationDefaults argDefaults)
+      ];
 
-      in {
-	devModules = import ./dev.nix;
+    in {
+      devModules = import ./dev.nix;
 
-	nixosConfigurations = {
-          vmware = nixpkgs.lib.nixosSystem {
-	    inherit specialArgs;
-            system = "x86_64-linux";
+      nixosConfigurations = {
+        vmware = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
 
-            modules = common-modules ++ [
-              ./hosts/vmware.nix
-	      ./home/vmware.nix
-            ];
-          };
+          modules = common-modules ++ [ ./hosts/vmware.nix ./home/vmware.nix ];
+        };
 
-          wsl = nixpkgs.lib.nixosSystem {
-	    inherit specialArgs;
-            system = "x86_64-linux";
+        wsl = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
 
-            modules = common-modules ++ [
-              nixos-wsl.nixosModules.wsl
-              ./hosts/wsl.nix
-	      ./home/wsl.nix
-            ];
-          };
+          modules = common-modules
+            ++ [ nixos-wsl.nixosModules.wsl ./hosts/wsl.nix ./home/wsl.nix ];
+        };
 
-          macbook = nixpkgs.lib.nixosSystem {
-	    inherit specialArgs;
-            system = "x86_64-linux";
+        macbook = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
 
-            modules = common-modules ++ [
-              nixos-hardware.nixosModules.apple-t2
-	      ./hosts/macbook.nix
-	      ./modules/desktop/gnome.nix
-	      ./modules/desktop/hyprland.nix
-		./modules/desktop/wayfire.nix
-		./modules/desktop/plasma.nix
-	      ./home/macbook.nix
-            ];
-          };
-	};
+          modules = common-modules ++ [
+            nixos-hardware.nixosModules.apple-t2
+            hosts/macbook.nix
+            modules/dm/greetd.nix
+            modules/desktop/sway.nix
+            modules/desktop/gnome.nix
+            modules/desktop/wayfire.nix
+            modules/desktop/plasma.nix
+            modules/desktop/hyprland.nix
+            home/macbook.nix
+          ];
+        };
       };
+    };
 }

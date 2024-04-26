@@ -1,10 +1,12 @@
 { inputs, pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [ where-is-my-sddm-theme ];
+
   services = {
     displayManager.sddm = {
       enable = false;
-      wayland.enable = false;
+      wayland.enable = true;
     };
 
   };

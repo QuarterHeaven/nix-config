@@ -1,7 +1,7 @@
 { config, lib, pkgs, features, home-manager, dotfiles, ... }:
 
 {
-  imports = [ ./global ./macbook ../home.nix ];
+  imports = [ ./global ./macbook ./home.nix ];
 
   home.packages = with pkgs; [
     qq
@@ -22,17 +22,15 @@
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Ice";
     size = 22;
-   };
+  };
 
   services.mako = {
- enable = true;
-      defaultTimeout = 4000;
+    enable = true;
+    defaultTimeout = 4000;
   };
 
   programs.thunderbird = {
     enable = true;
-    profiles."Taka Obsid" = {
-      isDefault = true;
-    };
+    profiles."Taka Obsid" = { isDefault = true; };
   };
 }

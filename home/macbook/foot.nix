@@ -1,23 +1,19 @@
 { ... }:
 
 {
- programs.foot = {
- enable = true;
-  settings = {
-         main = {
-   term = "xterm-256color";
+  programs.foot = {
+    enable = true;
+    settings = {
+      main = {
+        term = "xterm-256color";
 
-   font = "BlexMono Nerd Font:size=7";
-   dpi-aware = "yes";
-	 };
+        font = "BlexMono Nerd Font:size=7";
+        dpi-aware = "yes";
+      };
 
-	 mouse = {
-   hide-when-typing = "yes";
-	 };
+      mouse = { hide-when-typing = "yes"; };
 
-	 colors = {
-	      alpha = 0.7;
-	    };
-       };
- };
+      colors = { alpha = 0.7; };
+    };
+  };
 }
