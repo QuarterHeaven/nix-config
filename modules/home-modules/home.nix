@@ -31,7 +31,8 @@
     enable = true;
     userName = "QuarterHeaven";
     userEmail = "liaotx2@gmail.com";
-    extraConfig = { github.user = "QuarterHeaven"; };
+    extraConfig = { github.user = "QuarterHeaven";
+    credential.helper = "keepassxc --git-groups";};
   };
 
   # 通过 home.packages 安装一些常用的软件

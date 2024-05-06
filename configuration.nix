@@ -76,6 +76,7 @@
     wget
     curl
     git
+    git-credential-keepassxc
     helix
     fish
     pinentry
