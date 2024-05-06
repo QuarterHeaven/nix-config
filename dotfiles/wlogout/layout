@@ -1,0 +1,59 @@
+{
+    "label" : "lock",
+    "action" : "hyprlock",
+    "text" : "",
+    "keybind" : "l",
+    "width" : 1,
+    "height" : 1,
+    "circular" : true
+}
+
+{
+    "label" : "logout",
+    "action" : "loginctl terminate-user $USER",
+    "text" : "",
+    "keybind" : "e"
+    "width" : 1,
+    "height" : 1,
+    "circular" : true
+}
+
+{
+    "label" : "reboot",
+    "action" : "reboot",
+    "text" : "",
+    "keybind" : "r"
+    "width" : 1,
+    "height" : 1,
+    "circular" : true
+}
+
+{
+    "label" : "shutdown",
+    "action" : "poweroff",
+    "text" : "",
+    "keybind" : "s"
+    "width" : 1,
+    "height" : 1,
+    "circular" : true
+}
+
+{
+    "label" : "hibernate",
+    "action" : "hibernate",
+    "text" : "",
+    "keybind" : "h"
+    "width" : 1,
+    "height" : 1,
+    "circular" : true
+}
+
+{
+    "label" : "suspend",
+    "action" : "suspend",
+    "text" : "",
+    "keybind" : "u"
+    "width" : 1,
+    "height" : 1,
+    "circular" : true
+}

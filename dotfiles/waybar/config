@@ -35,6 +35,9 @@
 				  " joshuto (.*) foot": " $1",
 				  " Double Commander (.*) doublecmd": " Double Commander",
 				  " (.*) foot": "> [$1]",
+				  " (.*) (.*) org.wezfurlong.wezterm": "> [$1] $2",
+				  " (.*) org.wezfurlong.wezterm": "> [ ] $1",
+				  " (.*) Zotero": "󰬡 $1",
 				  " QQ QQ": " QQ",
 				  "(.*) org.telegram.desktop": " $1",
 				  "(.*) org.keepassxc.KeePassXC": "󰌾 $1"
@@ -51,7 +54,8 @@
         "format-ethernet": "{ifname} ",
         "format-disconnected": "",
         "max-length": 50,
-        "on-click": "kitty -e 'nmtui'"
+        // "on-click": "kitty -e 'nmtui'"
+	"on-click": "ags -t quicksettings"
     },
 
     "idle_inhibitor": {
@@ -71,7 +75,8 @@
     "clock": {
         // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         // "format-alt": "{:%Y-%m-%d}"
-		"on-click": "thunderbird"
+		"on-click": "ags -t datemenu",
+		"on-click-right": "~/.config/eww/dashboard/launch_dashboard"
     },
 
     "pulseaudio": {
@@ -90,7 +95,8 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pamixer -t"
+        "on-click": "pamixer -t",
+	"on-click-right": "ags -t quicksettings"
     },
 
 "custom/pipewire": {
@@ -108,15 +114,17 @@
         	},
 		"full-at": 84,
         	"format": "{icon} {capacity}%",
-        	"format-charging": "󰂄 {capacity}%",
+        	// "format-charging": "󰂄 {capacity}%",
+		"format-charging": ["󰢜 {capacity}%", "󰂆 {capacity}%", "󰂇 {capacity}%", "󰂈 {capacity}%", "󰢝 {capacity}%", "󰂉 {capacity}%", "󰢞 {capacity}%", "󰂊 {capacity}%", "󰂋 {capacity}%", "󰂅 {capacity}%"],
         	"format-plugged": " {capacity}%",
         	"format-alt": "{time} {icon}",
-        	"format-full": " {capacity}%",
-        	"format-icons": ["", "", ""]
-	},
+        	"format-full": "󰁹 {capacity}%",
+        	// "format-icons": ["", "", ""]
+		"format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+		},
 
 	"custom/power": {
 		"format": " ",
-		"on-click": "hyprlandnag -t warning -m 'Power Menu Options' -b 'Logout' 'hyprlandmsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
+		"on-click": "ags -t powermenu"
 	},
 }

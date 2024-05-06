@@ -16,6 +16,11 @@
   };
 
   inputs = {
+    dotfiles = {
+      url = "path:./dotfiles";
+      flake = false;
+    };
+
     nixpkgs.url = "github:NixOS/nixpkgs/master";
 
     nixpkgs-unstable = {
@@ -60,18 +65,28 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    hyprgrass = {
+      url = "github:horriblename/hyprgrass";
+      inputs.hyprland.follows = "hyprland"; # IMPORTANT
+    };
+
     flake-utils.url = "github:numtide/flake-utils";
 
     rust-overlay.url = "github:oxalica/rust-overlay";
+
+    ags.url = "github:Aylur/ags";
+
+    nur.url = "github:nix-community/NUR";
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+    };
   };
 
   outputs = { self, nixpkgs, nix, home-manager, emacs-overlay, nixos-wsl
     , nixos-hardware, hyprland, hy3, flake-utils, rust-overlay, nixpkgs-unstable
-    , ... }@inputs:
+    , dotfiles, nur, niri, hyprgrass, ... }@inputs:
     let
-      home = ./home;
-      modules = ./modules;
-      dotfiles = ./dotfiles;
       specialArgs = { inherit inputs; };
 
       add-unstable-packages = final: _prev: {
@@ -95,6 +110,14 @@
           add-unstable-packages
 
           (import rust-overlay)
+
+          (final: prev: {
+            rofi-calc = prev.rofi-calc.override {
+              rofi-unwrapped = prev.rofi-wayland-unwrapped;
+            };
+          })
+
+	  niri.overlays.niri
         ];
       };
 
@@ -105,12 +128,19 @@
         home-manager.extraSpecialArgs = args;
       };
 
-      argDefaults = { inherit inputs dotfiles home; };
+      argDefaults = { inherit inputs dotfiles; };
 
       common-modules = [
         ./configuration.nix
         home-manager.nixosModules.home-manager
         (configurationDefaults argDefaults)
+
+	nur.nixosModules.nur
+        # This adds a nur configuration option.
+        # Use `config.nur` for packages like this:
+        # ({ config, ... }: {
+        #   environment.systemPackages = [ config.nur.repos.mic92.hello-nur ];
+        # })
       ];
 
     in {
@@ -121,7 +151,7 @@
           inherit specialArgs;
           system = "x86_64-linux";
 
-          modules = common-modules ++ [ ./hosts/vmware.nix ./home/vmware.nix ];
+          modules = common-modules ++ [ ./hosts/vmware.nix ];
         };
 
         wsl = nixpkgs.lib.nixosSystem {
@@ -129,23 +159,26 @@
           system = "x86_64-linux";
 
           modules = common-modules
-            ++ [ nixos-wsl.nixosModules.wsl ./hosts/wsl.nix ./home/wsl.nix ];
+            ++ [ nixos-wsl.nixosModules.wsl ./hosts/wsl.nix ];
         };
 
         macbook = nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           system = "x86_64-linux";
 
-          modules = common-modules ++ [
-            nixos-hardware.nixosModules.apple-t2
-            hosts/macbook.nix
-            modules/dm/greetd.nix
-            modules/desktop/sway.nix
+          modules = common-modules
+            ++ [ nixos-hardware.nixosModules.apple-t2
+	      niri.nixosModules.niri
+	      hosts/macbook.nix ];
+        };
+
+        minimal = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
+          modules = [
+            ./configuration-minimal.nix
             modules/desktop/gnome.nix
-            modules/desktop/wayfire.nix
-            modules/desktop/plasma.nix
             modules/desktop/hyprland.nix
-            home/macbook.nix
           ];
         };
       };

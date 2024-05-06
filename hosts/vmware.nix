@@ -4,7 +4,7 @@
   networking.networkmanager.enable = true;
 
   imports = [ # Include the results of the hardware scan.
-    ../hardware-configuration.nix
+    ../hard-files/hardware/hardware-configuration.nix
   ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -31,5 +31,5 @@
 
   virtualisation.vmware.guest.enable = true;
 
-  home-manager.users.taka = { imports = [ ./vmware-home.nix ]; };
+  home-manager.users.takaobsid = { imports = [ ./vmware.nix ]; };
 }

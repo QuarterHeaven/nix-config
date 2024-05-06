@@ -1,0 +1,57 @@
+* {
+    font-size: 16pt;
+    background-image: none;
+}
+window {
+    background-image: url("/home/takaobsid/.config/wlogout/IMG_6959-blurred.png");
+    background-size: 100%;
+}
+
+button {
+    color: #FFFFFF;
+    background-color: rgba(34, 33, 44, 0.4);
+    outline-style: none;
+    border: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20%;
+    margin: 50px;
+    box-shadow: none;
+    text-shadow: none;
+    animation: gradient_f 20s ease-in infinite;
+}
+
+button:hover {
+    background-color: #3700B3;
+    background-size: 30%;
+}
+
+#lock {
+    /* margin: 200px 10px 200px 100px; */
+    background-image: image(url("./icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    /* margin: 200px 10px 200px 10px; */
+    background-image: image(url("./icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+}
+
+#suspend {
+    /* margin: 200px 100px 200px 10px; */
+    background-image: image(url("./icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+}
+
+#hibernate {
+    /* margin: 200px 10px 200px 10px; */
+    background-image: image(url("./icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
+}
+
+#shutdown {
+    /* margin: 200px 10px 200px 10px; */
+    background-image: image(url("./icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    /* margin: 200px 10px 200px 10px; */
+    background-image: image(url("./icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+}

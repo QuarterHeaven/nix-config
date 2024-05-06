@@ -4,6 +4,7 @@
     font-size: 13px;
     color: #ffffff;
     border-radius: 20px;
+    /*background: rgba(0,43,51,0.85);*/
 }
 
 window {
@@ -33,7 +34,8 @@ window#waybar {
 }
 #workspaces button:hover {
     box-shadow: inherit;
-	background-color: rgba(0,153,153,1);
+/*	background-color: rgba(0,153,153,0.85);*/
+        background: rgba(0, 0, 0, 0.2);
 }
 
 #workspaces button.focused {
@@ -53,7 +55,13 @@ window#waybar {
 #network,
 #pulseaudio,
 #custom-media,
-#tray,
+#tray {
+    padding: 0 10px;
+	background: inherit;
+}
+#tray menu {
+    background: rgba(0,43,51,0.85);
+}
 #mode,
 #custom-power,
 #custom-menu,
@@ -66,6 +74,7 @@ window#waybar {
     font-weight: bold;
 }
 #custom-power {
+    font-family: BlexMono Nerd Font Mono;
     background-color: rgba(0,119,179,0.6);
     border-radius: 100px;
     margin: 5px 5px;

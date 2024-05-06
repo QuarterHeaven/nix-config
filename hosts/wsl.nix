@@ -21,7 +21,7 @@
     autoPrune.enable = true;
   };
 
-  home-manager.users.taka = { imports = [ ./wsl-home.nix ]; };
+  home-manager.users.takaobsid = { imports = [ ../modules/home-modules/wsl.nix ]; };
 
   #   # Enable the X11 windowing system.
   #   services.xserver.enable = true;

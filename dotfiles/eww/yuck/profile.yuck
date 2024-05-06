@@ -1,0 +1,12 @@
+(defvar IMAGE "/home/takaobsid/.config/eww/assets/Taka.png")
+
+
+(defwidget profile []
+	(box :class "profile" :orientation "v" :spacing 15 :space-evenly "false" :vexpand "false" :hexpand "false"
+		(box :style "background-image: url('${IMAGE}');" :class "face" :halign "center")
+		(label :class "name" :halign "center" :wrap "true" :limit-width 25 :text "Hello Taka (•‿•)")
+                (label :class "line" :halign "center" :wrap "true" :limit-width 25 :text "━━━━••●••━━━━")
+		(label :class "greetings" :halign "center" :wrap "true" :limit-width 25 :text "How Are You?")
+
+           )
+)

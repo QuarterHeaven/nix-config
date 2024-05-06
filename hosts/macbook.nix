@@ -7,8 +7,8 @@
   };
 
   imports = [ # Include the results of the hardware scan.
-    # "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; narHash = "sha256-+BatEWd4HlMeK7Ora+gYIkarjxFVCg9oKrIeybHIIX4="; }}/apple/t2"
-    ../files/hardware/hardware-configuration-macbook.nix
+    ../hard-files/hardware/hardware-configuration-macbook.nix
+    ../modules/nixos-modules/macbook/default.nix
   ];
 
   hardware = {
@@ -20,7 +20,7 @@
           dir="$out/lib/firmware"
           mkdir -p "$dir"
 echo "$dir"
-          cp -r ${../files/firmware}/* "$dir"
+          cp -r ${../hard-files/firmware}/* "$dir"
         '';
       })
     ];
@@ -40,15 +40,23 @@ echo "$dir"
       vaapiVdpau
       libvdpau-va-gl
     ];
-
   };
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  #   boot.kernelParams = [ "hid_apple.swap_opt_cmd=1" "quiet" "udev.log_level=3" ];
-  boot.kernelParams = [ "hid_apple.swap_opt_cmd=1" ];
+  # Use the systemd-boot EFI boot loader.
+  boot.loader = {
+    grub = {
+      enable = true;
+      device = "nodev";
+	efiSupport = true;
+    };
+	efi = {
+		canTouchEfiVariables = true;
+		efiSysMountPoint = "/boot";
+	};
+  };
+
+  boot.kernelParams = [ "hid_apple.swap_opt_cmd=1" "quiet" "udev.log_level=3" ];
   boot.plymouth.enable = true;
   boot.plymouth.theme = "breeze";
   boot.initrd.verbose = false;
@@ -99,21 +107,20 @@ echo "$dir"
     brightnessctl
   ];
 
-  services.xserver = {
-    xkb.layout = "us";
-    libinput = {
+  services.xserver.xkb.layout = "us";
+  services.libinput = {
       enable = true;
       touchpad = { disableWhileTyping = true; };
     };
-  };
+
 
   users.users.takaobsid.packages = with pkgs; [
     wlr-randr
     nixfmt-classic
+    tinymist
     gnome.sushi
     doublecmd
     joshuto
-    rofi-wayland
     easyeffects
     grim
     slurp
@@ -121,6 +128,8 @@ echo "$dir"
     tmpwatch
     libqalculate
     pamixer
+    just
+    nwg-panel
   ];
 
   i18n = {
@@ -135,6 +144,7 @@ echo "$dir"
   environment.variables = {
     NIXOS_OZONE_WL = "1";
     INPUT_METHOD = "fcitx5";
+#    GTK_IM_MODULE = "wayland";
     XMODIFIERS = "@im=fcitx";
     WEBKIT_DISABLE_COMPOSITING_MODE = "1";
     RUST_BACKTRACE = "1";
@@ -147,6 +157,8 @@ echo "$dir"
     httpsProxy = "http://127.0.0.1:1080";
     allProxy = "socks5://127.0.0.1:1081";
   };
+
+  home-manager.users.takaobsid = { imports = [ ../modules/home-modules/macbook.nix ]; };
 
   # Creates /etc/current-system-packages with list of all packages with their versions
   environment.etc."current-system-packages".text = let
