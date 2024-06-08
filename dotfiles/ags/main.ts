@@ -36,7 +36,7 @@ App.config({
     ...forMonitors(OSD),
     DateMenu(),
     Launcher(),
-    Overview(),
+    // Overview(),
     PowerMenu(),
     SettingsDialog(),
     Verification(),

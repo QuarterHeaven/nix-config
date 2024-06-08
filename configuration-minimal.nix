@@ -5,23 +5,27 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-    "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; narHash = "sha256-/BPDMJEkrsFAFOsQWhwm31wezlgshPFlLBn34KEUdVA="; }}/apple/t2"
-      ./files/hardware/hardware-configuration-macbook.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    "${
+      builtins.fetchGit {
+        url = "https://github.com/NixOS/nixos-hardware.git";
+        narHash = "sha256-/BPDMJEkrsFAFOsQWhwm31wezlgshPFlLBn34KEUdVA=";
+      }
+    }/apple/t2"
+    ./files/hardware/hardware-configuration-macbook.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
     grub = {
       enable = true;
       device = "nodev";
-	efiSupport = true;
+      efiSupport = true;
     };
-	efi = {
-		canTouchEfiVariables = true;
-		efiSysMountPoint = "/boot";
-	};
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
+    };
   };
 
   hardware = {
@@ -30,10 +34,10 @@
         name = "brcm-firmware";
 
         buildCommand = ''
-          dir="$out/lib/firmware"
-          mkdir -p "$dir"
-echo "$dir"
-          cp -r ${./hard-files/firmware}/* "$dir"
+                    dir="$out/lib/firmware"
+                    mkdir -p "$dir"
+          echo "$dir"
+                    cp -r ${./hard-files/firmware}/* "$dir"
         '';
       })
     ];
@@ -65,9 +69,9 @@ echo "$dir"
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-#    displayManager.gdm.enable = true;
-#    displayManager.gdm.wayland = true;
-#    desktopManager.gnome.enable = true;
+    #    displayManager.gdm.enable = true;
+    #    displayManager.gdm.wayland = true;
+    #    desktopManager.gnome.enable = true;
   };
 
   # Configure keymap in X11

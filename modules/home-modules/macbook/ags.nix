@@ -8,11 +8,7 @@
   programs.ags = {
     enable = true;
     configDir = "${inputs.dotfiles}/ags";
-    extraPackages = with pkgs; [
-      gtksourceview
-      webkitgtk
-      accountsservice
-    ];
+    extraPackages = with pkgs; [ gtksourceview webkitgtk accountsservice ];
   };
 
   # home.file.".config/ags" = {

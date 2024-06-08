@@ -1,24 +1,24 @@
-{ pkgs, inputs, ...}:
+{ pkgs, inputs, ... }:
 
 {
-  # nixpkgs.overlays = [niri.overlays.niri];
+  nixpkgs.overlays = [inputs.niri.overlays.niri];
   programs.niri = {
     enable = true;
     # package = inputs.niri.packages.${pkgs.system}.niri-stable;
     package = pkgs.niri-unstable;
   };
 
-  users.users.takaobsid.packages = with pkgs; [
-    alacritty
-  ]; 
+  environment.variables.NIXOS_OZONE_WL = "1";
+  environment.systemPackages = with pkgs; [
+    wl-clipboard
+    wayland-utils
+    libsecret
+    cage
+    gamescope
+  ];
+  # qt.enable = true;
+  # qt.style = "adwaita-dark";
+  # qt.platformTheme = "gnome";
 
-  # services.xserver.displayManager.session = [
-  #   {
-  #     manage = "desktop";
-  #     name = "Niri";
-  #     exec = ''
-  #       ${pkgs.niri}/bin/niri-session
-  #     '';
-  #   }
-  # ];
+  users.users.takaobsid.packages = with pkgs; [ alacritty ];
 }

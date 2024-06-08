@@ -13,7 +13,7 @@
 
       mouse = { hide-when-typing = "yes"; };
 
-      colors = { alpha = 0.7; };
+      # colors = { alpha = 0.7; };
     };
   };
 }

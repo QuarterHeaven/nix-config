@@ -17,10 +17,10 @@
         name = "brcm-firmware";
 
         buildCommand = ''
-          dir="$out/lib/firmware"
-          mkdir -p "$dir"
-echo "$dir"
-          cp -r ${../hard-files/firmware}/* "$dir"
+                    dir="$out/lib/firmware"
+                    mkdir -p "$dir"
+          echo "$dir"
+                    cp -r ${../hard-files/firmware}/* "$dir"
         '';
       })
     ];
@@ -48,15 +48,20 @@ echo "$dir"
     grub = {
       enable = true;
       device = "nodev";
-	efiSupport = true;
+      efiSupport = true;
     };
-	efi = {
-		canTouchEfiVariables = true;
-		efiSysMountPoint = "/boot";
-	};
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
+    };
   };
 
-  boot.kernelParams = [ "hid_apple.swap_opt_cmd=1" "quiet" "udev.log_level=3" ];
+  boot.kernelParams = [
+    "hid_apple.swap_opt_cmd=1"
+    "quiet"
+    "udev.log_level=3"
+    "transparent_hugepage=never"
+  ];
   boot.plymouth.enable = true;
   boot.plymouth.theme = "breeze";
   boot.initrd.verbose = false;
@@ -105,22 +110,32 @@ echo "$dir"
     wl-clipboard
     wayshot
     brightnessctl
+    clash-verge-rev
+    handlr
+    xsel
+    # inputs.clipboard-sync.packages.${system}.default
   ];
+
+  services.clipboard-sync.enable = true;
 
   services.xserver.xkb.layout = "us";
   services.libinput = {
-      enable = true;
-      touchpad = { disableWhileTyping = true; };
-    };
-
+    enable = true;
+    touchpad = { disableWhileTyping = true; };
+  };
 
   users.users.takaobsid.packages = with pkgs; [
     wlr-randr
     nixfmt-classic
+    nixpkgs-fmt
     tinymist
     gnome.sushi
     doublecmd
-    joshuto
+
+    # command line file manager
+    # joshuto
+    yazi
+
     easyeffects
     grim
     slurp
@@ -130,7 +145,25 @@ echo "$dir"
     pamixer
     just
     nwg-panel
+
+    libreoffice
+    # wpsoffice                # use flatpak version instead
+
+    onlyoffice-bin_latest
+
+    appimage-run
+
+    config.nur.repos.xddxdd.baidunetdisk
   ];
+
+  boot.binfmt.registrations.appimage = {
+    wrapInterpreterInShell = false;
+    interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+    recognitionType = "magic";
+    offset = 0;
+    mask = "\\xff\\xff\\xff\\xff\\x00\\x00\\x00\\x00\\xff\\xff\\xff";
+    magicOrExtension = "\\x7fELF....AI\\x02";
+  };
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -141,16 +174,23 @@ echo "$dir"
 
   services.upower.enable = true;
 
+  services.flatpak.enable = true;
+
+
   environment.variables = {
     NIXOS_OZONE_WL = "1";
     INPUT_METHOD = "fcitx5";
-#    GTK_IM_MODULE = "wayland";
+    #    GTK_IM_MODULE = "wayland";
     XMODIFIERS = "@im=fcitx";
     WEBKIT_DISABLE_COMPOSITING_MODE = "1";
     RUST_BACKTRACE = "1";
+    PATH =
+      "$PATH:/home/takaobsid/bin:/home/takaobsid/.local/share/applications";
+    YDOTOOL_SOCKET="/run/user/$(id -u)/.ydotool_socket";
   };
 
   services.xserver.desktopManager.runXdgAutostartIfNone = true;
+  xdg.mime.enable = true;
 
   networking.proxy = {
     httpProxy = "http://127.0.0.1:1080";
@@ -158,7 +198,9 @@ echo "$dir"
     allProxy = "socks5://127.0.0.1:1081";
   };
 
-  home-manager.users.takaobsid = { imports = [ ../modules/home-modules/macbook.nix ]; };
+  home-manager.users.takaobsid = {
+    imports = [ ../modules/home-modules/macbook.nix ];
+  };
 
   # Creates /etc/current-system-packages with list of all packages with their versions
   environment.etc."current-system-packages".text = let

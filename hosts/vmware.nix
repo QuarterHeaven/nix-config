@@ -1,4 +1,4 @@
-{ features, ... }:
+{ features, pkgs, ... }:
 
 {
   networking.networkmanager.enable = true;

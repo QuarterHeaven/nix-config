@@ -53,7 +53,7 @@
   users.users.takaobsid = {
     isNormalUser = true;
     description = "TakaObsid";
-    extraGroups = [ "networkmanager" "wheel" "docker" "users" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "users" "uinput" "input" ];
     packages = with pkgs; [
       firefox
       kate
@@ -67,7 +67,16 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [ "electron-11.5.0" ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall =
+      true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall =
+      true; # Open ports in the firewall for Source Dedicated Server
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -96,10 +105,16 @@
     cmake
     gcc-unwrapped
     libgcc
+    pkg-config
 
     nix-output-monitor
 
-    nodejs
+    dive
+    podman-tui
+    # podman-compose
+    docker-compose
+
+    ueberzug # command-line image support
   ];
 
   # Font settings
@@ -142,8 +157,15 @@
   services.openssh.enable = true;
   services.openssh.hostKeys = options.services.openssh.hostKeys.default;
 
-  # Enable VMware Tools
-  # virtualisation.vmware.guest.enable = true;
+  systemd.services.tune-usb-autosuspend = {
+    description = "Disable USB autosuspend";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = { Type = "oneshot"; };
+    unitConfig.RequiresMountsFor = "/sys";
+    script = ''
+        echo -1 > /sys/module/usbcore/parameters/autosuspend
+      '';
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

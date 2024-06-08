@@ -1,6 +1,10 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   home.file = { ".config/waybar".source = "${inputs.dotfiles}/waybar"; };
-  programs.waybar = { enable = true; };
+  home.packages = with pkgs; [ libappindicator ];
+  programs.waybar = {
+    enable = true;
+    package = inputs.waybar.packages.${pkgs.system}.waybar;
+  };
 }

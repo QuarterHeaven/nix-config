@@ -22,6 +22,7 @@
     };
 
     nixpkgs.url = "github:NixOS/nixpkgs/master";
+    # nixpkgs.url = "github:QuarterHeaven/nixpkgs/master";
 
     nixpkgs-unstable = {
       url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -45,30 +46,31 @@
 
     nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };
 
-    hyprland = { url = "github:hyprwm/Hyprland"; };
+    across.url = "github:ArkToria/ACross";
+
+    hyprland = {
+      type = "git";
+      url = "https://github.com/hyprwm/Hyprland";
+      submodules = true;
+    };
+    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
 
-    hy3 = {
-      url =
-        "github:outfoxxed/hy3"; # where {version} is the hyprland release version
-      # or "github:outfoxxed/hy3" to follow the development branch.
-      # (you may encounter issues if you dont do the same for hyprland)
-      inputs.hyprland.follows = "hyprland";
-    };
-
-    Hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     hyprgrass = {
       url = "github:horriblename/hyprgrass";
-      inputs.hyprland.follows = "hyprland"; # IMPORTANT
+      inputs.hyprland.follows = "hyprland";
     };
+
+    hyprslidr = {
+      url = "gitlab:QuarterHeaven/hyprslidr";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    yazi.url = "github:sxyazi/yazi";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -78,14 +80,20 @@
 
     nur.url = "github:nix-community/NUR";
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
-    };
+    niri = { url = "github:sodiboo/niri-flake"; };
+
+    waybar = { url = "github:Alexays/Waybar"; };
+
+    gestures.url = "github:riley-martin/gestures";
+
+    xremap.url = "github:xremap/nix-flake";
+
+    clipboard-sync.url = "github:QuarterHeaven/clipboard-sync";
   };
 
   outputs = { self, nixpkgs, nix, home-manager, emacs-overlay, nixos-wsl
-    , nixos-hardware, hyprland, hy3, flake-utils, rust-overlay, nixpkgs-unstable
-    , dotfiles, nur, niri, hyprgrass, ... }@inputs:
+    , nixos-hardware, hyprland, flake-utils, rust-overlay, nixpkgs-unstable
+    , dotfiles, nur, niri, hyprgrass, hyprslidr, waybar, yazi, gestures, across, xremap, clipboard-sync, ... }@inputs:
     let
       specialArgs = { inherit inputs; };
 
@@ -117,7 +125,7 @@
             };
           })
 
-	  niri.overlays.niri
+          niri.overlays.niri
         ];
       };
 
@@ -135,7 +143,7 @@
         home-manager.nixosModules.home-manager
         (configurationDefaults argDefaults)
 
-	nur.nixosModules.nur
+        nur.nixosModules.nur
         # This adds a nur configuration option.
         # Use `config.nur` for packages like this:
         # ({ config, ... }: {
@@ -166,10 +174,13 @@
           inherit specialArgs;
           system = "x86_64-linux";
 
-          modules = common-modules
-            ++ [ nixos-hardware.nixosModules.apple-t2
-	      niri.nixosModules.niri
-	      hosts/macbook.nix ];
+          modules = common-modules ++ [
+            nixos-hardware.nixosModules.apple-t2
+            niri.nixosModules.niri
+	    xremap.nixosModules.default
+	    clipboard-sync.nixosModules.default
+            hosts/macbook.nix
+          ];
         };
 
         minimal = nixpkgs.lib.nixosSystem {

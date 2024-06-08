@@ -4,13 +4,13 @@
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    xwayland.enable = false;
+    xwayland.enable = true;
   };
 
-  #  xdg.portal = {
-  #    enable = true;
-  #    wlr.enable = true;
-  #  };
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+  };
 
   #  services.flatpak.enable = true;
 
@@ -50,5 +50,15 @@
   };
 
   users.users.takaobsid.packages = with pkgs; [ hyprpaper wlogout hyprlock ];
+
+  environment.systemPackages = with pkgs; [
+    cpio
+    meson
+    ninja
+    wayland-scanner
+    wayland-protocols
+    libGL
+    libGLU
+  ];
 
 }

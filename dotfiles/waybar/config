@@ -15,6 +15,11 @@
 		"3": "",
 		"4": "",
 		"5": "",
+		"6": "",
+		"7": "",
+		"8": "",
+		"9": "",
+		"10": "",
 		"active": "",
 		"default": ""
 	},
@@ -32,10 +37,13 @@
     		       "rewrite": {
 		       		  "(.*) — Mozilla Firefox firefox": "🌎 $1",
 				  "(.*) emacs": " $1",
-				  " joshuto (.*) foot": " $1",
+				  " joshuto (.*) foot": " $1",				  		   " yazi (.*) foot": " $1",
+
 				  " Double Commander (.*) doublecmd": " Double Commander",
 				  " (.*) foot": "> [$1]",
 				  " (.*) (.*) org.wezfurlong.wezterm": "> [$1] $2",
+				  " (.*) Alacritty": "> [ ] $1",
+				  " (.*) (.*) Alacritty": "> [$1] $2",
 				  " (.*) org.wezfurlong.wezterm": "> [ ] $1",
 				  " (.*) Zotero": "󰬡 $1",
 				  " QQ QQ": " QQ",

@@ -13,6 +13,7 @@ display-window:             "Windows";
 drun-display-format:        "{name}";
 window-format:              "{w} · {c} · {t}";
 font:                        "JetBrains Mono Nerd Font 8";
+combi-modi:		     "window,drun,run,filebrowser,calc,ssh";
 }
 
 /* ---- Load pywal colors ---- */

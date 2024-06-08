@@ -6,16 +6,22 @@
   home.packages = with pkgs; [
     qq
     weechat
+    # feishu
     wezterm
     unstable.zotero_7
     keepassxc
     libtool
     libsecret
     microsoft-edge
+
     imagemagick
+    libwebp
     telegram-desktop
+
     spacedrive
     kitty
+
+    appeditor
   ];
 
   home.pointerCursor = {
