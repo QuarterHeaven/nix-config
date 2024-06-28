@@ -1,7 +1,12 @@
 { inputs, config, pkgs, ... }:
 
 {
+  wayland.windowManager.hyprland.plugins = [
+    inputs.hyprscroller.packages.${pkgs.system}.default
+  ];
+  
   wayland.windowManager.hyprland.settings = {
+    
     general = { layout = "scroller"; };
 
     input = {

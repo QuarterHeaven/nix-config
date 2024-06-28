@@ -30,11 +30,9 @@
       powerOnBoot = true;
     };
 
-    opengl.enable = true;
-    opengl.driSupport = true;
-    opengl.driSupport32Bit = true;
+    graphics.enable = true;
 
-    opengl.extraPackages = with pkgs; [
+    graphics.extraPackages = with pkgs; [
       intel-media-driver
       vaapiIntel
       vaapiVdpau
@@ -59,7 +57,6 @@
   boot.kernelParams = [
     "hid_apple.swap_opt_cmd=1"
     "quiet"
-    "udev.log_level=3"
     "transparent_hugepage=never"
   ];
   boot.plymouth.enable = true;
@@ -174,16 +171,17 @@
 
   services.upower.enable = true;
 
-  services.flatpak.enable = true;
-
-
   environment.variables = {
     NIXOS_OZONE_WL = "1";
     INPUT_METHOD = "fcitx5";
     #    GTK_IM_MODULE = "wayland";
-    XMODIFIERS = "@im=fcitx";
     WEBKIT_DISABLE_COMPOSITING_MODE = "1";
     RUST_BACKTRACE = "1";
+    XMODIFIERS = "@im=fcitx";
+    GTK_IM_MODULE="fcitx";
+    QT_IM_MODULE="fcitx";
+    SDL_IM_MODULE="fcitx";
+    GLFW_IM_MODULE="fcitx";
     PATH =
       "$PATH:/home/takaobsid/bin:/home/takaobsid/.local/share/applications";
     YDOTOOL_SOCKET="/run/user/$(id -u)/.ydotool_socket";

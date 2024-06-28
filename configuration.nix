@@ -53,7 +53,7 @@
   users.users.takaobsid = {
     isNormalUser = true;
     description = "TakaObsid";
-    extraGroups = [ "networkmanager" "wheel" "docker" "users" "uinput" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "users" "uinput" "input" "aria2" ];
     packages = with pkgs; [
       firefox
       kate

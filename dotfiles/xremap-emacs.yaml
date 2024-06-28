@@ -5,6 +5,7 @@ shared:
     - Alacritty
     - foot
     - Gnome-terminal
+    - com.raggesilver.blackbox
 
   emacs-remap: &emacs-remap
       # Cursor
@@ -79,7 +80,7 @@ keypress_delay_ms: 10
 keymap:
   - name: Emacs
     application:
-      not: [emacs, Kitty, Alacritty, foot, jetbrains-idea]
+      not: [emacs, Kitty, Alacritty, foot, jetbrains-idea, Code, com.raggesilver.blackbox]
     remap: *emacs-remap
 
   - name: Terminal
@@ -90,9 +91,9 @@ keymap:
       M-w: [C-insert, { set_mark: false }]
       C-y: [Shift-insert, { set_mark: false }]
 
-  - name: IDEA
-    application:
-      only: jetbrains-idea
-    remap:
-      M-w: [C-insert, { set_mark: false }]
-      C-y: [Shift-insert, { set_mark: false }]
+  # - name: IDEA
+  #   application:
+  #     only: jetbrains-idea
+  #   remap:
+  #     M-w: [C-insert, { set_mark: false }]
+  #     C-y: [Shift-insert, { set_mark: false }]

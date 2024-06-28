@@ -4,9 +4,7 @@
   imports = [ ./global ./macbook ./home.nix ];
 
   home.packages = with pkgs; [
-    qq
     weechat
-    # feishu
     wezterm
     unstable.zotero_7
     keepassxc
@@ -19,7 +17,6 @@
     telegram-desktop
 
     spacedrive
-    kitty
 
     appeditor
   ];

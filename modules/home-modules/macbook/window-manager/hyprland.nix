@@ -24,13 +24,13 @@
     "$mod" = "SUPER";
     "$alt" = "ALT";
     monitor = [
-      "eDP-1, preferred, auto, 1.600000"
-      "desc:AOC Q2701 GWRK8HA002235, preferred, 0x0, 1.25"
+      "eDP-1, preferred, 0x0, 1.600000"
+      "desc:AOC Q2701 GWRK8HA002235, preferred, 1600x-900, 1.25"
     ];
     bind = [
       "$mod, F, fullscreen, 0"
       "$mod, G, exec, grimblast copy area"
-      "ALT CTRL, T, exec, foot"
+      "ALT CTRL, T, exec, footclient"
       "ALT, E, exec, emacs"
       "ALT, SPACE, exec, rofi -show combi"
       "$mod, SPACE, togglefloating,"
@@ -113,7 +113,7 @@
       # hide_cursor_on_key_press = "true";
     };
 
-    debug = { disable_logs = "false"; };
+    debug = { disable_logs = "true"; };
   };
 
   wayland.windowManager.hyprland.extraConfig = ''
@@ -169,11 +169,11 @@
         exec-once = ydotoold --socket-path="/run/user/$(id -u)/.ydotool_socket" --socket-own="$(id -u):$(id -g)"
 
                 windowrulev2 = opacity 0.9 override 0.5 override 0.9 override, class:(emacs),
-                windowrulev2 = float, class:(thunderbird),
                 windowrulev2 = float, class:(Zotero), title:(进度)
-                windowrulev2 = float, class:(QQ),
                 windowrulev2 = opacity 0.9 override 0.5 override 0.9 override, class:(firefox)
                 windowrulev2 = opacity 0.9 override 0.5 override 0.9 override, class:(Alacritty)
+                windowrulev2 = opacity 0.9 override 0.5 override 0.9 override, class:(com.raggesilver.BlackBox)
+                windowrulev2 = opacity 0.9 override 0.5 override 0.9 override, class:(kitty)
                 windowrulev2 = float, class:(jetbrains-idea), title:(Welcome to IntelliJ IDEA)
 
     windowrulev2 = float,title:(holo_layer.py)
@@ -184,7 +184,6 @@
                 layerrule = blur, rofi
                 layerrule = ignorezero, rofi
                 layerrule = noanim, ^(selection)$
-
         # unscale XWayland
         xwayland {
           force_zero_scaling = true

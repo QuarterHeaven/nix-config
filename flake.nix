@@ -16,6 +16,8 @@
   };
 
   inputs = {
+    arion.url = "github:hercules-ci/arion";
+
     dotfiles = {
       url = "path:./dotfiles";
       flake = false;
@@ -48,12 +50,12 @@
 
     across.url = "github:ArkToria/ACross";
 
-    hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/Hyprland";
-      submodules = true;
-    };
-    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    # hyprland = {
+    #   type = "git";
+    #   url = "https://github.com/hyprwm/Hyprland";
+    #   submodules = true;
+    # };
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&rev=9e781040d9067c2711ec2e9f5b47b76ef70762b3";
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -67,6 +69,11 @@
 
     hyprslidr = {
       url = "gitlab:QuarterHeaven/hyprslidr";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    hyprscroller = {
+      url = "github:dawsers/hyprscroller";
       inputs.hyprland.follows = "hyprland";
     };
 
@@ -89,11 +96,15 @@
     xremap.url = "github:xremap/nix-flake";
 
     clipboard-sync.url = "github:QuarterHeaven/clipboard-sync";
+
+    sops-nix.url = "github:Mic92/sops-nix";
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
   outputs = { self, nixpkgs, nix, home-manager, emacs-overlay, nixos-wsl
     , nixos-hardware, hyprland, flake-utils, rust-overlay, nixpkgs-unstable
-    , dotfiles, nur, niri, hyprgrass, hyprslidr, waybar, yazi, gestures, across, xremap, clipboard-sync, ... }@inputs:
+    , dotfiles, nur, niri, hyprgrass, hyprslidr, waybar, yazi, gestures, across, xremap, clipboard-sync, arion, sops-nix, nix-flatpak, hyprscroller, ... }@inputs:
     let
       specialArgs = { inherit inputs; };
 
@@ -149,6 +160,8 @@
         # ({ config, ... }: {
         #   environment.systemPackages = [ config.nur.repos.mic92.hello-nur ];
         # })
+
+	sops-nix.nixosModules.sops
       ];
 
     in {
@@ -175,10 +188,12 @@
           system = "x86_64-linux";
 
           modules = common-modules ++ [
+	    arion.nixosModules.arion
             nixos-hardware.nixosModules.apple-t2
             niri.nixosModules.niri
 	    xremap.nixosModules.default
 	    clipboard-sync.nixosModules.default
+	    nix-flatpak.nixosModules.nix-flatpak
             hosts/macbook.nix
           ];
         };

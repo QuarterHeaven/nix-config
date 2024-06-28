@@ -1,5 +1,14 @@
 keys:
-        - &mac BD83D90981352A28
+  - &takaobsid AD885C7A7C8780C40859E69B753E8D23FFFBF8C4
+  - &taka_age age107pj0xkcfsvv94hhd5ydcljv3rlc8pfreg4m6r8kk7u7mmv7ncnsdsezys
+
 creation_rules:
-        - pgp:
-          - *mac
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *taka_age
+  - path_regex: .+_secrets\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *taka_age
+  - pgp: 'id'

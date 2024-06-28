@@ -123,7 +123,6 @@
     texliveFull
 
     xapian
-    sops
     nil # nix lsp
   ];
 
