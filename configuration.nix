@@ -163,8 +163,8 @@
     serviceConfig = { Type = "oneshot"; };
     unitConfig.RequiresMountsFor = "/sys";
     script = ''
-        echo -1 > /sys/module/usbcore/parameters/autosuspend
-      '';
+      echo -1 > /sys/module/usbcore/parameters/autosuspend
+    '';
   };
 
   # Open ports in the firewall.

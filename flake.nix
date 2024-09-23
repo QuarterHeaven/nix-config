@@ -23,8 +23,11 @@
       flake = false;
     };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/master";
+    # nixpkgs.url = "github:NixOS/nixpkgs/master";
     # nixpkgs.url = "github:QuarterHeaven/nixpkgs/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs-unstable = {
       url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -102,9 +105,36 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
-  outputs = { self, nixpkgs, nix, home-manager, emacs-overlay, nixos-wsl
-    , nixos-hardware, hyprland, flake-utils, rust-overlay, nixpkgs-unstable
-    , dotfiles, nur, niri, hyprgrass, hyprslidr, waybar, yazi, gestures, across, xremap, clipboard-sync, arion, sops-nix, nix-flatpak, hyprscroller, ... }@inputs:
+  outputs =
+    { self
+    , nixpkgs
+    , nix
+    , home-manager
+    , emacs-overlay
+    , nixos-wsl
+    , nixos-hardware
+    , hyprland
+    , flake-utils
+    , rust-overlay
+    , nixpkgs-unstable
+    , dotfiles
+    , nur
+    , niri
+    , hyprgrass
+    , hyprslidr
+    , waybar
+    , yazi
+    , gestures
+    , across
+    , xremap
+    , clipboard-sync
+    , arion
+    , sops-nix
+    , nix-flatpak
+    , hyprscroller
+    , nix-darwin
+    , ...
+    }@inputs:
     let
       specialArgs = { inherit inputs; };
 
@@ -161,10 +191,11 @@
         #   environment.systemPackages = [ config.nur.repos.mic92.hello-nur ];
         # })
 
-	sops-nix.nixosModules.sops
+        sops-nix.nixosModules.sops
       ];
 
-    in {
+    in
+    {
       devModules = import ./dev.nix;
 
       nixosConfigurations = {
@@ -188,12 +219,12 @@
           system = "x86_64-linux";
 
           modules = common-modules ++ [
-	    arion.nixosModules.arion
+            arion.nixosModules.arion
             nixos-hardware.nixosModules.apple-t2
             niri.nixosModules.niri
-	    xremap.nixosModules.default
-	    clipboard-sync.nixosModules.default
-	    nix-flatpak.nixosModules.nix-flatpak
+            xremap.nixosModules.default
+            clipboard-sync.nixosModules.default
+            nix-flatpak.nixosModules.nix-flatpak
             hosts/macbook.nix
           ];
         };
@@ -207,6 +238,17 @@
             modules/desktop/hyprland.nix
           ];
         };
+      };
+
+      darwinConfigurations."Leyline" = nix-darwin.lib.darwinSystem {
+        inherit specialArgs;
+        system = "x86_64-darwin";
+        modules = [
+          home-manager.darwinModules.home-manager
+          (configurationDefaults argDefaults)
+          ./configuration-darwin.nix
+          hosts/darwin.nix
+        ];
       };
     };
 }

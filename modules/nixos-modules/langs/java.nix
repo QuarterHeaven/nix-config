@@ -9,7 +9,7 @@
     maven
     google-chrome
     jdk8
-    # jdk17
+    jdk17
     jetbrains.jdk
 
     # (callPackage ./jbr/default.nix {})

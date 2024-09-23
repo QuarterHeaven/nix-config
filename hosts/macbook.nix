@@ -129,10 +129,6 @@
     gnome.sushi
     doublecmd
 
-    # command line file manager
-    # joshuto
-    yazi
-
     easyeffects
     grim
     slurp
