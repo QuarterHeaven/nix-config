@@ -18,6 +18,7 @@
       # "tdlib"
       "sketchybar"
       "mit-scheme"
+      "eless"
     ];
 
     casks = [
@@ -45,6 +46,8 @@
       "google-chrome"
       "microsoft-edge"
       "xquartz"
+      "jordanbaird-ice"
+      "windterm"
     ];
 
     taps = [

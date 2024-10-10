@@ -9,7 +9,7 @@
   ];
 
   home.packages = with pkgs; [
-    unstable.zotero_7
+    # unstable.zotero_7
     keepassxc
     libtool
     libsecret
@@ -19,6 +19,7 @@
     telegram-desktop
 
     pngpaste
+    unstable.aider-chat
   ];
 
   services.mako = {

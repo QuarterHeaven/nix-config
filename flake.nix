@@ -138,9 +138,13 @@
     let
       specialArgs = { inherit inputs; };
 
-      add-unstable-packages = final: _prev: {
+      add-unstable-packages-linux = final: _prev: {
         unstable = import inputs.nixpkgs-unstable { system = "x86_64-linux"; };
       };
+
+      add-unstable-packages-darwin = final: _prev: {
+        unstable = import inputs.nixpkgs-unstable { system = "x86_64-darwin"; };
+      };      
 
       nixpkgsWithOverlays = with inputs; rec {
         config = {
@@ -156,7 +160,7 @@
             };
           })
 
-          add-unstable-packages
+          add-unstable-packages-linux
 
           (import rust-overlay)
 
@@ -170,9 +174,36 @@
         ];
       };
 
+      nixpkgsWithOverlaysDarwin =  with inputs; rec {
+        config = {
+	  allowUnfree = true;
+	  permittedInsecurePackages = [ ];
+        };
+        overlays = [
+	  emacs-overlay.overlay
+	  (self: super: {
+	    emacs-unstable = super.emacs-unstable.override {
+	      withXwidgets = true;
+	      withGTK3 = true;
+	    };
+	  })
+
+	  add-unstable-packages-darwin
+
+	  (import rust-overlay)
+	];
+      };
+      
       configurationDefaults = args: {
         nixpkgs = nixpkgsWithOverlays;
         home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = args;
+      };
+
+      configurationDefaultsDarwin = args: {
+	nixpkgs = nixpkgsWithOverlaysDarwin;
+	home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;
       };
@@ -194,61 +225,62 @@
         sops-nix.nixosModules.sops
       ];
 
-    in
-    {
-      devModules = import ./dev.nix;
+      in
+      {
+	devModules = import ./dev.nix;
 
-      nixosConfigurations = {
-        vmware = nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
+	nixosConfigurations = {
+          vmware = nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
+            system = "x86_64-linux";
 
-          modules = common-modules ++ [ ./hosts/vmware.nix ];
-        };
+            modules = common-modules ++ [ ./hosts/vmware.nix ];
+          };
 
-        wsl = nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
+          wsl = nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
+            system = "x86_64-linux";
 
-          modules = common-modules
+            modules = common-modules
             ++ [ nixos-wsl.nixosModules.wsl ./hosts/wsl.nix ];
-        };
+          };
 
-        macbook = nixpkgs.lib.nixosSystem {
+          macbook = nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
+            system = "x86_64-linux";
+
+            modules = common-modules ++ [
+              arion.nixosModules.arion
+              nixos-hardware.nixosModules.apple-t2
+              niri.nixosModules.niri
+              xremap.nixosModules.default
+              clipboard-sync.nixosModules.default
+              nix-flatpak.nixosModules.nix-flatpak
+              hosts/macbook.nix
+            ];
+          };
+
+          minimal = nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
+            system = "x86_64-linux";
+            modules = [
+              ./configuration-minimal.nix
+              modules/desktop/gnome.nix
+              modules/desktop/hyprland.nix
+            ];
+          };
+	};
+
+	darwinConfigurations."Leyline" = nix-darwin.lib.darwinSystem {
           inherit specialArgs;
-          system = "x86_64-linux";
-
-          modules = common-modules ++ [
-            arion.nixosModules.arion
-            nixos-hardware.nixosModules.apple-t2
-            niri.nixosModules.niri
-            xremap.nixosModules.default
-            clipboard-sync.nixosModules.default
-            nix-flatpak.nixosModules.nix-flatpak
-            hosts/macbook.nix
-          ];
-        };
-
-        minimal = nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
+          system = "x86_64-darwin";
           modules = [
-            ./configuration-minimal.nix
-            modules/desktop/gnome.nix
-            modules/desktop/hyprland.nix
+            home-manager.darwinModules.home-manager
+            (configurationDefaultsDarwin argDefaults)
+	              
+            ./configuration-darwin.nix
+            hosts/darwin.nix
           ];
-        };
+	};
       };
-
-      darwinConfigurations."Leyline" = nix-darwin.lib.darwinSystem {
-        inherit specialArgs;
-        system = "x86_64-darwin";
-        modules = [
-          home-manager.darwinModules.home-manager
-          (configurationDefaults argDefaults)
-          ./configuration-darwin.nix
-          hosts/darwin.nix
-        ];
-      };
-    };
 }
