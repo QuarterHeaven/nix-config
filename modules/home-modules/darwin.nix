@@ -2,10 +2,11 @@
 
 {
   imports = [ 
-	./global/dotfiles.nix 
-	./global/yazi.nix
-	./darwin 
-	./home-darwin.nix 
+    # 	./global/dotfiles.nix 
+    # ./global/yazi.nix
+    ./global
+    ./darwin 
+    ./home-darwin.nix 
   ];
 
   home.packages = with pkgs; [
@@ -17,9 +18,11 @@
     imagemagick
     libwebp
     telegram-desktop
+    mpv
 
     pngpaste
     unstable.aider-chat
+    # grip-search
   ];
 
   services.mako = {

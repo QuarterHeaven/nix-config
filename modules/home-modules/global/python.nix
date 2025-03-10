@@ -13,8 +13,11 @@
           pyqt6
           pyqt6-sip
           inflect
-          pynput
+          # pynput
+          grip
         ]))
       # cudaPackages.cudatoolkit
+      poetry
+      black # formatter
     ];
 }

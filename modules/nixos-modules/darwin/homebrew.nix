@@ -5,27 +5,28 @@
     enable = true;
 
     brews = [
-      # "imagemagick"
-      # "displayplacer"
-      # "QuarterHeaven/selfuse/maven"
-      # "sops"
-      # "autoconf"
-      # "automake" 
-      # "texinfo" 
-      # "QuarterHeaven/selfuse/gnutls"
-      # "QuarterHeaven/selfuse/openssl@3"
-      # "pkg-config"
+      "autoconf"
+      "gnutls"
+      "tree-sitter"
+      "pkg-config"
       # "tdlib"
       "sketchybar"
       "mit-scheme"
       "eless"
+      "fontconfig"
+      "pidof"
+      "jenv" # java environment
+      "macism"
+      "ncdu"
+      "libmps"
+      "sbcl"
+      "koekeishiya/formulae/yabai"
     ];
 
     casks = [
       "wezterm"
-      # "onedrive"
-      "firefox"
       "intellij-idea"
+      "intellij-idea-ce"
       "mos" # mouse controller
       "lulu" # defend upgrade
       "qq"
@@ -48,6 +49,11 @@
       "xquartz"
       "jordanbaird-ice"
       "windterm"
+      "font-symbols-only-nerd-font"
+      "font-material-symbols"
+      # "kitty" # build fron source
+      "zen-browser"
+      "keycastr"
     ];
 
     taps = [
@@ -57,6 +63,7 @@
       "koekeishiya/formulae"
       "FelixKratz/formulae"
       "mrkai77/cask"
+      "laishulu/homebrew"
     ];
   };
 }

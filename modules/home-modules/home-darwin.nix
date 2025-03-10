@@ -35,6 +35,8 @@
       github.user = "QuarterHeaven";
       credential.helper = "keepassxc --git-groups";
       core.autocrlf = false;
+      http.postBuffer = 524288000;
+      push = { autoSetupRemote = true; };
     };
   };
 
@@ -95,7 +97,6 @@
 
     librime
     rime-data
-    tdlib
 
     # Language settings
     # rustup
@@ -126,7 +127,7 @@
         "eza --git --git-repos --icons=always --hyperlink --color=always --color-scale=all --color-scale-mode=gradient -la";
       gcc = "clang";
       "g++" = "clang++";
-      open = "handlr open";
+      brew86 = "arch --x86_64 /usr/local/Homebrew/bin/brew";
     };
   };
 

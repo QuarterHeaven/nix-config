@@ -126,12 +126,13 @@
     lxgw-wenkai
     liberation_ttf
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-color-emoji
     unifont_upper
     symbola
     font-awesome
-    (nerdfonts.override { fonts = [ "FiraCode" "IBMPlexMono" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.blex-mono
   ];
 
   fonts.fontconfig = {

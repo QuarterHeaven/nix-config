@@ -10,11 +10,11 @@
     google-chrome
     jdk8
     jdk17
-    jetbrains.jdk
+    unstable.jetbrains.jdk
 
-    # (callPackage ./jbr/default.nix {})
+    (callPackage ./jbr/default.nix {})
 
-    # jdt-language-server
+    jdt-language-server
     lombok
   ];
 
@@ -27,4 +27,6 @@
 
   environment.variables.IDEA_JDK = "${jbr}";
   environment.variables.IDEA_VM_OPTIONS = "-Dawt.toolkit.name=WLToolkit";
+  environment.variables.JAVA_8_HOME = "${pkgs.jdk8}/lib/openjdk";
+  environment.variables.JAVA_17_HOME = "${pkgs.jdk17}/lib/openjdk";
 }

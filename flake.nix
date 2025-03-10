@@ -5,13 +5,21 @@
   nixConfig = {
     experimental-features = [ "nix-command" "flakes" ];
     substituters = [
-      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cache.nixos.org/"
     ];
 
-    extra-substituters = [ "https://nix-community.cachix.org" ];
+    extra-substituters = [ 
+      "https://nix-community.cachix.org"
+      "https://aseipp-nix-cache.global.ssl.fastly.net"
+      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+    ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+
+    extra-platforms = [
+	"x86_64-darwin"
+	"aarch64-darwin"
     ];
   };
 
@@ -25,7 +33,7 @@
 
     # nixpkgs.url = "github:NixOS/nixpkgs/master";
     # nixpkgs.url = "github:QuarterHeaven/nixpkgs/master";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -103,6 +111,10 @@
     sops-nix.url = "github:Mic92/sops-nix";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+
+    my_tdlib = {
+      url = "git+file:.?dir=./modules/flakes/td";
+    };
   };
 
   outputs =
@@ -133,6 +145,7 @@
     , nix-flatpak
     , hyprscroller
     , nix-darwin
+    , my_tdlib
     , ...
     }@inputs:
     let
@@ -143,7 +156,7 @@
       };
 
       add-unstable-packages-darwin = final: _prev: {
-        unstable = import inputs.nixpkgs-unstable { system = "x86_64-darwin"; };
+        unstable = import inputs.nixpkgs-unstable { system = "aarch64-darwin"; };
       };      
 
       nixpkgsWithOverlays = with inputs; rec {
@@ -273,7 +286,7 @@
 
 	darwinConfigurations."Leyline" = nix-darwin.lib.darwinSystem {
           inherit specialArgs;
-          system = "x86_64-darwin";
+          system = "aarch64-darwin";
           modules = [
             home-manager.darwinModules.home-manager
             (configurationDefaultsDarwin argDefaults)

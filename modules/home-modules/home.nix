@@ -107,7 +107,6 @@
 
     librime
     rime-data
-    tdlib
 
     # Dropbox third-party client
     # maestral

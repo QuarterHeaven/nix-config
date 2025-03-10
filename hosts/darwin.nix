@@ -35,7 +35,6 @@
     };
   };
 
-  services.nix-daemon.enable = true;
   nix = {
     package = pkgs.nix;
     settings = {
@@ -50,12 +49,20 @@
   ];
 
   environment.variables = {
-    PATH =
-      "/opt/local/bin:$PATH:/Users/takaobsid/bin:/Users/takaobsid/.local/share/applications:/Applications/Emacs.app/Contents/MacOS/bin:/Applications/Emacs.app/Contents/MacOS:/Users/takaobsid/mutable_node_modules/bin/";
+    PATH = "/opt/homebrew/bin:$PATH:$HOME/bin:$HOME/.local/share/applications:/Applications/Emacs.app/Contents/MacOS/bin:/Applications/Emacs.app/Contents/MacOS:$HOME/.npm-packages/bin/";
+    MAVEN_PATH = "${pkgs.maven}/maven";
+    JAVA_HOME = "${pkgs.jdk8}/zulu-8.jdk/Contents/Home";
     LDFLAGS = "-L/usr/local/opt/openssl@3/lib";
     CPPFLAGS = "-I/usr/local/opt/openssl@3/include";
     PKG_CONFIG_PATH = "/usr/local/opt/openssl@3/lib/pkgconfig";
   };
+
+  system.activationScripts.extraActivation.text = ''
+    ln -sf "${pkgs.jdk8}/zulu-8.jdk" "/Library/Java/JavaVirtualMachines/"
+  ln -sf "${pkgs.jdk11}/zulu-11.jdk" "/Library/Java/JavaVirtualMachines/"
+  ln -sf "${pkgs.jdk17}/zulu-17.jdk" "/Library/Java/JavaVirtualMachines/"
+  '';
+
 
   #  networking.proxy = {
   #    httpProxy = "http://127.0.0.1:1080";

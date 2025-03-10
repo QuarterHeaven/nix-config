@@ -12,6 +12,8 @@
 
   # nix.settings.substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
 
+  nixpkgs.hostPlatform = "aarch64-darwin";
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.takaobsid = {
     name = "takaobsid";
@@ -58,6 +60,7 @@
     llvmPackages.libcxxStdenv
     clang-tools
     libgccjit
+    cmake
 
     nix-output-monitor
 
@@ -78,12 +81,13 @@
     lxgw-wenkai
     liberation_ttf
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-color-emoji
     unifont_upper
-    symbola
+    # symbola
     font-awesome
-    (nerdfonts.override { fonts = [ "FiraCode" "IBMPlexMono" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.blex-mono
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -102,7 +106,7 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -112,4 +116,5 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   # system.stateVersion = "24.05"; # Did you read the comment?
   system.stateVersion = 4;
+  ids.gids.nixbld = 350;
 }
