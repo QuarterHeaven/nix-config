@@ -7,5 +7,6 @@
     ./yazi.nix
     ./tdlib.nix
     ./emacs-lsp-booster.nix
+    ./gh.nix
   ];
 }

@@ -2,8 +2,8 @@
 
 {
   # 注意修改这里的用户名与用户目录
-  home.username = "takaobsid";
-  home.homeDirectory = "/home/takaobsid";
+  home.username = "taka";
+  home.homeDirectory = "/home/taka";
 
   # 直接将当前文件夹的配置文件，链接到 Home 目录下的指定位置
   # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
@@ -33,17 +33,15 @@
     userEmail = "liaotx2@gmail.com";
     extraConfig = {
       github.user = "QuarterHeaven";
-      credential.helper = "keepassxc --git-groups";
-      core.autocrlf = false;
     };
   };
 
   # 通过 home.packages 安装一些常用的软件
   # 这些软件将仅在当前用户下可用，不会影响系统级别的配置
   # 建议将所有 GUI 软件，以及与 OS 关系不大的 CLI 软件，都通过 home.packages 安装
-  home.packages = with pkgs; [
-    onefetch
-    screenfetch
+  home.packages = with pkgs;[
+    neofetch
+    nnn # terminal file manager
     ncdu
     gparted
 
@@ -63,18 +61,16 @@
     xclip
     maestral
     maestral-gui # Dropbox 3rd party client
-    ffmpeg
-    sops
 
     # networking tools
     mtr # A network diagnostic tool
     iperf3
-    dnsutils # `dig` + `nslookup`
+    dnsutils  # `dig` + `nslookup`
     ldns # replacement of `dig`, it provide the command `drill`
     aria2 # A lightweight multi-protocol & multi-source command-line download utility
     socat # replacement of openbsd-netcat
     nmap # A utility for network discovery and security auditing
-    ipcalc # it is a calculator for the IPv4/v6 addresses
+    ipcalc  # it is a calculator for the IPv4/v6 addresses
 
     # misc
     cowsay
@@ -93,7 +89,7 @@
     # with more details log output
     nix-output-monitor
 
-    btop # replacement of htop/nmon
+    btop  # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
 
@@ -111,13 +107,20 @@
 
     librime
     rime-data
+    tdlib
 
     # Dropbox third-party client
-    # maestral
-    # maestral-gui
-    # use https://codeberg.org/akiross/podman-dropbox instead
+    maestral-gui
 
     # Language settings
+    llvmPackages.libcxxClang
+    llvmPackages.libcxxStdenv
+    clang-tools
+    libtool
+    bintools
+    gnumake
+    cmake
+    gcc-unwrapped
     rustup
     typst
     # typst-lsp
@@ -126,11 +129,12 @@
     texliveFull
 
     xapian
-    nil # nix lsp
   ];
 
   # 启用 starship，这是一个漂亮的 shell 提示符
-  programs.starship = { enable = true; };
+  programs.starship = {
+    enable = true;
+  };
 
   programs.fish = {
     enable = true;
@@ -138,15 +142,11 @@
       starship init fish | source
     '';
     shellAliases = {
-      ls =
-        "eza --git --git-repos --icons=always --hyperlink --color=always --color-scale=all --color-scale-mode=gradient";
-      l =
-        "eza --git --git-repos --icons=always --hyperlink --color=always --color-scale=all --color-scale-mode=gradient";
-      la =
-        "eza --git --git-repos --icons=always --hyperlink --color=always --color-scale=all --color-scale-mode=gradient -la";
+      ls = "eza";
+      l = "eza";
+      la = "eza -la";
       gcc = "clang";
       "g++" = "clang++";
-      open = "handlr open";
     };
   };
 
@@ -163,14 +163,10 @@
     nix-direnv.enable = true;
   };
 
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs-pgtk;
-  };
-
-  programs.bat = { enable = true; };
-
-  programs.htop = { enable = true; };
+ programs.emacs = {
+   enable = true;
+   package = pkgs.emacs-unstable;
+ };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

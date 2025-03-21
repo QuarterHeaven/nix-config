@@ -135,7 +135,7 @@
     extraGroups = [ "networkmanager" "wheel" "docker" "users" ];
     packages = with pkgs; [
       firefox
-      kate
+      kdePackages.kate
       #  thunderbird
     ];
     shell = pkgs.fish;

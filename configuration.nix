@@ -22,7 +22,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -56,7 +55,7 @@
     extraGroups = [ "networkmanager" "wheel" "docker" "users" "uinput" "input" "aria2" ];
     packages = with pkgs; [
       firefox
-      kate
+      kdePackages.kate
       #  thunderbird
     ];
     shell = pkgs.fish;
