@@ -6,7 +6,7 @@
     wslConf.automount.root = "/mnt";
     wslConf.interop.appendWindowsPath = false;
     wslConf.network.generateHosts = false;
-    defaultUser = "taka";
+    defaultUser = "takaobsid";
     startMenuLaunchers = true;
 
     # Enable integration with Docker Desktop (needs to be installed)
@@ -29,8 +29,8 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   services.xrdp = {
     enable = true;
@@ -45,11 +45,11 @@
 
     # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
     # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "taka";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "taka";
 }
