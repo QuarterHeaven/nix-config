@@ -165,7 +165,7 @@
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-pgtk;
+    package = pkgs.emacs-git-pgtk;
   };
 
   programs.bat = { enable = true; };

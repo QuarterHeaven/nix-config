@@ -22,7 +22,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -62,6 +62,7 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMm976P3b0EigYG7VHxaORw1O4zFL2PvPZ7EUXw1MPRg liaotx2@gmail.com"
     ];
+    hashedPassword = "$y$j9T$04pg9kLriruO/P2GrOdY8/$fFsYvfQftt6UfaBC/VdYqoxIoK7J.58qU80CalVrEyA";
   };
 
   # Allow unfree packages
@@ -75,6 +76,11 @@
       true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall =
       true; # Open ports in the firewall for Source Dedicated Server
+  };
+
+  programs.nix-ld = {
+      enable = true;
+      package = pkgs.nix-ld-rs; # only for NixOS 24.05
   };
 
   # List packages installed in system profile. To search, run:
@@ -128,7 +134,7 @@
     noto-fonts-cjk-sans
     noto-fonts-color-emoji
     unifont_upper
-    symbola
+    # symbola
     font-awesome
     nerd-fonts.fira-code
     nerd-fonts.blex-mono
@@ -157,15 +163,15 @@
   services.openssh.enable = true;
   services.openssh.hostKeys = options.services.openssh.hostKeys.default;
 
-  systemd.services.tune-usb-autosuspend = {
-    description = "Disable USB autosuspend";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = { Type = "oneshot"; };
-    unitConfig.RequiresMountsFor = "/sys";
-    script = ''
-      echo -1 > /sys/module/usbcore/parameters/autosuspend
-    '';
-  };
+#  systemd.services.tune-usb-autosuspend = {
+#    description = "Disable USB autosuspend";
+#    wantedBy = [ "multi-user.target" ];
+#    serviceConfig = { Type = "oneshot"; };
+#    unitConfig.RequiresMountsFor = "/sys";
+#    script = ''
+#      echo -1 > /sys/module/usbcore/parameters/autosuspend
+#    '';
+#  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

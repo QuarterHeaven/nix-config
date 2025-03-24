@@ -39,7 +39,7 @@
 
     nixpkgs-unstable = {
       url = "github:nixos/nixpkgs/nixpkgs-unstable";
-      inputs.nixpkgs.follows = "nixpkgs";
+#      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
@@ -66,7 +66,8 @@
     #   url = "https://github.com/hyprwm/Hyprland";
     #   submodules = true;
     # };
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&rev=9e781040d9067c2711ec2e9f5b47b76ef70762b3";
+    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&rev=9e781040d9067c2711ec2e9f5b47b76ef70762b3";
+    hyprland.url = "github:hyprwm/Hyprland";
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -80,11 +81,6 @@
 
     hyprslidr = {
       url = "gitlab:QuarterHeaven/hyprslidr";
-      inputs.hyprland.follows = "hyprland";
-    };
-
-    hyprscroller = {
-      url = "github:dawsers/hyprscroller";
       inputs.hyprland.follows = "hyprland";
     };
 
@@ -113,7 +109,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
     my_tdlib = {
-      url = "git+file:.?dir=./modules/flakes/td";
+      url = "github:QuarterHeaven/my_tdlib";
     };
   };
 
@@ -143,7 +139,6 @@
     , arion
     , sops-nix
     , nix-flatpak
-    , hyprscroller
     , nix-darwin
     , my_tdlib
     , ...
@@ -228,7 +223,7 @@
         home-manager.nixosModules.home-manager
         (configurationDefaults argDefaults)
 
-        nur.nixosModules.nur
+	nur.modules.nixos.default
         # This adds a nur configuration option.
         # Use `config.nur` for packages like this:
         # ({ config, ... }: {
@@ -255,7 +250,10 @@
             system = "x86_64-linux";
 
             modules = common-modules
-            ++ [ nixos-wsl.nixosModules.wsl ./hosts/wsl.nix ];
+            ++ [ 
+		nixos-wsl.nixosModules.wsl 
+		hosts/wsl.nix 
+	       ];
           };
 
           macbook = nixpkgs.lib.nixosSystem {
