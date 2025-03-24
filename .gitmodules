@@ -1,3 +1,6 @@
 [submodule "modules/flakes/my_tdlib"]
 	path = modules/flakes/my_tdlib
 	url = https://github.com/QuarterHeaven/my_tdlib
+[submodule "modules/flakes/td"]
+	path = modules/flakes/td
+	url = git@github.com:QuarterHeaven/my_tdlib.git
