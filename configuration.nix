@@ -111,6 +111,7 @@
     gcc-unwrapped
     libgcc
     pkg-config
+    gdb
 
     nix-output-monitor
 

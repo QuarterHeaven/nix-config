@@ -61,6 +61,7 @@
     clang-tools
     libgccjit
     cmake
+    gdb
 
     nix-output-monitor
 

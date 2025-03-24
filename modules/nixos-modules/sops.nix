@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }:
 
 {
-  environment.defaultPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     age
     sops
   ];
