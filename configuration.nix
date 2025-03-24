@@ -100,17 +100,11 @@
         extensions = [ "rust-src" "rust-analyzer" ];
         targets = [ "wasm32-unknown-unknown" ];
       }))
-    llvmPackages.libcxxClang
-    llvmPackages.libcxxStdenv
-    clang-tools
     libtool
     libdrm
     bintools
-    gnumake
-    cmake
-    gcc-unwrapped
-    libgcc
     pkg-config
+    libgcc
     gdb
 
     nix-output-monitor

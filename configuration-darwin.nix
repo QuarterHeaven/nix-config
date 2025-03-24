@@ -40,6 +40,13 @@
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.permittedInsecurePackages = [ "electron-11.5.0" ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.trusted-users = [ "root" "takaobsid" ];
+  nix.extraOptions = ''
+  substituters = https://cache.nixos.org
+  trusted-public-keys = cache.nixos.org-1:QpeIWfMW8ZQZnt0Qz8ZhTtVn5z+VksGJybTDoGo+/Iw=
+  max-jobs = 1
+  cores    = 1
+'';
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -56,12 +63,6 @@
     #     extensions = [ "rust-src" "rust-analyzer" ];
     #     targets = [ "wasm32-unknown-unknown" ];
     #   }))
-    llvmPackages.libcxxClang
-    llvmPackages.libcxxStdenv
-    clang-tools
-    libgccjit
-    cmake
-    gdb
 
     nix-output-monitor
 

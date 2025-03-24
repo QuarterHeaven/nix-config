@@ -276,8 +276,8 @@
             system = "x86_64-linux";
             modules = [
               ./configuration-minimal.nix
-              modules/desktop/gnome.nix
-              modules/desktop/hyprland.nix
+              modules/nix-modules/desktop/gnome.nix
+              modules/nix-modules/desktop/hyprland.nix
             ];
           };
 	};

@@ -18,7 +18,6 @@
     imagemagick
     libwebp
     telegram-desktop
-    mpv
 
     pngpaste
     unstable.aider-chat
@@ -33,5 +32,9 @@
   programs.thunderbird = {
     enable = false;
     profiles."Taka Obsid" = { isDefault = true; };
+  };
+ 
+  programs.mpv = {
+    enable = false;
   };
 }

@@ -12,6 +12,8 @@
     # ../langs/java-darwin.nix
     ../langs/go.nix
     # ../langs/common-lisp.nix
+    ../langs/cpp.nix
+    ../langs/dot.nix
   ];
 
   environment.systemPackages = with pkgs; [

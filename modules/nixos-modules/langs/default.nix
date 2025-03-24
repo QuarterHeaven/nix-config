@@ -10,5 +10,6 @@
     ./wolfram.nix
     ./clojure.nix
     ./dot.nix
+    ./cpp.nix
   ];
 }

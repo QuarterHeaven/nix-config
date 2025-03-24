@@ -12,6 +12,10 @@
     # Enable integration with Docker Desktop (needs to be installed)
     docker-desktop.enable = false;
   };
+  
+  imports = [ # Include the results of the hardware scan.
+    ../modules/nixos-modules/wsl/default.nix
+  ];
 
   services.openssh = { ports = [ 2222 ]; };
 
