@@ -9,7 +9,6 @@
     ../langs/xml.nix
     ../langs/nodejs.nix
     ../langs/vue.nix
-    # ../langs/java-darwin.nix
     ../langs/go.nix
     # ../langs/common-lisp.nix
     ../langs/cpp.nix

@@ -2,12 +2,12 @@
 
 {
   imports = [
-    ./java.nix
+    # ./java.nix
     ./nodejs.nix
     ./mysql.nix
     ./ts.nix
     ./xml.nix
-    ./wolfram.nix
+    # ./wolfram.nix
     ./clojure.nix
     ./dot.nix
     ./cpp.nix

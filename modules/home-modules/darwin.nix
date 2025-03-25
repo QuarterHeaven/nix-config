@@ -2,8 +2,6 @@
 
 {
   imports = [ 
-    # 	./global/dotfiles.nix 
-    # ./global/yazi.nix
     ./global
     ./darwin 
     ./home-darwin.nix 

@@ -5,13 +5,13 @@
     libmysqlclient
     libmysqlconnectorcpp
     # llvmPackages.libcxxClang
-    llvmPackages.libcxxStdenv
-    llvmPackages.lld
+    # llvmPackages.libcxxStdenv
+    # llvmPackages.lld
     clang-tools
-    # clang-unwrapped
     # libgccjit
     # libgcc
-    gcc-unwrapped
+    # gcc-unwrapped
+    gcc
     gnumake
     cmake
     lldb_20

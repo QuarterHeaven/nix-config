@@ -42,11 +42,11 @@ in
         wayland
         gtk3
       ]
-      ++ (with pkgs.gnome2; [
-        gnome_vfs
-        GConf
-        glib
-      ])
+#      ++ (with pkgs.gnome2; [
+#        gnome_vfs
+#        GConf
+#        glib
+#      ])
       ++ (with pkgs.xorg; [
         libX11
         libICE
