@@ -4,14 +4,17 @@
   users.users.takaobsid.packages = with pkgs; [
     libmysqlclient
     libmysqlconnectorcpp
-    llvmPackages.libcxxClang
+    # llvmPackages.libcxxClang
     llvmPackages.libcxxStdenv
+    llvmPackages.lld
     clang-tools
-    libgccjit
+    # clang-unwrapped
+    # libgccjit
     # libgcc
-    # gcc-unwrapped
+    gcc-unwrapped
     gnumake
     cmake
     lldb_20
+    # ld64
   ];
 }
