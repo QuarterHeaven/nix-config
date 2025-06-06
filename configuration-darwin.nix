@@ -30,7 +30,11 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMm976P3b0EigYG7VHxaORw1O4zFL2PvPZ7EUXw1MPRg liaotx2@gmail.com"
     ];
   };
+  system.primaryUser = "takaobsid";
 
+  nix.settings.sandbox = false;
+  nixpkgs.config.allowBroken = true;
+  
   users.knownUsers = [ "takaobsid" ];
 
   programs.zsh.enable = true;

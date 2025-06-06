@@ -1,0 +1,11 @@
+root = /Users/takaobsid/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/orgs
+root = /Users/takaobsid/Library/CloudStorage/OneDrive-MSFT/orgs
+
+auto = true      
+batch = true     
+repeat = watch   
+logfile = /tmp/unison-orgs.log  
+backupdir = /tmp/unison-backups 
+
+ignore = Name {.*}              
+ignore = Path tmp

@@ -1,0 +1,1057 @@
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+-- Loading extension: fnutils
+17:38:31     hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌥⇧H
+-- Loading extension: hotkey
+             hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+-- Loading extension: fnutils
+17:38:39     hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥,
+-- Loading extension: hotkey
+             hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: http
+-- Loading extension: json
+-- Loading extension: application
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+-- Loading extension: fnutils
+17:50:52     hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌥⇧K
+-- Loading extension: hotkey
+             hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+-- Loading extension: fnutils
+17:51:11     hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥⇧J
+-- Loading extension: hotkey
+             hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: http
+-- Loading extension: json
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+-- Loading extension: fnutils
+17:51:54     hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌥⇧J
+-- Loading extension: http
+-- Loading extension: hotkey
+             hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: json
+-- Loading extension: notify
+-- Loading Spoon: ActiveSpace
+-- Loading extension: menubar
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+-- Loading extension: fnutils
+17:56:18     hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌥R
+-- Loading extension: notify
+-- Loading Spoon: ActiveSpace
+-- Loading extension: menubar
+-- Loading extension: hotkey
+17:56:41     hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: application
+18:24:35 ERROR:   PaperWM: anchor index not found
+18:24:35 ERROR:   PaperWM: anchor index not found
+18:24:35 ERROR:   PaperWM: anchor index not found
+18:24:35 ERROR:   PaperWM: anchor index not found
+18:24:35 ERROR:   PaperWM: anchor index not found
+18:35:31 ERROR:   PaperWM: add window does not have a space
+18:43:12 ERROR:   PaperWM: anchor index not found
+18:43:17 ERROR:   PaperWM: anchor index not found
+18:48:59 ERROR:   PaperWM: focused index not found
+18:48:59 ERROR:   PaperWM: focused index not found
+18:49:00 ERROR:   PaperWM: focused index not found
+18:49:00 ERROR:   PaperWM: focused index not found
+-- Loading extension: http
+-- Loading extension: fnutils
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+18:50:03     hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥K
+-- Loading extension: notify
+-- Loading Spoon: ActiveSpace
+-- Loading extension: menubar
+-- Loading extension: hotkey
+18:50:25     hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: json
+18:51:24 ERROR:   PaperWM: anchor index not found
+18:51:53 ERROR:   PaperWM: anchor index not found
+18:51:56 ERROR:   PaperWM: anchor index not found
+18:51:57 ERROR:   PaperWM: focused index not found
+18:51:58 ERROR:   PaperWM: focused index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:01 ERROR:   PaperWM: anchor index not found
+18:52:02 ERROR:   PaperWM: anchor index not found
+18:52:02 ERROR:   PaperWM: anchor index not found
+-- Loading extension: application
+18:52:13 ERROR:   PaperWM: anchor index not found
+18:52:33 ERROR:   PaperWM: anchor index not found
+18:52:50 ERROR:   PaperWM: focusSpace() timeout! space 1 focused space 1
+-- Loading extension: http
+-- Loading extension: fnutils
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+18:52:52     hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌥C
+-- Loading extension: notify
+-- Loading Spoon: ActiveSpace
+-- Loading extension: menubar
+-- Loading extension: hotkey
+18:53:14     hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: json
+-- Loading extension: application
+18:53:31 ERROR:   PaperWM: focused index not found
+18:53:31 ERROR:   PaperWM: focused index not found
+18:53:32 ERROR:   PaperWM: focused index not found
+18:53:32 ERROR:   PaperWM: focused index not found
+18:53:32 ERROR:   PaperWM: focused index not found
+18:53:36 ERROR:   PaperWM: add window does not have a space
+-- Loading extension: http
+-- Loading extension: fnutils
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+18:54:06     hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌥⇧K
+-- Loading extension: notify
+-- Loading Spoon: ActiveSpace
+-- Loading extension: menubar
+-- Loading extension: hotkey
+18:54:27     hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: json
+18:54:30 ERROR:   PaperWM: focused index not found
+18:54:43 ERROR:   PaperWM: add window does not have a space
+18:55:12 ** Warning:   wfilter: cannot process focus changed for app kitty - AXWindow has no window id
+-- Loading extension: application
+19:02:12 ERROR:   PaperWM: add window does not have a space
+19:02:12 ERROR:   PaperWM: add window does not have a space
+19:02:16 ERROR:   PaperWM: add window does not have a space
+19:02:16 ERROR:   PaperWM: add window does not have a space
+19:02:19 ERROR:   PaperWM: add window does not have a space
+19:02:19 ERROR:   PaperWM: add window does not have a space
+19:05:24 ERROR:   PaperWM: add window does not have a space
+19:07:27 ERROR:   PaperWM: remove index not found
+19:07:28 ERROR:   PaperWM: no anchor window in space
+19:07:28 ERROR:   PaperWM: remove index not found
+19:07:56 ERROR:   PaperWM: anchor index not found
+-- Loading extension: http
+-- Loading extension: fnutils
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+19:18:01     hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌥L
+-- Loading extension: notify
+-- Loading Spoon: ActiveSpace
+-- Loading extension: menubar
+-- Loading extension: hotkey
+19:18:19     hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: json
+19:18:30 ERROR:   PaperWM: anchor index not found
+-- Loading extension: application
+19:19:05 ERROR:   PaperWM: anchor index not found
+19:19:10 ERROR:   PaperWM: anchor index not found
+19:19:19 ERROR:   PaperWM: anchor index not found
+19:19:25 ERROR:   PaperWM: anchor index not found
+19:19:26 ERROR:   PaperWM: focusSpace() timeout! space 5 focused space 1
+19:19:51 ERROR:   PaperWM: moveWindowToSpace() timeout! new space 5 curr space 5 window space 1
+19:20:32 ERROR:   PaperWM: focusSpace() timeout! space 5 focused space 1
+19:20:49 ERROR:   PaperWM: anchor index not found
+19:21:06 ERROR:   PaperWM: focusSpace() timeout! space 5 focused space 1
+-- Loading extension: http
+-- Loading extension: fnutils
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+19:21:56     hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥⇧9
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌥⇧8
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌥⇧3
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌥⇧6
+             hotkey: Enabled hotkey ⌥⇧4
+             hotkey: Enabled hotkey ⌥⇧7
+             hotkey: Enabled hotkey ⌥⇧5
+             hotkey: Enabled hotkey ⌥⇧2
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌥⇧1
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌥,
+-- Loading extension: notify
+-- Loading Spoon: ActiveSpace
+-- Loading extension: menubar
+-- Loading extension: hotkey
+19:22:15     hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: json
+19:22:17 ERROR:   PaperWM: anchor index not found
+19:22:19 ERROR:   PaperWM: anchor index not found
+19:22:21 ERROR:   PaperWM: focused index not found
+19:22:22 ERROR:   PaperWM: focused index not found
+19:22:44 ERROR:   PaperWM: anchor index not found
+19:23:27 ERROR:   PaperWM: anchor index not found
+19:23:29 ERROR:   PaperWM: focused index not found
+19:23:30 ERROR:   PaperWM: focused index not found
+19:23:30 ERROR:   PaperWM: focused index not found
+19:23:30 ERROR:   PaperWM: focused index not found
+-- Loading extension: http
+-- Loading extension: fnutils
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+19:23:43     hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌥⇧R
+-- Loading extension: notify
+-- Loading Spoon: ActiveSpace
+-- Loading extension: menubar
+-- Loading extension: hotkey
+19:24:02     hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: json
+19:30:02 ERROR:   PaperWM: anchor index not found
+19:30:04 ERROR:   PaperWM: focused index not found
+19:30:06 ERROR:   PaperWM: focused index not found
+19:33:42 ERROR:   PaperWM: add window does not have a space
+-- Loading extension: application
+19:36:43 ERROR:   PaperWM: remove index not found
+19:36:48 ERROR:   PaperWM: no anchor window in space
+-- Loading extension: http
+-- Loading extension: fnutils
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+19:40:58     hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌥8
+-- Loading extension: notify
+-- Loading Spoon: ActiveSpace
+-- Loading extension: menubar
+-- Loading extension: hotkey
+19:41:15     hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: json
+19:41:29 ERROR:   PaperWM: anchor index not found
+19:41:59 ERROR:   PaperWM: anchor index not found
+19:42:02 ERROR:   PaperWM: anchor index not found
+19:42:08 ERROR:   PaperWM: focused index not found
+19:42:10 ERROR:   PaperWM: focused index not found
+-- Loading extension: application
+19:42:18 ERROR:   PaperWM: anchor index not found
+19:43:02 ERROR:   PaperWM: add window does not have a space
+19:43:02 ERROR:   PaperWM: add window does not have a space
+19:43:02 ERROR:   PaperWM: add window does not have a space
+19:43:02 ERROR:   PaperWM: add window does not have a space
+19:43:27 ERROR:   PaperWM: no anchor window column
+19:43:28 ERROR:   PaperWM: no anchor window column
+19:43:28 ERROR:   PaperWM: no anchor window column
+19:43:28 ERROR:   PaperWM: no anchor window column
+19:43:28 ERROR:   PaperWM: no anchor window column
+19:43:46 ERROR:   PaperWM: anchor index not found
+19:43:47 ERROR:   PaperWM: moveWindowToSpace() timeout! new space 5 curr space 1 window space 1
+19:43:55 ERROR:   PaperWM: anchor index not found
+19:43:57 ERROR:   PaperWM: focused index not found
+19:43:59 ERROR:   PaperWM: focused index not found
+19:44:04 ERROR:   PaperWM: anchor index not found
+-- Loading extension: http
+-- Loading extension: fnutils
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+19:44:12     hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌃⌥⇧R
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌥⇧R
+-- Loading Spoon: ActiveSpace
+-- Loading extension: menubar
+-- Loading extension: hotkey
+19:44:31     hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: json
+-- Loading extension: application
+19:45:26 ERROR:   PaperWM: add window does not have a space
+19:45:26 ERROR:   PaperWM: add window does not have a space
+19:52:11 ERROR:   LuaSkin: Unable to fetch NSRunningApplication for pid: 2307
+19:52:11 ** Warning:   wfilter: app SecurityAgent disappeared!
+19:52:11 ERROR:   PaperWM: remove index not found
+-- Some applications have alternate names which can also be checked if you enable Spotlight support with `hs.application.enableSpotlightForNameSearches(true)`.
+19:52:13 ERROR:   PaperWM: add window does not have a space
+19:52:13 ERROR:   PaperWM: add window does not have a space
+19:52:54 ERROR:   PaperWM: add window does not have a space
+19:52:55 ERROR:   PaperWM: add window does not have a space
+19:54:09 ERROR:   PaperWM: add window does not have a space
+19:54:20 ERROR:   PaperWM: add window does not have a space
+19:55:13 ERROR:   PaperWM: add window does not have a space
+19:55:32 ERROR:   PaperWM: add window does not have a space
+20:02:19 ERROR:   PaperWM: add window does not have a space
+20:04:58 ERROR:   PaperWM: add window does not have a space
+20:04:58 ERROR:   PaperWM: add window does not have a space
+20:16:57 ERROR:   PaperWM: remove index not found
+20:16:58 ERROR:   PaperWM: anchor index not found
+20:17:02 ERROR:   PaperWM: remove index not found
+20:17:02 ERROR:   PaperWM: no anchor window in space
+20:17:02 ERROR:   PaperWM: no anchor window in space
+-- Loading extension: http
+-- Loading extension: fnutils
+-- Loading extension: spoons
+-- Loading Spoon: PaperWM
+-- Loading extension: mouse
+-- Loading extension: geometry
+-- Loading extension: screen
+-- Loading extension: spaces
+-- Loading extension: timer
+-- Loading extension: uielement
+-- Loading extension: window
+-- Loading extensions: window.filter
+-- Loading extension: eventtap
+-- Loading extension: host
+20:19:14     hotkey: Enabled hotkey ⌥⇧H
+             hotkey: Enabled hotkey ⌘⇧9
+             hotkey: Enabled hotkey ⌥⇧J
+             hotkey: Enabled hotkey ⌥⇧L
+             hotkey: Enabled hotkey ⌥K
+             hotkey: Enabled hotkey ⌥I
+             hotkey: Enabled hotkey ⌥⇧K
+             hotkey: Enabled hotkey ⌥8
+             hotkey: Enabled hotkey ⌥.
+             hotkey: Enabled hotkey ⌘⇧3
+             hotkey: Enabled hotkey ⌘⇧8
+             hotkey: Enabled hotkey ⌥,
+             hotkey: Enabled hotkey ⌥⇧R
+             hotkey: Enabled hotkey ⌃⌥R
+             hotkey: Enabled hotkey ⌥F
+             hotkey: Enabled hotkey ⌥J
+             hotkey: Enabled hotkey ⌥R
+             hotkey: Enabled hotkey ⌘⇧5
+             hotkey: Enabled hotkey ⌥7
+             hotkey: Enabled hotkey ⌘⇧4
+             hotkey: Enabled hotkey ⌘⇧6
+             hotkey: Enabled hotkey ⌥C
+             hotkey: Enabled hotkey ⌘⇧7
+             hotkey: Enabled hotkey ⌘⇧2
+             hotkey: Enabled hotkey ⌥L
+             hotkey: Enabled hotkey ⌥5
+             hotkey: Enabled hotkey ⌘⇧1
+             hotkey: Enabled hotkey ⌥9
+             hotkey: Enabled hotkey ⌥2
+             hotkey: Enabled hotkey ⌥4
+             hotkey: Enabled hotkey ⌥O
+             hotkey: Enabled hotkey ⌥6
+             hotkey: Enabled hotkey ⌥H
+             hotkey: Enabled hotkey ⌥1
+             hotkey: Enabled hotkey ⌥3
+             hotkey: Enabled hotkey ⌃⌥⇧R
+-- Loading extension: notify
+-- Loading Spoon: ActiveSpace
+-- Loading extension: menubar
+-- Loading extension: hotkey
+20:19:28     hotkey: Enabled hotkey ⌘⌃T
+             hotkey: Enabled hotkey ⌘E
+-- Done.
+-- Loading extension: json
+20:21:12 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:31 ERROR:   PaperWM: anchor index not found
+20:21:35 ERROR:   PaperWM: anchor index not found
+20:21:39 ERROR:   PaperWM: anchor index not found
+20:21:42 ERROR:   PaperWM: focused index not found
+20:21:45 ERROR:   PaperWM: anchor index not found
+20:21:45 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+20:21:46 ERROR:   PaperWM: anchor index not found
+-- Loading extension: application
+20:21:52 ERROR:   PaperWM: anchor index not found
+20:21:52 ERROR:   PaperWM: anchor index not found
+20:22:13 ERROR:   PaperWM: moveWindowToSpace() timeout! new space 7 curr space 7 window space 1
+20:22:17 ERROR:   PaperWM: anchor index not found
+20:22:18 ERROR:   PaperWM: focused index not found
+20:22:25 ERROR:   PaperWM: anchor index not found
+20:22:28 ERROR:   PaperWM: anchor index not found
+20:22:30 ERROR:   PaperWM: focused index not found
+20:22:31 ERROR:   PaperWM: focused index not found
+20:22:33 ERROR:   PaperWM: remove index not found
+20:23:46 ERROR:   LuaSkin: Unable to fetch NSRunningApplication for pid: 577
+20:26:04 ERROR:   PaperWM: anchor index not found
+20:26:06 ERROR:   PaperWM: remove index not found
+20:26:09 ERROR:   PaperWM: anchor index not found
+20:26:15 ERROR:   PaperWM: anchor index not found
+20:29:01 ERROR:   PaperWM: add window does not have a space

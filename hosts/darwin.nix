@@ -64,11 +64,11 @@
   '';
 
 
-  #  networking.proxy = {
-  #    httpProxy = "http://127.0.0.1:1080";
-  #    httpsProxy = "http://127.0.0.1:1080";
-  #    allProxy = "socks5://127.0.0.1:1081";
-  #  };
+  networking.proxy = {
+    httpProxy = "http://127.0.0.1:1081";
+    httpsProxy = "http://127.0.0.1:1081";
+    allProxy = "socks5://127.0.0.1:1081";
+  };
 
   home-manager.users.takaobsid = {
     imports = [ ../modules/home-modules/darwin.nix ];

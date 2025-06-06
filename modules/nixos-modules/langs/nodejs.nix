@@ -5,6 +5,6 @@
     nodePackages.nrm
     nodePackages.yarn
     nodePackages.pnpm
-    nodejs-18_x
+    nodePackages.nodejs
   ];
 }

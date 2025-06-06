@@ -6,11 +6,11 @@
 
     brews = [
       "autoconf"
+      "borders"
       "gnutls"
       "tree-sitter"
       "pkg-config"
       # "tdlib"
-      "sketchybar"
       "mit-scheme"
       "eless"
       "fontconfig"
@@ -52,7 +52,7 @@
       "font-symbols-only-nerd-font"
       "font-material-symbols"
       # "kitty" # build fron source
-      "zen-browser"
+      # "zen-browser"
       "keycastr"
     ];
 

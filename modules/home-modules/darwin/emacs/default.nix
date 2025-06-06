@@ -15,6 +15,6 @@
           ./poll.patch
           ./system-appearance.patch
         ];
-          });
-      };
-      }
+      });
+  };
+}
