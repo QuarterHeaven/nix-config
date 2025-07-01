@@ -6,6 +6,7 @@
     ./homebrew.nix
     ./proxy.nix
     ../langs/clojure.nix
+    ../langs/dotnet.nix
     ../langs/ts.nix
     ../langs/xml.nix
     ../langs/nodejs.nix

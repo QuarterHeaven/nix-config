@@ -163,11 +163,6 @@
     nix-direnv.enable = true;
   };
 
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs-git-pgtk;
-  };
-
   programs.bat = { enable = true; };
 
   programs.htop = { enable = true; };

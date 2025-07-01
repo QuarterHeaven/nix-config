@@ -1,0 +1,44 @@
+{
+    "source-emacs-lsp-booster": {
+        "cargoLocks": null,
+        "date": "2025-01-07",
+        "extract": null,
+        "name": "source-emacs-lsp-booster",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "blahgeek",
+            "repo": "emacs-lsp-booster",
+            "rev": "5f702a2699f306a3958ff1996a2b1a625f0cee0b",
+            "sha256": "sha256-R9v+hCma/FfYdR+fvZ0vmtVk4dm+bPBacwV1QCc6X+8=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "5f702a2699f306a3958ff1996a2b1a625f0cee0b"
+    },
+    "source-emacs-master-igc": {
+        "cargoLocks": null,
+        "date": "2025-06-25",
+        "extract": null,
+        "name": "source-emacs-master-igc",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "emacs-mirror",
+            "repo": "emacs",
+            "rev": "1c19182e28e90b619a4c3d5553e3b5ae03eccd12",
+            "sha256": "sha256-nZIcNLpe6qqyxZMsm8e5jup2HHHaWbgIk36MstxoTjc=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "1c19182e28e90b619a4c3d5553e3b5ae03eccd12"
+    }
+}

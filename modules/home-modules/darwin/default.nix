@@ -2,7 +2,7 @@
 
 {
   imports = [
-    # ./emacs.nix
+    ./emacs
     # ./java-darwin.nix
     ./dotfiles.nix
     ./sync_orgs.nix

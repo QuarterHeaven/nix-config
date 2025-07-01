@@ -12,7 +12,7 @@
       "pkg-config"
       # "tdlib"
       "mit-scheme"
-      "eless"
+      # "eless"
       "fontconfig"
       "pidof"
       "jenv" # java environment

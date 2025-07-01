@@ -10,5 +10,7 @@
     unison
     gnutls
     tree-sitter
+    coreutils-prefixed
+    mps
   ];
 }

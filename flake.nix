@@ -9,7 +9,7 @@
       "https://cache.nixos.org/"
     ];
 
-    extra-substituters = [ 
+    extra-substituters = [
       "https://nix-community.cachix.org"
       "https://aseipp-nix-cache.global.ssl.fastly.net"
     ];
@@ -25,10 +25,10 @@
 
   inputs = {
     arion.url = "github:hercules-ci/arion";
-    dotfiles = { 
- 	# url = "git+file:///Users/takaobsid/nix-config/dotfiles";
- 	url = "path:./dotfiles";
-	# flake = false;
+    dotfiles = {
+      # url = "git+file:///Users/takaobsid/nix-config/dotfiles";
+      url = "path:./dotfiles";
+      # flake = false;
     };
     # nixpkgs.url = "github:NixOS/nixpkgs/master";
     # nixpkgs.url = "github:QuarterHeaven/nixpkgs/master";
@@ -112,23 +112,29 @@
         unstable = import inputs.nixpkgs-unstable { system = "aarch64-darwin"; };
       };
 
+      universal_overlays = [
+        emacs-overlay.overlay
+        # (self: super: {
+        #   emacs-unstable = super.emacs-unstable.override {
+        #     withXwidgets = true;
+        #     withGTK3 = true;
+        #   };
+        # })
+
+        (import rust-overlay)
+      ];
+
+      overlaysFor = system: import ./modules/overlays/overlays-for-systems.nix {
+inherit system inputs;
+};
+
       nixpkgsWithOverlays = with inputs; rec {
         config = {
           allowUnfree = true;
           permittedInsecurePackages = [ ];
         };
-        overlays = [
-          emacs-overlay.overlay
-          (self: super: {
-            emacs-unstable = super.emacs-unstable.override {
-              withXwidgets = true;
-              withGTK3 = true;
-            };
-          })
-
+        overlays = universal_overlays ++ [
           add-unstable-packages-linux
-
-          (import rust-overlay)
 
           (final: prev: {
             rofi-calc = prev.rofi-calc.override {
@@ -139,37 +145,36 @@
           niri.overlays.niri
         ];
       };
-      
-      nixpkgsWithOverlaysDarwin =  with inputs; rec {
+
+      nixpkgsWithOverlaysDarwin = with inputs; rec {
         config = {
-	  allowUnfree = true;
-	  permittedInsecurePackages = [ ];
+          allowUnfree = true;
+          permittedInsecurePackages = [ ];
         };
-        overlays = [
-	  emacs-overlay.overlay
-	  (self: super: {
-	    emacs-unstable = super.emacs-unstable.override {
-	      withXwidgets = true;
-	      withGTK3 = true;
-	    };
-	  })
-
-	  add-unstable-packages-darwin
-
-	  (import rust-overlay)
+        overlays = universal_overlays ++ [
+          add-unstable-packages-darwin
         ];
       };
-      
+
       configurationDefaults = args: {
-        nixpkgs = nixpkgsWithOverlays;
+        # nixpkgs = nixpkgsWithOverlays;
+	nixpkgs = {
+        inherit (nixpkgsWithOverlays) config;
+        overlays = nixpkgsWithOverlays.overlays ++ overlaysFor "x86_64-linux";
+      };
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;
       };
 
       configurationDefaultsDarwin = args: {
-	nixpkgs = nixpkgsWithOverlaysDarwin;
-	home-manager.useGlobalPkgs = true;
+        # nixpkgs = nixpkgsWithOverlaysDarwin;
+	nixpkgs = {
+        inherit (nixpkgsWithOverlaysDarwin) config;
+        overlays = nixpkgsWithOverlaysDarwin.overlays ++ overlaysFor "aarch64-darwin";
+      };
+
+        home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;
       };
@@ -181,7 +186,7 @@
         home-manager.nixosModules.home-manager
         (configurationDefaults argDefaults)
 
-	nur.modules.nixos.default
+        nur.modules.nixos.default
         # This adds a nur configuration option.
         # Use `config.nur` for packages like this:
         # ({ config, ... }: {
@@ -190,71 +195,71 @@
 
         sops-nix.nixosModules.sops
       ];
-      
-      in
-      {
-	devModules = import ./dev.nix;
+    in
+    {
+      devModules = import ./dev.nix;
 
-	nixosConfigurations = {
-          vmware = nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            system = "x86_64-linux";
+      nixosConfigurations = {
+        vmware = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
 
-            modules = common-modules ++ [ ./hosts/vmware.nix ];
-          };
+          modules = common-modules ++ [ ./hosts/vmware.nix ];
+        };
 
-          wsl = nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            system = "x86_64-linux";
+        wsl = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
 
-            modules = common-modules
-            ++ [ 
-	      nixos-wsl.nixosModules.wsl 
-	      hosts/wsl.nix 
-	    ];
-          };
-
-          macbook = nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            system = "x86_64-linux";
-
-            modules = common-modules ++ [
-              arion.nixosModules.arion
-              nixos-hardware.nixosModules.apple-t2
-              niri.nixosModules.niri
-              xremap.nixosModules.default
-              clipboard-sync.nixosModules.default
-              nix-flatpak.nixosModules.nix-flatpak
-              hosts/macbook.nix
-            ];
-          };
-
-          minimal = nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            system = "x86_64-linux";
-            modules = [
-              ./configuration-minimal.nix
-              modules/nix-modules/desktop/gnome.nix
-              modules/nix-modules/desktop/hyprland.nix
-            ];
-          };
-	};
-
-	darwinConfigurations."Leyline" = nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-
-          specialArgs = {
-            inherit inputs;
-            pkgs-unstable = nixpkgs-unstable.legacyPackages.aarch64-darwin;
-          };
-          
-          modules = [
-            home-manager.darwinModules.home-manager
-            (configurationDefaultsDarwin argDefaults)
-	              
-            ./configuration-darwin.nix
-            hosts/darwin.nix
+          modules = common-modules
+            ++ [
+            nixos-wsl.nixosModules.wsl
+            hosts/wsl.nix
           ];
-	};
+        };
+
+        macbook = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
+
+          modules = common-modules ++ [
+            arion.nixosModules.arion
+            nixos-hardware.nixosModules.apple-t2
+            niri.nixosModules.niri
+            xremap.nixosModules.default
+            clipboard-sync.nixosModules.default
+            nix-flatpak.nixosModules.nix-flatpak
+            hosts/macbook.nix
+          ];
+        };
+
+        minimal = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
+          modules = [
+            ./configuration-minimal.nix
+            modules/nix-modules/desktop/gnome.nix
+            modules/nix-modules/desktop/hyprland.nix
+          ];
+        };
       };
+
+      darwinConfigurations."Leyline" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+
+        specialArgs = {
+          inherit inputs;
+          pkgs-unstable = nixpkgs-unstable.legacyPackages.aarch64-darwin;
+        };
+
+        modules = [
+          home-manager.darwinModules.home-manager
+          (configurationDefaultsDarwin argDefaults)
+
+          ./configuration-darwin.nix
+          hosts/darwin.nix
+          ./modules/assertions/no-default-emacs.nix
+        ];
+      };
+    };
 }
