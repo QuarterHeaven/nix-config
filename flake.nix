@@ -112,6 +112,8 @@
         unstable = import inputs.nixpkgs-unstable { system = "aarch64-darwin"; };
       };
 
+      # mylib = import ./lib { inherit lib; };
+
       universal_overlays = [
         emacs-overlay.overlay
         # (self: super: {
@@ -122,6 +124,17 @@
         # })
 
         (import rust-overlay)
+
+      #   (
+      #     final: prev:
+      # let
+      #   sources = prev.callPackage modules/pkgs/_sources/generated.nix { };
+      # in
+      #   mylib.callPackageFromDirectory {
+      #     callPackage = prev.lib.callPackageWith (prev // sources);
+      #     directory = modules/pkgs;
+      #   }
+        )
       ];
 
       overlaysFor = system: import ./modules/overlays/overlays-for-systems.nix {
