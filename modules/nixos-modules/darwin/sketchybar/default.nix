@@ -10,8 +10,6 @@ let
   
   in
   {
-    nixpkgs.config.allowUnfreePredicate = _: true;
-
     environment.systemPackages = with pkgs; [
       sketchybar
       sbLuaPackage

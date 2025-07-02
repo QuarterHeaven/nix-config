@@ -1,5 +1,5 @@
 {
-  emacsGit,
+  emacs-git,
   lib,
   stdenv,
   ccacheStdenv,
@@ -11,7 +11,7 @@
 let
   source-emacs = source-emacs-master-igc;
 in
-(emacsGit.override {
+(emacs-git.override {
   stdenv = ccacheStdenv;
   withPgtk = true;
   # toolkit = "lucid";
@@ -23,6 +23,19 @@ in
     inherit (source-emacs) src;
     buildInputs = old.buildInputs ++ [ mps ];
     configureFlags = old.configureFlags ++ [
+      "--disable-build-details"
+      "--with-modules"
+      "--with-cairo"
+      "--with-xft"
+      "--with-sqlite3=yes"
+      "--with-compress-install"
+      "--without-native-compilation"
+      "--with-mailutils"
+      "--with-small-ja-dic"
+      "--with-tree-sitter"
+      "--with-xinput2"
+      "--without-xwidgets" # Needed for it to compile properly for some reason
+      "--with-dbus=ifavailable"
       "--with-mps=yes"
     ];
     patches = (old.patches or [ ]) ++ [
@@ -32,6 +45,14 @@ in
       ./patches-31/round-undecorated-frame.patch  
       ./patches-31/system-appearance.patch
     ];
+
+      preConfigure = ''
+    export CCACHE_DIR="$TMPDIR/ccache"
+    mkdir -p "$CCACHE_DIR"
+    # 可选：限制缓存大小，例如 5 GiB
+    ccache --max-size=5G || true
+      '';
+    
     postPatch =
       old.postPatch
       + (lib.optionalString ((old ? NATIVE_FULL_AOT) || (old ? env.NATIVE_FULL_AOT)) (

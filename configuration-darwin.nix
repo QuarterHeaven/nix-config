@@ -33,16 +33,12 @@
   system.primaryUser = "takaobsid";
 
   nix.settings.sandbox = false;
-  nixpkgs.config.allowBroken = true;
-  
   users.knownUsers = [ "takaobsid" ];
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config.permittedInsecurePackages = [ "electron-11.5.0" ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "root" "takaobsid" ];
 

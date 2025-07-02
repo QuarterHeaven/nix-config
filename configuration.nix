@@ -66,8 +66,6 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [ "electron-11.5.0" ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs.steam = {
