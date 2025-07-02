@@ -134,12 +134,12 @@
       #     callPackage = prev.lib.callPackageWith (prev // sources);
       #     directory = modules/pkgs;
       #   }
-        )
+        # )
       ];
 
       overlaysFor = system: import ./modules/overlays/overlays-for-systems.nix {
-inherit system inputs;
-};
+        inherit system inputs;
+      };
 
       nixpkgsWithOverlays = with inputs; rec {
         config = {
