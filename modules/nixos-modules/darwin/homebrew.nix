@@ -54,6 +54,7 @@
       # "kitty" # build fron source
       # "zen-browser"
       "keycastr"
+      "ghostty"
     ];
 
     taps = [

@@ -167,8 +167,8 @@ hs.alert.show("Config loaded")
 -- end)
 
 super = {"ctrl", "alt", "cmd"}
--- hs.hotkey.bind({'cmd', 'ctrl'}, 't', function () hs.application.launchOrFocusByBundleID("com.mitchellh.ghostty") end)
-hs.hotkey.bind({'cmd', 'ctrl'}, 't', function () hs.application.launchOrFocusByBundleID("net.kovidgoyal.kitty") end)
+hs.hotkey.bind({'cmd', 'ctrl'}, 't', function () hs.application.launchOrFocusByBundleID("com.mitchellh.ghostty") end)
+-- hs.hotkey.bind({'cmd', 'ctrl'}, 't', function () hs.application.launchOrFocusByBundleID("net.kovidgoyal.kitty") end)
 hs.hotkey.bind({'cmd'}, 'e', function () hs.application.launchOrFocusByBundleID("org.gnu.Emacs") end)
 -- local aerospace = require("aerospace")
 

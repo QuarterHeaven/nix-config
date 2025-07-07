@@ -3,7 +3,7 @@
 [
   inputs.emacs-overlay.overlay
   (import ./mps-overlay.nix)
-  (import ./emacs-mps-overlay.nix system)
+  # (import ./emacs-mps-overlay.nix system)
   (
     final: prev:
       let

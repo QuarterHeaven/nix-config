@@ -12,5 +12,6 @@
     tree-sitter
     coreutils-prefixed
     mps
+    comma
   ];
 }
