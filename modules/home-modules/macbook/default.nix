@@ -9,6 +9,7 @@
     ./desktop.nix
     ./dotfiles.nix
     ./eww.nix
+    ../langs
     ./flameshot.nix
     ./foot.nix
     ./gestures.nix

@@ -13,7 +13,6 @@
     ./gestures.nix
     ./kdeconnect.nix
     ../k8s.nix
-    ../langs
     ./mpv.nix
     ../onedrive.nix
     ../pptp.nix

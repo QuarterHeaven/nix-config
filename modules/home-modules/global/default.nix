@@ -7,7 +7,7 @@
     ./yazi.nix
     ./tdlib.nix
     ./gh.nix
-    ./gemini.nix
+    # ./gemini.nix
     ./java.nix
   ];
 }

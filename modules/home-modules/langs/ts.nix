@@ -1,7 +1,7 @@
 { pkgs, config, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     typescript
     nodePackages.typescript-language-server
   ];

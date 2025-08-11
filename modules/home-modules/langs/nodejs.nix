@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     nodePackages.nrm
     nodePackages.yarn
     nodePackages.pnpm

@@ -58,7 +58,8 @@
       kdePackages.kate
       #  thunderbird
     ];
-    shell = pkgs.fish;
+    # shell = pkgs.fish;
+    shell = pkgs.nushell;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMm976P3b0EigYG7VHxaORw1O4zFL2PvPZ7EUXw1MPRg liaotx2@gmail.com"
     ];
@@ -91,6 +92,7 @@
     git-credential-keepassxc
     helix
     fish
+    nushell
     pinentry
     nix-index
     (rust-bin.selectLatestNightlyWith (toolchain:

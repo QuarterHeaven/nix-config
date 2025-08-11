@@ -25,8 +25,8 @@
     # package = (pkgs.callPackage ./jbr/default.nix {});
   };
 
-  environment.variables.IDEA_JDK = "${jbr}";
-  environment.variables.IDEA_VM_OPTIONS = "-Dawt.toolkit.name=WLToolkit";
-  environment.variables.JAVA_8_HOME = "${pkgs.jdk8}/lib/openjdk";
-  environment.variables.JAVA_17_HOME = "${pkgs.jdk17}/lib/openjdk";
+  home.sessionVariables.IDEA_JDK = "${jbr}";
+  home.sessionVariables.IDEA_VM_OPTIONS = "-Dawt.toolkit.name=WLToolkit";
+  home.sessionVariables.JAVA_8_HOME = "${pkgs.jdk8}/lib/openjdk";
+  home.sessionVariables.JAVA_17_HOME = "${pkgs.jdk17}/lib/openjdk";
 }

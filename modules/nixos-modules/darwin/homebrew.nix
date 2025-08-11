@@ -55,6 +55,7 @@
       # "zen-browser"
       "keycastr"
       "ghostty"
+      "krishkrosh/apps/trackweight"
     ];
 
     taps = [

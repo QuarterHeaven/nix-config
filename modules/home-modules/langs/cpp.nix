@@ -6,7 +6,7 @@ let
   libcxx    = pkgs.llvmPackages_latest.libcxx;
   libcxxrt  = pkgs.libcxxrt;
 in {
-  users.users.takaobsid.packages = with pkgs; [
+  home.packages = with pkgs; [
     libmysqlclient
     libmysqlconnectorcpp
     # llvmPackages.libcxxClang
@@ -28,7 +28,7 @@ in {
     # ld64
   ];
 
-  environment.variables = {
+  home.sessionVariables = {
     LIBRARY_PATH = lib.concatStringsSep ":" [
       "${gcc.out}/lib/gcc/${gcc.version}"
       "${libcxx.out}/lib"

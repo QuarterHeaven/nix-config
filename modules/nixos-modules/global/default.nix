@@ -8,6 +8,8 @@
     fswatch
     binutils
     unison
+    # gemini-cli
+    just
     gnutls
     tree-sitter
     coreutils-prefixed

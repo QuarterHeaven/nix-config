@@ -25,7 +25,7 @@ let
       transmission
     ];
 
-    environment.systemPackages = with pkgs; [
+    home.packages = with pkgs; [
       inetutils
     ];
 

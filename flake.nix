@@ -5,7 +5,7 @@
 
   # Set Cache origin
   nixConfig = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [ "nix-command" "flakes" "pipe-operators"];
     substituters = [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
       "https://cache.nixos.org/"
