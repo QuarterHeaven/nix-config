@@ -8,7 +8,7 @@
     ../desktop/hyprland.nix
     ../desktop/niri.nix
     ../dropbox.nix
-    ./fcitx5.nix
+    ../fcitx5.nix
     ./flatpak.nix
     ./gestures.nix
     ./kdeconnect.nix

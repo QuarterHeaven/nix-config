@@ -53,6 +53,25 @@
     xkb.variant = "";
   };
 
+  environment.variables = {
+    NIXOS_OZONE_WL = "1";
+    INPUT_METHOD = "fcitx5";
+    #    GTK_IM_MODULE = "wayland";
+    WEBKIT_DISABLE_COMPOSITING_MODE = "1";
+    RUST_BACKTRACE = "1";
+    XMODIFIERS = "@im=fcitx";
+    GTK_IM_MODULE="fcitx";
+    QT_IM_MODULE="fcitx";
+    SDL_IM_MODULE="fcitx";
+    GLFW_IM_MODULE="fcitx";
+    PATH = [
+      "$PATH"
+      "/home/takaobsid/bin"
+      "/home/takaobsid/.local/share/applications"
+    ];
+    YDOTOOL_SOCKET="/run/user/$(id -u)/.ydotool_socket";
+  };
+
     # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "taka";
