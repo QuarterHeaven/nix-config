@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, options, features, inputs, ... }:
+{ pkgs, ... }:
 
 {
   networking.hostName = "Leyline";
@@ -20,25 +20,26 @@
     home = "/Users/takaobsid";
     uid = 501;
     description = "TakaObsid";
-    packages = with pkgs; [
+    packages = [
       # firefox
       # kate
       #  thunderbird
     ];
-    shell = pkgs.fish;
+    # shell = pkgs.fish;
+    shell = pkgs.nushell;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMm976P3b0EigYG7VHxaORw1O4zFL2PvPZ7EUXw1MPRg liaotx2@gmail.com"
     ];
   };
+  system.primaryUser = "takaobsid";
 
+  nix.settings.sandbox = false;
   users.knownUsers = [ "takaobsid" ];
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config.permittedInsecurePackages = [ "electron-11.5.0" ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "root" "takaobsid" ];
 

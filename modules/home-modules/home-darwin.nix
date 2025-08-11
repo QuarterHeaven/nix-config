@@ -1,5 +1,31 @@
 { config, pkgs, lib, ... }:
 
+let
+  # ─ helpers ──────────────────────────────────────────────────────────────────
+  # 把 $HOME/foo → $"($env.HOME)/foo"
+  toNuPath = p:
+    if lib.hasPrefix "$HOME/" p
+    then ''$"($env.HOME)/${lib.removePrefix "$HOME/" p}"''
+    else ''"${p}"'';
+
+  # sessionPath → Nu list
+  nuPathList = lib.concatStringsSep " " (map toNuPath config.home.sessionPath);
+
+  # sessionVariables（除 PATH 以外）→ `$env.KEY = $"…"`
+  varLines =
+    lib.attrsets.mapAttrsToList
+      (name: value:
+        # 跳过 PATH；已经用 sessionPath 处理
+        if name == "PATH" then ""
+        else
+          let replaced =
+            lib.replaceStrings ["$HOME" "$PATH"]
+                              ["($env.HOME)" "($env.PATH)"] value;
+          in ''    $env.${name} = $"${replaced}"''
+      )
+      config.home.sessionVariables
+    |> lib.filter (x: x != "");  # 去掉空行
+in
 {
   # 注意修改这里的用户名与用户目录
   home.username = "takaobsid";
@@ -131,6 +157,63 @@
     };
   };
 
+    programs.nushell = { enable = true;
+      # The config.nu can be anywhere you want if you like to edit your Nushell with Nu
+      # configFile.source = ./.../config.nu;
+    # for editing directly to config.nu
+    # envFile.text = ''
+    #   # This file is auto-generated from home.sessionVariables
+    #   export-env {
+    #   ${lib.concatStringsSep "\n" nuLines}
+    #   }
+    # '';
+    extraEnv = ''
+          # Auto-generated from home.session{Path,Variables}
+    export-env {
+      # 导入 PATH list
+      $env.PATH = ($env.PATH | prepend [ ${nuPathList} ] | uniq)
+      ${lib.concatStringsSep "\n" varLines}
+    }
+      '';
+      extraConfig = ''
+       let carapace_completer = {|spans|
+       carapace $spans.0 nushell ...$spans | from json
+       }
+       $env.config = {
+        show_banner: false,
+        completions: {
+        case_sensitive: false # case-sensitive completions
+        quick: true    # set to false to prevent auto-selecting completions
+        partial: true    # set to false to prevent partial filling of the prompt
+        algorithm: "fuzzy"    # prefix or fuzzy
+        external: {
+        # set to false to prevent nushell looking into $env.PATH to find more suggestions
+            enable: true 
+        # set to lower can improve completion performance at the cost of omitting some options
+            max_results: 100 
+            completer: $carapace_completer # check 'carapace_completer' 
+          }
+        }
+       } 
+       $env.PATH = ($env.PATH | 
+       split row (char esep) |
+       prepend /home/takaobsid/.apps |
+       prepend /Users/takaobsid/.apps |
+       append /usr/bin/env |
+       append /usr/local/bin
+       )
+       mkdir ($nu.data-dir | path join "vendor/autoload")
+       starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+       '';
+       shellAliases = {
+       vi = "hx";
+       vim = "hx";
+       nano = "hx";
+       };
+   };  
+   programs.carapace.enable = true;
+   programs.carapace.enableNushellIntegration = true;
+
   programs.bash = {
     enable = true;
     shellAliases = {
@@ -144,7 +227,7 @@
     shellAliases = {
       gcc = "clang";
       "g++" = "clang++";
-    };
+    }; 
   };
 
   programs.direnv = {

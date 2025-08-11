@@ -6,8 +6,8 @@
     ./python.nix
     ./yazi.nix
     ./tdlib.nix
-    ./emacs-lsp-booster.nix
     ./gh.nix
+    # ./gemini.nix
     ./java.nix
   ];
 }

@@ -1,0 +1,40 @@
+* self-host pkgs
+copied from https://github.com/VitalyAnkh/nix-vault/blob/4f6a1950de5a14629836548d5ab114a055c145e1/pkgs/README.md
+** 如何定义新的包
+
+支持两种格式:
+
+ - /pkgs/package-name/package.nix 最终会得到 pkgs.package-name
+
+ - /pkgs/<folder>/{a.nix, b.nix} 最终会得到 pkgs.a pkgs.b
+
+定义完后，git add file 即可。
+
+** 如何通过 nvfetcher 修改软件
+
+例如，emacs，在 `nvfetcher.toml` 中定义
+
+#+begin_src toml
+[source-emacs-master-igc]
+src.git = "https://github.com/emacs-mirror/emacs.git"
+src.branch = "feature/igc"
+fetch.github = "emacs-mirror/emacs"
+#+end_src
+
+然后在 `emacs/emacs-master-igc-pgtk.nix` 中，传入的函数加上 `source-emacs-master-igc` 参数，并替换掉
+原有的src
+
+#+begin_src nix
+{ source-emacs-master-igc, emacs, ... }:
+emacs.overrideAttrs (
+  old: {
+    ...
+    inherit (source-emacs-master-igc) src; # 替换 src
+    ...
+  }
+)
+#+end_src
+
+** 如何更新软件的源码?
+
+在当前目录下执行 nvfetcher 命令，然后 git commit 出现的 generated.nix

@@ -26,6 +26,10 @@ let
       value = { source = pkgs.jdt-language-server; };
     }
     {
+      name = ".jdks/clj-lsp";
+      value = { source = pkgs.clojure-lsp;};
+    }
+    {
       name = ".jdks/lombok";
       value = { source = pkgs.lombok; };
     }
@@ -42,4 +46,6 @@ let
       value = { source = pkgs.maven; };
     }
   ]));
+  home.sessionVariables.JAVA_HOME = "${pkgs.jdk17}";
+  home.sessionVariables.JAVA_17_HOME = "${pkgs.jdk17}";
 }

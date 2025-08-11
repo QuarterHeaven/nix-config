@@ -6,13 +6,13 @@
 
     brews = [
       "autoconf"
+      "borders"
       "gnutls"
       "tree-sitter"
       "pkg-config"
       # "tdlib"
-      "sketchybar"
       "mit-scheme"
-      "eless"
+      # "eless"
       "fontconfig"
       "pidof"
       "jenv" # java environment
@@ -52,8 +52,10 @@
       "font-symbols-only-nerd-font"
       "font-material-symbols"
       # "kitty" # build fron source
-      "zen-browser"
+      # "zen-browser"
       "keycastr"
+      "ghostty"
+      "krishkrosh/apps/trackweight"
     ];
 
     taps = [

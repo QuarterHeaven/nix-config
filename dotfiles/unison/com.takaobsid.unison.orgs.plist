@@ -1,0 +1,28 @@
+<!-- ~/Library/LaunchAgents/com.takaobsid.unison.orgs.plist -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" 
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.takaobsid.unison.orgs</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/bin/unison</string>
+    <string>orgs</string>
+  </array>
+
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+
+  <!-- 只要文件变化，就重启进程 -->
+  <key>WatchPaths</key>
+  <array>
+    <string>/Users/takaobsid/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/orgs</string>
+    <string>/Users/takaobsid/Library/CloudStorage/OneDrive-MSFT/orgs</string>
+  </array>
+</dict>
+</plist>

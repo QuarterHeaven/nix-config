@@ -167,7 +167,7 @@
 
   services.upower.enable = true;
 
-  environment.variables = {
+  environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     INPUT_METHOD = "fcitx5";
     #    GTK_IM_MODULE = "wayland";

@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    python311Packages.python
     python311Packages.pip
     python311Packages.virtualenv
     python311Packages.epc
