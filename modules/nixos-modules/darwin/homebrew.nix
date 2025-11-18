@@ -4,6 +4,12 @@
   homebrew = {
     enable = true;
 
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "zap";
+    };
+
     brews = [
       "autoconf"
       "borders"
@@ -12,6 +18,7 @@
       "pkg-config"
       # "tdlib"
       "mit-scheme"
+      "guile"
       # "eless"
       "fontconfig"
       "pidof"
@@ -32,7 +39,7 @@
       "qq"
       "wechat"
       "visual-studio-code"
-      "squirrel"
+      "squirrel-app"
       #"nikitabobko/tap/aerospace"
       "apifox"
       "beekeeper-studio"
@@ -47,7 +54,7 @@
       "google-chrome"
       "microsoft-edge"
       "xquartz"
-      "jordanbaird-ice"
+      "jordanbaird-ice@beta"
       "windterm"
       "font-symbols-only-nerd-font"
       "font-material-symbols"

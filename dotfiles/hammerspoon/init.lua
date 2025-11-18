@@ -169,7 +169,21 @@ hs.alert.show("Config loaded")
 super = {"ctrl", "alt", "cmd"}
 hs.hotkey.bind({'cmd', 'ctrl'}, 't', function () hs.application.launchOrFocusByBundleID("com.mitchellh.ghostty") end)
 -- hs.hotkey.bind({'cmd', 'ctrl'}, 't', function () hs.application.launchOrFocusByBundleID("net.kovidgoyal.kitty") end)
-hs.hotkey.bind({'cmd'}, 'e', function () hs.application.launchOrFocusByBundleID("org.gnu.Emacs") end)
+local emacsBundleID = "org.gnu.Emacs"
+local emacsPath     = "/Applications/Emacs.app"
+
+hs.hotkey.bind({"cmd"}, "e", function()
+  local app = hs.application.get(emacsBundleID)
+  if app then
+    app:unhide()
+    app:activate(true)  -- 聚焦并切到当前 Space
+  else
+    -- 按路径启动，确保用到符号链接指向的最新版本
+    hs.application.launchOrFocus(emacsPath)
+    -- 备用：用 open 强制从路径启动
+    -- hs.task.new("/usr/bin/open", nil, { emacsPath }):start()
+  end
+end)
 -- local aerospace = require("aerospace")
 
 local manualSpoons = {

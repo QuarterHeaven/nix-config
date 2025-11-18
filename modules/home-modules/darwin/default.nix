@@ -17,6 +17,7 @@
     # ../langs/lua.nix
     ../langs/vue.nix
     ../langs/go.nix
+    ../langs/scheme.nix
     # ../langs/common-lisp.nix
     ../langs/cpp.nix
     ../langs/dot.nix

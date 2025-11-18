@@ -44,6 +44,8 @@ in
       ./patches-31/ns-mac-input-source.patch      
       ./patches-31/round-undecorated-frame.patch  
       ./patches-31/system-appearance.patch
+    #  ./patches-31/cursor-animation-neo.patch
+      ./patches-31/cursor-animation.patch
     ];
 
       preConfigure = ''

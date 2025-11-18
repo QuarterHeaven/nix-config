@@ -63,7 +63,6 @@
     xclip
     maestral
     maestral-gui # Dropbox 3rd party client
-    ffmpeg
     sops
 
     # networking tools

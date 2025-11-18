@@ -204,6 +204,8 @@ in
        )
        mkdir ($nu.data-dir | path join "vendor/autoload")
        starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+       def nuopen [arg, --raw (-r)] { if $raw { open -r $arg } else { open $arg } }
+       alias open = ^open
        '';
        shellAliases = {
        vi = "hx";
