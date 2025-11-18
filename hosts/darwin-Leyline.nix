@@ -56,9 +56,9 @@
 
 
   networking.proxy = {
-    httpProxy = "http://127.0.0.1:1081";
-    httpsProxy = "http://127.0.0.1:1081";
-    allProxy = "socks5://127.0.0.1:1081";
+    httpProxy = "http://127.0.0.1:7890";
+    httpsProxy = "http://127.0.0.1:7890";
+    allProxy = "socks5://127.0.0.1:7890";
   };
 
   home-manager.users.takaobsid = {
