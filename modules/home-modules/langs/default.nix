@@ -11,5 +11,6 @@
     ./clojure.nix
     ./dot.nix
     ./cpp.nix
+    ./scheme.nix
   ];
 }
