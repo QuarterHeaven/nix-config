@@ -45,7 +45,7 @@ let
 
   # -------------- 2. 引入各系统子目录 ------------------------------
   nixosSystems  = {
-    # x86_64-linux  = import ./x86_64-linux  (baseArgs // { system = "x86_64-linux";  });
+    x86_64-linux  = import ./x86_64-linux  (baseArgs // { system = "x86_64-linux";  });
     # aarch64-linux = import ./aarch64-linux (baseArgs // { system = "aarch64-linux"; });
     # riscv64-linux = import ./riscv64-linux (baseArgs // { system = "riscv64-linux"; });
   };
