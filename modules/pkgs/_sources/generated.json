@@ -1,6 +1,6 @@
 {
     "source-emacs-lsp-booster": {
-        "cargoLocks": null,
+        "cargoLock": null,
         "date": "2025-01-07",
         "extract": null,
         "name": "source-emacs-lsp-booster",
@@ -21,8 +21,8 @@
         "version": "5f702a2699f306a3958ff1996a2b1a625f0cee0b"
     },
     "source-emacs-master-igc": {
-        "cargoLocks": null,
-        "date": "2025-06-25",
+        "cargoLock": null,
+        "date": "2025-11-17",
         "extract": null,
         "name": "source-emacs-master-igc",
         "passthru": null,
@@ -34,11 +34,11 @@
             "name": null,
             "owner": "emacs-mirror",
             "repo": "emacs",
-            "rev": "1c19182e28e90b619a4c3d5553e3b5ae03eccd12",
-            "sha256": "sha256-nZIcNLpe6qqyxZMsm8e5jup2HHHaWbgIk36MstxoTjc=",
+            "rev": "ec8e64f2a5cd9c02c2afdcc21509141c6a9c3989",
+            "sha256": "sha256-aoreE379fkHzY3832GxxPa2zt94CHT5PPo5LbeVu0rM=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "1c19182e28e90b619a4c3d5553e3b5ae03eccd12"
+        "version": "ec8e64f2a5cd9c02c2afdcc21509141c6a9c3989"
     }
 }

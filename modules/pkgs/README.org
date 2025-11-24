@@ -37,4 +37,4 @@ emacs.overrideAttrs (
 
 ** 如何更新软件的源码?
 
-在当前目录下执行 nvfetcher 命令，然后 git commit 出现的 generated.nix
+nix run github:berberman/nvfetcher，在当前目录下执行 nvfetcher 命令，然后 git commit 出现的 generated.nix
