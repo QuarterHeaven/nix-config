@@ -30,14 +30,18 @@
     dotfiles = {
       # url = "git+file:///Users/takaobsid/nix-config/dotfiles";
       url = "path:./dotfiles";
-      # flake = false;
+      flake = false;
     };
     # nixpkgs.url = "github:NixOS/nixpkgs/master";
     # nixpkgs.url = "github:QuarterHeaven/nixpkgs/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+<<<<<<< HEAD
+    nixos-generators = { url = "github:nix-community/nixos-generators"; inputs.nixpkgs.follows = "nixpkgs"; };
+=======
     nixpkgs-stable = { url = "github:nixos/nixpkgs/nixos-25.05"; };
+>>>>>>> 20871d24efbb6bb3512b717f3e5539d506c54327
     nixpkgs-unstable = { url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
     home-manager = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
     emacs-overlay = { url = "github:nix-community/emacs-overlay"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };

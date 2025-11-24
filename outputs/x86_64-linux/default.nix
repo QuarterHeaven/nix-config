@@ -4,12 +4,11 @@ let
   inherit (inputs) haumea;
 
   data = haumea.lib.load { src = ./src; inputs = args; };
-  dataWithoutPaths   = builtins.attrValues data;
+  dataWithoutPaths = builtins.attrValues data;
 
   nixosConfigurations =
     lib.attrsets.mergeAttrsList
       (map (h: h.nixosConfigurations or h) dataWithoutPaths);
-
 in
 {
   inherit nixosConfigurations;
@@ -21,3 +20,4 @@ in
 
   inherit data;
 }
+
