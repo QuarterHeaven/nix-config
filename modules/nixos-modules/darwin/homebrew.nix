@@ -16,7 +16,10 @@
       "gnutls"
       "tree-sitter"
       "pkg-config"
-      # "tdlib"
+      {
+        name = "tdlib";
+        args = [ "HEAD" ];
+      }
       "mit-scheme"
       "guile"
       # "eless"

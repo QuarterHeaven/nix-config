@@ -8,26 +8,26 @@
 {
   source-emacs-lsp-booster = {
     pname = "source-emacs-lsp-booster";
-    version = "5f702a2699f306a3958ff1996a2b1a625f0cee0b";
+    version = "8059c7dce8f9abe26099f6e30e7824c63c5ebd79";
     src = fetchFromGitHub {
       owner = "blahgeek";
       repo = "emacs-lsp-booster";
-      rev = "5f702a2699f306a3958ff1996a2b1a625f0cee0b";
+      rev = "8059c7dce8f9abe26099f6e30e7824c63c5ebd79";
       fetchSubmodules = false;
-      sha256 = "sha256-R9v+hCma/FfYdR+fvZ0vmtVk4dm+bPBacwV1QCc6X+8=";
+      sha256 = "sha256-++YkiKyJhjynPTntHcF/PLsnQj2/enZwXe/F0mQ73vg=";
     };
-    date = "2025-01-07";
+    date = "2025-11-29";
   };
   source-emacs-master-igc = {
     pname = "source-emacs-master-igc";
-    version = "ec8e64f2a5cd9c02c2afdcc21509141c6a9c3989";
+    version = "13c058c35853eda44dd5a05fadfcc2394596a5f9";
     src = fetchFromGitHub {
       owner = "emacs-mirror";
       repo = "emacs";
-      rev = "ec8e64f2a5cd9c02c2afdcc21509141c6a9c3989";
+      rev = "13c058c35853eda44dd5a05fadfcc2394596a5f9";
       fetchSubmodules = false;
-      sha256 = "sha256-aoreE379fkHzY3832GxxPa2zt94CHT5PPo5LbeVu0rM=";
+      sha256 = "sha256-eX/fw0vUFxrISdd0Lmi1TJAnP7+525ksGs0Lxok2ZrI=";
     };
-    date = "2025-11-17";
+    date = "2025-12-01";
   };
 }

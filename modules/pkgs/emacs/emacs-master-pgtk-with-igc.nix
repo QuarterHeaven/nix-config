@@ -14,6 +14,7 @@ in
 (emacs-git.override {
   stdenv = ccacheStdenv;
   withPgtk = true;
+  withNativeCompilation = false;
   # toolkit = "lucid";
   # withCairo = false;
 }).overrideAttrs
@@ -39,12 +40,10 @@ in
       "--with-mps=yes"
     ];
     patches = (old.patches or [ ]) ++ [
-      ./patches-31/fix-window-role.patch          
       ./patches-31/ns-alpha-background.patch      
       ./patches-31/ns-mac-input-source.patch      
       ./patches-31/round-undecorated-frame.patch  
       ./patches-31/system-appearance.patch
-    #  ./patches-31/cursor-animation-neo.patch
       ./patches-31/cursor-animation.patch
     ];
 

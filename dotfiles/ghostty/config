@@ -1,0 +1,6 @@
+alpha-blending = native
+background-opacity = 0.8
+window-decoration = server
+keybind = shift+enter=text:\x1b\r
+macos-icon = custom
+macos-custom-icon = ~/.config/ghostty/Ghostty.icns

@@ -7,5 +7,6 @@
     ".config/wezterm/wezterm.lua".source = "${inputs.dotfiles}/wezterm.lua";
     ".npmrc".source = "${inputs.dotfiles}/.npmrc";
     ".config/kitty/kitty.conf".source = "${inputs.dotfiles}/kitty.conf";
+    ".config/ghostty".source = "${inputs.dotfiles}/ghostty";
   };
 }

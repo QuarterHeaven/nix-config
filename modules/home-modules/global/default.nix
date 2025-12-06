@@ -13,5 +13,6 @@
     # ./gemini.nix
     ./java.nix
     ./snappymail.nix
+    ./env.nix
   ];
 }

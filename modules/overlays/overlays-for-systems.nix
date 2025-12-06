@@ -16,4 +16,7 @@
           directory = ../pkgs;
         }
   )
+  (if system == "aarch64-darwin" 
+   then import ./boost-fix.nix
+   else (_final: _prev: {}))
 ]
