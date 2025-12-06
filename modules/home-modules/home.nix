@@ -120,7 +120,8 @@
     rustup
     typst
     # typst-lsp
-    typstfmt
+    # typstfmt ;; removed by upstream
+    typststyle
     typst-live
     texliveFull
 

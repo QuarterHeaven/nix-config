@@ -128,7 +128,8 @@ in
     # rustup
     typst
     # typst-lsp
-    typstfmt
+    # typstfmt
+    typststyle
     typst-live
     texliveFull
 
