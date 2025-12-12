@@ -1,491 +1,8 @@
-diff --git a/CURSOR_ANIMATION_STATUS.md b/CURSOR_ANIMATION_STATUS.md
-new file mode 100644
-index 00000000000..61b013f5d21
---- /dev/null
-+++ b/CURSOR_ANIMATION_STATUS.md
-@@ -0,0 +1,176 @@
-+# 光标动画修复工作状态
-+
-+## 日期：2025-12-02
-+
-+## 已完成的核心修复 ✅
-+
-+### 1. NO_CURSOR 移动检测修复
-+**文件**: `src/cursor-animation.c`
-+**位置**: Lines 164-189
-+
-+**问题**: 光标在移动后立即消失，因为 blink 定时器发送 NO_CURSOR 信号
-+
-+**解决方案**:
-+- 添加移动宽限期检测（CURSOR_MOVING_GRACE_TIME = 0.12秒）
-+- 在宽限期内忽略 NO_CURSOR，保持光标可见
-+- 移动停止后超过宽限期才处理 NO_CURSOR
-+
-+**关键代码**:
-+```c
-+/* Get current time for movement detection (needed early for NO_CURSOR check) */
-+double current_time = timespectod (current_timespec ());
-+
-+/* Handle NO_CURSOR specially BEFORE should_animate check */
-+if (cursor_type == NO_CURSOR)
-+  {
-+    /* Check if cursor is currently moving - if so, ignore NO_CURSOR to keep cursor visible */
-+    if (state->last_frame_valid)
-+      {
-+        double time_since_move = current_time - state->last_move_time;
-+        if (time_since_move < CURSOR_MOVING_GRACE_TIME)
-+          {
-+            /* Cursor is still moving or just stopped - ignore NO_CURSOR to keep it visible */
-+            return;
-+          }
-+      }
-+
-+    if (cursor_animation_interface)
-+      cursor_animation_interface->hide_cursor (f);
-+    /* Mark cursor as not visible so it will be restored when blink turns on */
-+    state->visible = false;
-+    return;
-+  }
-+```
-+
-+**测试结果**: ✅ 通过
-+- 日志文件：`/tmp/movement_test.log`
-+- 证实：移动时显示 "Ignoring NO_CURSOR during movement"
-+- 光标在移动期间保持可见
-+- 停止后正常闪烁
-+
-+### 2. 调试代码清理
-+**文件**: `src/cursor-animation.c`
-+**状态**: ✅ 已移除所有 fprintf DEBUG 语句
-+
-+## 待完成的工作 ⏳
-+
-+### 1. PGTK 后端集成（高优先级）
-+**文件**: `src/pgtkterm.c`
-+**状态**: ⚠️ 需要重新整合
-+
-+由于操作失误，pgtkterm.c 被重置到原始版本。需要重新添加以下功能：
-+
-+#### 必需的修改：
-+
-+1. **添加头文件引用**（约行 69）
-+   ```c
-+   #include "cursor-animation.h"
-+   ```
-+
-+2. **添加光标动画数据结构**（约行 127）
-+   - 定义 `struct pgtk_cursor_animation_data`
-+   - 包含动画状态、定时器、外观信息等
-+
-+3. **修改 pgtk_draw_window_cursor**（约行 3077）
-+   - 移除原有的各个光标类型的独立绘制代码
-+   - 改为调用 `animated_draw_cursor`
-+
-+4. **实现核心功能函数**：
-+   - `pgtk_cursor_animation_update()` - 更新光标动画
-+   - `pgtk_draw_animated_cursor()` - 绘制动画光标
-+   - `pgtk_cursor_animation_hide()` - 隐藏光标
-+   - `pgtk_get_cursor_animation_data()` - 获取动画数据
-+
-+5. **修改 pgtk_handle_draw**（约行 5170）
-+   - 使用维度检查代替 cursor_visible 标志
-+   - 检查 `current_width > 0 && current_height > 0`
-+
-+6. **HBAR 光标尺寸修正**
-+   - 保持 cursor_height 为完整行高（17px）
-+   - 不修改为 bar_height
-+   - 绘制代码会使用 `y + height - bar_height` 计算正确位置
-+
-+### 2. 构建系统集成
-+**文件**: `src/Makefile.in`
-+**状态**: ✅ 已部分完成，需验证
-+
-+确保 cursor-animation.c 包含在编译目标中。
-+
-+### 3. 其他平台支持（低优先级）
-+**文件**: `src/nsterm.m`, `src/nsterm.h`
-+**状态**: 已有修改，需要测试
-+
-+macOS NS 后端的光标动画支持。
-+
-+## 已知问题与解决方案
-+
-+### 问题 1: HBAR 光标位置错误
-+**症状**: HBAR 显示在行中间而不是底部
-+**原因**: cursor_height 被错误地设置为 bar_height (~4px)
-+**解决**: 保持 cursor_height 为完整行高，绘制时使用 `y + height - bar_height`
-+**状态**: ✅ 已在设计中解决
-+
-+### 问题 2: 光标移动后消失
-+**症状**: 光标移动后约1秒消失，然后才重新出现并开始闪烁
-+**原因**: Blink 定时器发送 NO_CURSOR，立即隐藏光标
-+**解决**: 移动宽限期检测，忽略移动期间的 NO_CURSOR
-+**状态**: ✅ 已完全修复（cursor-animation.c:164-189）
-+
-+### 问题 3: 光标类型切换残留
-+**症状**: 从 box 切换到 hbar 时有残留
-+**原因**: 类型变化检测和状态同步问题
-+**解决**: 光标类型变化时强制重绘，清理旧光标
-+**状态**: ⏳ 需要在 pgtkterm.c 重新整合时验证
-+
-+## 测试验证
-+
-+### 已验证的功能
-+1. ✅ 光标移动时保持可见
-+2. ✅ 停止移动后正常闪烁
-+3. ✅ HBAR 位置正确（绘制逻辑验证）
-+4. ✅ NO_CURSOR 宽限期工作正常
-+
-+### 待验证的功能
-+1. ⏳ 完整的光标动画流畅性
-+2. ⏳ 各种光标类型切换
-+3. ⏳ 多窗口场景
-+4. ⏳ 高 DPI 显示
-+
-+## 文件清单
-+
-+### 新增文件
-+- `src/cursor-animation.c` - 跨平台光标动画核心逻辑 ✅
-+- `src/cursor-animation.h` - 光标动画接口定义 ✅
-+- `CURSOR_ANIMATION_STATUS.md` - 本状态文档 ✅
-+
-+### 修改的文件
-+- `src/Makefile.in` - 添加 cursor-animation.c 编译 ✅
-+- `src/cursor-animation.c` - 核心修复完成 ✅
-+- `src/pgtkterm.c` - ⚠️ 需要重新整合
-+- `src/pgtkterm.h` - 部分完成
-+- `src/nsterm.m` - macOS 支持（待测试）
-+- `src/nsterm.h` - macOS 支持（待测试）
-+
-+## 下一步行动
-+
-+1. **立即**: 提交当前的核心修复（cursor-animation.c/h）
-+2. **下一步**: 重新整合 pgtkterm.c 的光标动画代码
-+3. **测试**: 完整的功能测试和验证
-+4. **优化**: 移除调试代码，性能优化
-+5. **文档**: 更新用户文档和开发文档
-+
-+## 备注
-+
-+- 备份文件 `src/pgtkterm.c.backup` 包含之前的完整实现（但可能有编译错误）
-+- 测试日志保存在 `/tmp/*.log`
-+- 核心修复逻辑简洁且经过验证
-+- KISS 原则：保持简单，专注核心问题
-+
-+## 参考
-+
-+- 光标闪烁机制：`lisp/frame.el` 中的 `blink-cursor-mode`
-+- 宽限期常量：`CURSOR_MOVING_GRACE_TIME = 0.12` 秒
-+- 移动检测阈值：`CURSOR_MOVE_ON_EPS = 1.0` 像素
-+
-+---
-+最后更新：2025-12-02
-diff --git a/PGTKTERM_INTEGRATION_PLAN.md b/PGTKTERM_INTEGRATION_PLAN.md
-new file mode 100644
-index 00000000000..eb9e2aca494
---- /dev/null
-+++ b/PGTKTERM_INTEGRATION_PLAN.md
-@@ -0,0 +1,295 @@
-+# pgtkterm.c 光标动画整合实现方案
-+
-+## 当前进度
-+
-+✅ **已完成**：
-+1. 添加头文件引用：`#include "cursor-animation.h"` (line 67)
-+2. 添加光标动画数据结构 `struct pgtk_cursor_animation_data` (lines 125-146)
-+3. 声明 `pgtk_get_cursor_animation_data()` 函数 (line 148)
-+
-+## 待实现的核心函数
-+
-+### 1. pgtk_get_cursor_animation_data() - 获取动画数据
-+
-+**位置**：在文件末尾添加，约 line 8000+
-+
-+```c
-+static struct pgtk_cursor_animation_data *
-+pgtk_get_cursor_animation_data (struct frame *f)
-+{
-+  if (!f || !FRAME_PGTK_P (f))
-+    return NULL;
-+
-+  struct pgtk_output *output = FRAME_OUTPUT_DATA (f);
-+  if (!output->cursor_animation_data)
-+    {
-+      output->cursor_animation_data = xzalloc (sizeof (struct pgtk_cursor_animation_data));
-+      output->cursor_animation_data->cursor_visible = false;
-+    }
-+
-+  return output->cursor_animation_data;
-+}
-+```
-+
-+**注意**：需要在 `src/pgtkterm.h` 的 `struct pgtk_output` 中添加：
-+```c
-+struct pgtk_cursor_animation_data *cursor_animation_data;
-+```
-+
-+### 2. pgtk_cursor_animation_update() - 更新光标动画
-+
-+**位置**：紧接 pgtk_get_cursor_animation_data() 之后
-+
-+```c
-+static void
-+pgtk_cursor_animation_update (struct frame *f, int x, int y,
-+                               int width, int height,
-+                               const struct cursor_appearance *appearance,
-+                               bool on_state, bool should_animate)
-+{
-+  struct pgtk_cursor_animation_data *data = pgtk_get_cursor_animation_data (f);
-+  if (!data)
-+    return;
-+
-+  /* Update target position and size */
-+  data->animation.target_x = x;
-+  data->animation.target_y = y;
-+  data->animation.target_width = width;
-+  data->animation.target_height = height;
-+
-+  /* For now, snap directly to target (no animation) */
-+  data->animation.current_x = x;
-+  data->animation.current_y = y;
-+  data->animation.current_width = width;
-+  data->animation.current_height = height;
-+
-+  /* Update appearance */
-+  if (appearance)
-+    data->last_appearance = *appearance;
-+
-+  /* Update visibility */
-+  data->cursor_visible = on_state;
-+
-+  /* Request frame redraw */
-+  if (FRAME_GTK_WIDGET (f))
-+    gtk_widget_queue_draw (FRAME_GTK_WIDGET (f));
-+}
-+```
-+
-+### 3. pgtk_cursor_animation_hide() - 隐藏光标
-+
-+```c
-+static void
-+pgtk_cursor_animation_hide (struct frame *f)
-+{
-+  struct pgtk_cursor_animation_data *data = pgtk_get_cursor_animation_data (f);
-+  if (!data)
-+    return;
-+
-+  /* Clear current dimensions to hide cursor */
-+  data->animation.current_width = 0;
-+  data->animation.current_height = 0;
-+  data->cursor_visible = false;
-+
-+  /* Request frame redraw */
-+  if (FRAME_GTK_WIDGET (f))
-+    gtk_widget_queue_draw (FRAME_GTK_WIDGET (f));
-+}
-+```
-+
-+### 4. 注册光标动画接口
-+
-+**位置**：在 pgtk_term_init() 函数中添加
-+
-+```c
-+/* Register cursor animation interface */
-+static const struct cursor_animation_interface pgtk_cursor_animation_interface = {
-+  .update_cursor = pgtk_cursor_animation_update,
-+  .hide_cursor = pgtk_cursor_animation_hide
-+};
-+
-+cursor_animation_interface = &pgtk_cursor_animation_interface;
-+```
-+
-+## 待修改的现有函数
-+
-+### 1. pgtk_draw_window_cursor() - 修改为使用 animated_draw_cursor
-+
-+**位置**：约 line 3000+
-+
-+**查找**：搜索 `pgtk_draw_window_cursor`
-+
-+**修改**：将整个函数体替换为：
-+
-+```c
-+static void
-+pgtk_draw_window_cursor (struct window *w, struct glyph_row *glyph_row,
-+                         int x, int y, enum text_cursor_kinds cursor_type,
-+                         int cursor_width, bool on_p, bool active_p)
-+{
-+  struct frame *f = XFRAME (WINDOW_FRAME (w));
-+
-+  if (on_p)
-+    {
-+      w->phys_cursor_type = cursor_type;
-+      w->phys_cursor_on_p = true;
-+
-+      /* Calculate cursor dimensions */
-+      int cursor_height = w->phys_cursor_height;
-+
-+      /* Handle width=-1 case: use cursor glyph's actual width */
-+      if (cursor_width < 0)
-+        {
-+          struct glyph *cursor_glyph = get_phys_cursor_glyph (w);
-+          if (cursor_glyph)
-+            cursor_width = cursor_glyph->pixel_width;
-+          else
-+            cursor_width = FRAME_COLUMN_WIDTH (f);
-+        }
-+
-+      /* For HBAR_CURSOR: keep cursor_height as row height.
-+         Drawing code will calculate bar height and position at bottom. */
-+
-+      /* Call animated cursor drawing */
-+      animated_draw_cursor (w, glyph_row, x, y, cursor_width, cursor_height,
-+                           cursor_type, on_p, active_p);
-+    }
-+  else
-+    {
-+      /* Cursor off - let animation system handle */
-+      animated_draw_cursor (w, glyph_row, x, y, 0, 0,
-+                           NO_CURSOR, false, active_p);
-+    }
-+}
-+```
-+
-+### 2. pgtk_handle_draw() - 添加光标绘制
-+
-+**位置**：约 line 5100+ 的 `pgtk_handle_draw` 函数
-+
-+**查找**：`static gboolean pgtk_handle_draw`
-+
-+**在函数末尾（return 之前）添加**：
-+
-+```c
-+  /* Draw animated cursor if visible */
-+  struct pgtk_cursor_animation_data *cursor_data = pgtk_get_cursor_animation_data (f);
-+  if (cursor_data &&
-+      cursor_data->animation.current_width > 0 &&
-+      cursor_data->animation.current_height > 0)
-+    {
-+      cairo_t *cr = FRAME_CR_CONTEXT (f);
-+      int x = (int) cursor_data->animation.current_x;
-+      int y = (int) cursor_data->animation.current_y;
-+      int width = (int) cursor_data->animation.current_width;
-+      int height = (int) cursor_data->animation.current_height;
-+
-+      struct cursor_appearance *appearance = &cursor_data->last_appearance;
-+      enum text_cursor_kinds cursor_type = appearance->cursor_type;
-+
-+      /* Extract RGB from color */
-+      unsigned long color = appearance->background_color;
-+      double red = RED_FROM_ULONG (color) / 255.0;
-+      double green = GREEN_FROM_ULONG (color) / 255.0;
-+      double blue = BLUE_FROM_ULONG (color) / 255.0;
-+
-+      cairo_set_source_rgb (cr, red, green, blue);
-+
-+      if (cursor_type == BAR_CURSOR)
-+        {
-+          /* Draw vertical bar */
-+          int bar_width = (width > 2) ? 2 : width;
-+          cairo_rectangle (cr, x, y, bar_width, height);
-+          cairo_fill (cr);
-+        }
-+      else if (cursor_type == HBAR_CURSOR)
-+        {
-+          /* Draw horizontal bar at bottom of line */
-+          int bar_height = (height > 2) ? 2 : height;
-+          cairo_rectangle (cr, x, y + height - bar_height, width, bar_height);
-+          cairo_fill (cr);
-+        }
-+      else if (cursor_type == FILLED_BOX_CURSOR)
-+        {
-+          /* Draw filled box */
-+          float radius = appearance->corner_radius;
-+          if (radius > 0)
-+            {
-+              /* Rounded rectangle */
-+              cairo_new_path (cr);
-+              cairo_arc (cr, x + radius, y + radius, radius, M_PI, 3 * M_PI / 2);
-+              cairo_arc (cr, x + width - radius, y + radius, radius, 3 * M_PI / 2, 0);
-+              cairo_arc (cr, x + width - radius, y + height - radius, radius, 0, M_PI / 2);
-+              cairo_arc (cr, x + radius, y + height - radius, radius, M_PI / 2, M_PI);
-+              cairo_close_path (cr);
-+              cairo_fill (cr);
-+            }
-+          else
-+            {
-+              cairo_rectangle (cr, x, y, width, height);
-+              cairo_fill (cr);
-+            }
-+
-+          /* Draw character if available */
-+          if (appearance->glyph_info.character &&
-+              !appearance->glyph_info.is_composite)
-+            {
-+              /* Draw text on cursor - simplified version */
-+              /* TODO: Implement proper text rendering with face info */
-+            }
-+        }
-+      else if (cursor_type == HOLLOW_BOX_CURSOR)
-+        {
-+          /* Draw hollow box */
-+          cairo_set_line_width (cr, 1.0);
-+          cairo_rectangle (cr, x + 0.5, y + 0.5, width - 1, height - 1);
-+          cairo_stroke (cr);
-+        }
-+    }
-+
-+  return FALSE;
-+```
-+
-+## 编译配置
-+
-+确保 `src/Makefile.in` 包含 cursor-animation.c：
-+
-+```makefile
-+base_obj = ... cursor-animation.o ...
-+```
-+
-+## 测试步骤
-+
-+1. **编译**：
-+   ```bash
-+   make -j8
-+   ```
-+
-+2. **基础测试**：
-+   ```bash
-+   ./src/emacs -Q --eval "(setq cursor-type 'box)"
-+   ```
-+
-+3. **HBAR 测试**：
-+   ```bash
-+   ./src/emacs -Q --eval "(setq cursor-type 'hbar)"
-+   ```
-+
-+4. **移动测试**：
-+   - 移动光标
-+   - 确认光标不会立即消失
-+   - 停止后应该正常闪烁
-+
-+## 关键点
-+
-+1. **HBAR 尺寸**：保持 cursor_height 为行高（17px），绘制时使用 `y + height - bar_height`
-+2. **维度检查**：使用 `current_width > 0 && current_height > 0` 判断可见性
-+3. **NO_CURSOR 处理**：由 cursor-animation.c 中的宽限期逻辑处理
-+4. **简化实现**：暂时不实现动画插值，直接跳到目标位置
-+
-+## 下一步
-+
-+1. 实现上述函数
-+2. 修改 pgtk_draw_window_cursor 和 pgtk_handle_draw
-+3. 编译测试
-+4. 根据测试结果调整
 diff --git a/src/Makefile.in b/src/Makefile.in
-index 8101d4406da..8a006152c1c 100644
+index a2f7ea011c3..428f3ea5d86 100644
 --- a/src/Makefile.in
 +++ b/src/Makefile.in
-@@ -451,7 +451,7 @@ .m.o:
+@@ -447,7 +447,7 @@ .m.o:
  .cc.o:
  	$(AM_V_CXX)$(CXX) -c $(CPPFLAGS) $(ALL_CXX_CFLAGS) $(PROFILING_CFLAGS) $<
  
@@ -496,10 +13,10 @@ index 8101d4406da..8a006152c1c 100644
  	emacs.o keyboard.o macros.o keymap.o sysdep.o 			       \
 diff --git a/src/cursor-animation.c b/src/cursor-animation.c
 new file mode 100644
-index 00000000000..72b0dd37b20
+index 00000000000..52cf99afc17
 --- /dev/null
 +++ b/src/cursor-animation.c
-@@ -0,0 +1,293 @@
+@@ -0,0 +1,313 @@
 +/* Cross-platform cursor animation implementation for GNU Emacs.
 +
 +Copyright (C) 2025 Free Software Foundation, Inc.
@@ -655,27 +172,47 @@ index 00000000000..72b0dd37b20
 +    return;
 +
 +  bool is_selected_window = (w == XWINDOW (selected_window));
-+  bool should_animate = active_p && is_selected_window;
++
++  /* IMPORTANT: Only process cursor updates for the selected window.
++     This prevents issues with minibuffer and other windows causing
++     constant window switching detection. */
++  if (!is_selected_window || !active_p)
++    return;
++
++  bool should_animate = true;  /* Always animate in selected, active window */
 +
 +  /* Get cursor animation state from frame - use a global for now */
 +  static struct cursor_animation_state global_state = {0};
 +  struct cursor_animation_state *state = &global_state;
 +
-+  /* Get current time for movement detection (needed early for NO_CURSOR check) */
++  /* Get current time early for window switching logic */
 +  double current_time = timespectod (current_timespec ());
++
++  /* If window changed, update tracking but preserve position for smooth animation */
++  if (state->last_window != w)
++    {
++      /* DON'T reset last_frame_valid - we want to animate from old window position!
++         This creates smooth animation when switching between windows. */
++      state->last_move_time = current_time;  /* Mark as just moved to prevent NO_CURSOR from hiding */
++      state->last_window = w;
++
++      /* Reset blink cursor to make it immediately visible in new window */
++      cursor_animation_try_reset_blink ();
++
++      /* Don't clear platform cursor position - preserve it to enable animation
++         from old window position to new window position */
++    }
 +
 +  /* Handle NO_CURSOR specially BEFORE should_animate check */
 +  if (cursor_type == NO_CURSOR)
 +    {
-+      /* Check if cursor is currently moving - if so, ignore NO_CURSOR to keep cursor visible */
-+      if (state->last_frame_valid)
++      /* Check if cursor is currently moving - if so, ignore NO_CURSOR to keep cursor visible
++         Check time since last move regardless of last_frame_valid state */
++      double time_since_move = current_time - state->last_move_time;
++      if (time_since_move < CURSOR_MOVING_GRACE_TIME)
 +        {
-+          double time_since_move = current_time - state->last_move_time;
-+          if (time_since_move < CURSOR_MOVING_GRACE_TIME)
-+            {
-+              /* Cursor is still moving or just stopped - ignore NO_CURSOR to keep it visible */
-+              return;
-+            }
++          /* Cursor is still moving or just stopped - ignore NO_CURSOR to keep it visible */
++          return;
 +        }
 +
 +      if (cursor_animation_interface)
@@ -777,7 +314,7 @@ index 00000000000..72b0dd37b20
 +      appearance.foreground_color = cursor_animation_get_text_color (
 +        appearance.background_color, appearance.glyph_info.face, f);
 +
-+      /* Update animated cursor */
++      /* Update animated cursor - always animate in selected window */
 +      cursor_animation_interface->update_cursor (f, x, y, width, height,
 +                                               &appearance, on_p, should_animate);
 +
@@ -796,10 +333,10 @@ index 00000000000..72b0dd37b20
 \ No newline at end of file
 diff --git a/src/cursor-animation.h b/src/cursor-animation.h
 new file mode 100644
-index 00000000000..0fb7d656e39
+index 00000000000..e643b361ac1
 --- /dev/null
 +++ b/src/cursor-animation.h
-@@ -0,0 +1,133 @@
+@@ -0,0 +1,136 @@
 +/* Cross-platform cursor animation system for GNU Emacs.
 +
 +Copyright (C) 2025 Free Software Foundation, Inc.
@@ -832,7 +369,7 @@ index 00000000000..0fb7d656e39
 +#define CURSOR_MOVE_ON_EPS  0.35   /* Movement threshold to start animation (pixels) */
 +#define CURSOR_MOVE_OFF_EPS 0.20   /* Movement threshold to end animation (pixels) */
 +#define CURSOR_MOVING_GRACE_TIME 0.12  /* Grace period after stopping (seconds) */
-+#define CURSOR_ANIMATION_DURATION 0.10 /* Animation duration (seconds) */
++#define CURSOR_ANIMATION_DURATION 0.10 /* Animation duration (seconds) - matches macOS */
 +#define CURSOR_FADE_IN_DURATION 0.06   /* Fade in duration (seconds) */
 +
 +/* Cross-platform cursor animation state */
@@ -853,6 +390,9 @@ index 00000000000..0fb7d656e39
 +
 +  /* Timing */
 +  double last_move_time;           /* Last movement timestamp */
++
++  /* Window tracking - per frame to detect window switches */
++  struct window *last_window;      /* Last window that had cursor */
 +
 +  /* Platform-specific data */
 +  void *platform_data;             /* Platform-specific animation objects */
@@ -935,7 +475,7 @@ index 00000000000..0fb7d656e39
 +#endif /* CURSOR_ANIMATION_H */
 \ No newline at end of file
 diff --git a/src/nsterm.h b/src/nsterm.h
-index 6a715fb92fc..19e87be0b7c 100644
+index d9d16ffabd3..98c00fb6e3b 100644
 --- a/src/nsterm.h
 +++ b/src/nsterm.h
 @@ -461,6 +461,8 @@ #define NSTRACE_UNSILENCE()
@@ -986,10 +526,10 @@ index 6a715fb92fc..19e87be0b7c 100644
  - (void) updateCollectionBehavior;
  #endif
 diff --git a/src/nsterm.m b/src/nsterm.m
-index 472d2a52a7d..f735e16cfa2 100644
+index 66b4a3c82e7..54e2661ecca 100644
 --- a/src/nsterm.m
 +++ b/src/nsterm.m
-@@ -72,6 +72,12 @@ Updated by Christian Limpach (chris@nice.ch)
+@@ -71,6 +71,12 @@ Updated by Christian Limpach (chris@nice.ch)
  #include "macfont.h"
  #include <Carbon/Carbon.h>
  #include <IOSurface/IOSurface.h>
@@ -1002,7 +542,7 @@ index 472d2a52a7d..f735e16cfa2 100644
  #endif
  
  static EmacsMenu *dockMenu;
-@@ -3190,6 +3196,173 @@ Note that CURSOR_WIDTH is meaningful only for (h)bar cursors.
+@@ -3184,6 +3190,173 @@ Note that CURSOR_WIDTH is meaningful only for (h)bar cursors.
    /* Prevent the cursor from being drawn outside the text area.  */
    r = NSIntersectionRect (r, ns_row_rect (w, glyph_row, TEXT_AREA));
  
@@ -1176,7 +716,7 @@ index 472d2a52a7d..f735e16cfa2 100644
    ns_focus (f, NULL, 0);
  
    NSGraphicsContext *ctx = [NSGraphicsContext currentContext];
-@@ -3228,6 +3401,7 @@ Note that CURSOR_WIDTH is meaningful only for (h)bar cursors.
+@@ -3222,6 +3395,7 @@ Note that CURSOR_WIDTH is meaningful only for (h)bar cursors.
      }
  
    ns_unfocus (f);
@@ -1184,7 +724,7 @@ index 472d2a52a7d..f735e16cfa2 100644
  }
  
  
-@@ -6830,6 +7004,302 @@ - (void)windowDidEndLiveResize:(NSNotification *)notification
+@@ -6824,6 +6998,302 @@ - (void)windowDidEndLiveResize:(NSNotification *)notification
    [self updateFramePosition];
  }
  
@@ -1488,7 +1028,7 @@ index 472d2a52a7d..f735e16cfa2 100644
  - (void) setWindowClosing: (BOOL)closing
  {
 diff --git a/src/pgtkterm.c b/src/pgtkterm.c
-index a21d8be25dd..b5f9be0ef9a 100644
+index a7be2d90899..c87b499be7d 100644
 --- a/src/pgtkterm.c
 +++ b/src/pgtkterm.c
 @@ -26,6 +26,9 @@ Copyright (C) 1989, 1993-1994, 2005-2006, 2008-2025 Free Software
@@ -1509,7 +1049,7 @@ index a21d8be25dd..b5f9be0ef9a 100644
  
  #ifdef GDK_WINDOWING_WAYLAND
  #include <gdk/gdkwayland.h>
-@@ -121,6 +125,31 @@ #define FRAME_CR_SURFACE(f)		(cairo_get_target (FRAME_CR_CONTEXT (f)))
+@@ -117,6 +121,31 @@ #define FRAME_CR_SURFACE(f)		(cairo_get_target (FRAME_CR_CONTEXT (f)))
  static struct frame *pgtk_any_window_to_frame (GdkWindow *);
  static void pgtk_regenerate_devices (struct pgtk_display_info *);
  
@@ -1541,7 +1081,7 @@ index a21d8be25dd..b5f9be0ef9a 100644
  static void
  pgtk_device_added_or_removal_cb (GdkSeat *seat, GdkDevice *device,
  				 gpointer user_data)
-@@ -3031,48 +3060,45 @@ pgtk_draw_window_cursor (struct window *w, struct glyph_row *glyph_row, int x,
+@@ -3002,48 +3031,45 @@ pgtk_draw_window_cursor (struct window *w, struct glyph_row *glyph_row, int x,
  	{
  	  glyph_row->cursor_in_fringe_p = true;
  	  draw_fringe_bitmap (w, glyph_row, glyph_row->reversed_p);
@@ -1568,8 +1108,8 @@ index a21d8be25dd..b5f9be0ef9a 100644
 -	    case HBAR_CURSOR:
 -	      pgtk_draw_bar_cursor (w, glyph_row, cursor_width, HBAR_CURSOR);
 -	      break;
-+      /* Handle cursor_width < 0: use cursor glyph's actual width */
-+      if (cursor_width < 0)
++      /* Handle cursor_width <= 0: use cursor glyph's actual width */
++      if (cursor_width <= 0)
 +        {
 +          struct glyph *cursor_glyph = get_phys_cursor_glyph (w);
 +          if (cursor_glyph)
@@ -1616,7 +1156,7 @@ index a21d8be25dd..b5f9be0ef9a 100644
  }
  
  static void
-@@ -5104,6 +5130,209 @@ pgtk_handle_draw (GtkWidget *widget, cairo_t *cr, gpointer *data)
+@@ -5073,6 +5099,212 @@ pgtk_handle_draw (GtkWidget *widget, cairo_t *cr, gpointer *data)
  	  cairo_set_source_surface (cr, src, 0, 0);
  	  cairo_paint (cr);
  	}
@@ -1625,6 +1165,9 @@ index a21d8be25dd..b5f9be0ef9a 100644
 +      if (f != NULL)
 +        {
 +          struct pgtk_cursor_animation_data *cursor_data = pgtk_get_cursor_animation_data (f);
++          /* Draw cursor if it has valid dimensions
++             Note: Don't check cursor_visible here - that's for intentional hiding (e.g., NO_CURSOR)
++             The on_state parameter in update_cursor controls blink visibility */
 +          if (cursor_data &&
 +              cursor_data->animation.current_width > 0 &&
 +              cursor_data->animation.current_height > 0)
@@ -1826,7 +1369,7 @@ index a21d8be25dd..b5f9be0ef9a 100644
      }
    return FALSE;
  }
-@@ -7030,6 +7259,191 @@ pgtk_selection_event (GtkWidget *widget, GdkEvent *event,
+@@ -6985,6 +7217,193 @@ pgtk_selection_event (GtkWidget *widget, GdkEvent *event,
  /* Display a warning message if the PGTK port is being used under X;
     that is not supported.  */
  
@@ -1902,7 +1445,7 @@ index a21d8be25dd..b5f9be0ef9a 100644
 +      return G_SOURCE_REMOVE;
 +    }
 +
-+  /* Ease-out cubic interpolation */
++  /* Ease-out cubic interpolation (matches macOS kCAMediaTimingFunctionEaseOut) */
 +  double t = progress - 1.0;
 +  double eased = 1.0 + t * t * t;
 +
@@ -1945,8 +1488,11 @@ index a21d8be25dd..b5f9be0ef9a 100644
 +  data->animation.target_width = width;
 +  data->animation.target_height = height;
 +
-+  /* If first time or not animating, jump to target */
-+  if (!data->cursor_visible || !should_animate)
++  /* If first time (no valid position) or explicitly not animating, jump to target */
++  bool has_valid_position = (data->animation.current_width > 0 &&
++                             data->animation.current_height > 0);
++
++  if (!has_valid_position || !should_animate)
 +    {
 +      data->animation.current_x = x;
 +      data->animation.current_y = y;
@@ -1983,9 +1529,8 @@ index a21d8be25dd..b5f9be0ef9a 100644
 +  if (!data)
 +    return;
 +
-+  /* Clear current dimensions to hide cursor */
-+  data->animation.current_width = 0;
-+  data->animation.current_height = 0;
++  /* Mark cursor as not visible but preserve position
++     This allows smooth animation when cursor reappears (e.g., after blink or window switch) */
 +  data->cursor_visible = false;
 +  data->animation.active = false;
 +
@@ -2018,7 +1563,7 @@ index a21d8be25dd..b5f9be0ef9a 100644
  static void
  pgtk_display_x_warning (GdkDisplay *display)
  {
-@@ -7312,6 +7726,9 @@ #define NUM_ARGV 10
+@@ -7260,6 +7679,9 @@ #define NUM_ARGV 10
  		    G_CALLBACK (pgtk_seat_removed_cb), dpyinfo);
    pgtk_enumerate_devices (dpyinfo, true);
  
@@ -2029,7 +1574,7 @@ index a21d8be25dd..b5f9be0ef9a 100644
  
    return dpyinfo;
 diff --git a/src/pgtkterm.h b/src/pgtkterm.h
-index fa522244e14..7c31199c134 100644
+index 94a40b823c8..6e0928ba948 100644
 --- a/src/pgtkterm.h
 +++ b/src/pgtkterm.h
 @@ -450,6 +450,9 @@ #define BLUE_FROM_ULONG(color)	((color) & 0xff)
