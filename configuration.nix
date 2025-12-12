@@ -79,7 +79,7 @@
 
   programs.nix-ld = {
       enable = true;
-      package = pkgs.nix-ld-rs; # only for NixOS 24.05
+      # package = pkgs.nix-ld-rs; # only for NixOS 24.05
   };
 
   # List packages installed in system profile. To search, run:
@@ -93,7 +93,7 @@
     helix
     fish
     nushell
-    pinentry
+    pinentry-all
     nix-index
     (rust-bin.selectLatestNightlyWith (toolchain:
       toolchain.default.override {

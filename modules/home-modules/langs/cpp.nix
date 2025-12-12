@@ -24,7 +24,7 @@ in {
     # gcc
     gnumake
     cmake
-    lldb_20
+    # lldb_20
     # ld64
   ];
 

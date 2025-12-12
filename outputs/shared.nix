@@ -57,7 +57,7 @@ let
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
     home-manager.extraSpecialArgs = extraArgs;
-    home-manager.backupFileExtension = "backup";
+    # home-manager.backupFileExtension = "backup";
   };
 
   configurationDefaultsDarwin = extraArgs: {
@@ -73,7 +73,7 @@ let
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
     home-manager.extraSpecialArgs = extraArgs;
-    home-manager.backupFileExtension = "backup";
+    # home-manager.backupFileExtension = "backup";
   };
 
   ###################################

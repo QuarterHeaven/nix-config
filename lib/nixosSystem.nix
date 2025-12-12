@@ -10,7 +10,7 @@
   ...
 }:
 let
-  inherit (inputs) nixpkgs home-manager;
+  inherit (inputs) nixpkgs nixpkgs-unstable home-manager;
   nixos-generators = inputs.nixos-generators or null;
 in
 nixpkgs.lib.nixosSystem {
@@ -20,6 +20,19 @@ nixpkgs.lib.nixosSystem {
     ++ (lib.optionals (nixos-generators != null) [
       nixos-generators.nixosModules.all-formats
     ])
+    ++ [
+      (
+        { lib, ... }:
+        {
+          nixpkgs.pkgs = import nixpkgs-unstable {
+            inherit system; # refer the `system` parameter form outer scope recursively
+            # To use chrome, we need to allow the installation of non-free software
+            config.allowUnfree = true;
+            config.allowBroken = true;
+          };
+        }
+      )
+    ]
     ++ (lib.optionals ((lib.lists.length home-modules) > 0) [
       home-manager.nixosModules.home-manager
       {

@@ -29,6 +29,7 @@
     arion.url = "github:hercules-ci/arion";
     dotfiles = {
       # url = "git+file:///Users/takaobsid/nix-config/dotfiles";
+      # url = "git+file:.?dir=dotfiles";
       url = "path:./dotfiles";
       flake = false;
     };

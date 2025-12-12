@@ -129,7 +129,7 @@ in
     typst
     # typst-lsp
     # typstfmt
-    typststyle
+    typstyle
     typst-live
     texliveFull
 

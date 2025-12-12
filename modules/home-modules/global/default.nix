@@ -4,6 +4,7 @@
   imports = [
     ./ai-coding.nix
     ./dotfiles.nix
+    ./emacs
     ./ffmpeg.nix
     ./python.nix
     ./yazi.nix
