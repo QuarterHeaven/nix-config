@@ -66,7 +66,7 @@
     # podman-compose
     docker-compose
 
-    ueberzug # command-line image support
+    ueberzugpp
   ];
 
   # Font settings

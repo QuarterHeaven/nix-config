@@ -35,10 +35,11 @@
     };
     # nixpkgs.url = "github:NixOS/nixpkgs/master";
     # nixpkgs.url = "github:QuarterHeaven/nixpkgs/master";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nixpkgs-stable = { url = "github:nixos/nixpkgs/nixos-25.05"; };
+    nixpkgs-stable = { url = "github:nixos/nixpkgs/nixos-25.11"; };
     nixpkgs-unstable = { url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
     home-manager = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
     emacs-overlay = { url = "github:nix-community/emacs-overlay"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };

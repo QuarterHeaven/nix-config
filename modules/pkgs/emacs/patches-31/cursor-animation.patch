@@ -886,7 +886,7 @@ index 66b4a3c82e7..54e2661ecca 100644
 +    cursorTextLayer.fontSize = [font pointSize];
 +
 +    /* 智能文字颜色选择（参考 X11 xterm.c:8335-8351）*/
-+    struct frame *f = *emacsframe;
++    struct frame *f = emacsframe;
 +    NSColor *textColor = nil;
 +    unsigned long cursorBgColor = [color unsignedLong];
 +

@@ -37,14 +37,14 @@ in
       "--with-xinput2"
       "--without-xwidgets" # Needed for it to compile properly for some reason
       "--with-dbus=ifavailable"
-      "--with-mps=yes"
+      #"--with-mps=yes"
     ];
     patches = (old.patches or [ ]) ++ [
       ./patches-31/ns-alpha-background.patch      
       ./patches-31/ns-mac-input-source.patch      
       ./patches-31/round-undecorated-frame.patch  
       ./patches-31/system-appearance.patch
-      ./patches-31/cursor-animation.patch
+#      ./patches-31/cursor-animation.patch
     ];
 
       preConfigure = ''
