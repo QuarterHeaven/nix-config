@@ -10,7 +10,7 @@
   ...
 }:
 let
-  inherit (inputs) nixpkgs-unstable home-manager nix-darwin;
+  inherit (inputs) nixpkgs-stable-darwin home-manager nix-darwin;
 in
 nix-darwin.lib.darwinSystem {
   inherit system specialArgs;
@@ -20,7 +20,7 @@ nix-darwin.lib.darwinSystem {
       (
         { lib, ... }:
         {
-          nixpkgs.pkgs = import nixpkgs-unstable {
+          nixpkgs.pkgs = import nixpkgs-stable-darwin {
             inherit system; # refer the `system` parameter form outer scope recursively
             # To use chrome, we need to allow the installation of non-free software
             config.allowUnfree = true;
