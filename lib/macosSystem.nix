@@ -10,18 +10,19 @@
   ...
 }:
 let
-  inherit (inputs) nixpkgs-stable-darwin home-manager nix-darwin;
+  inherit (inputs) nixpkgs-stable home-manager nix-darwin;
 in
 nix-darwin.lib.darwinSystem {
-  inherit system specialArgs;
+  inherit specialArgs;
   modules =
     darwin-modules
     ++ [
       (
         { lib, ... }:
         {
-          nixpkgs.pkgs = import nixpkgs-stable-darwin {
-            inherit system; # refer the `system` parameter form outer scope recursively
+          nixpkgs.hostPlatform = system;
+          nixpkgs.pkgs = import nixpkgs-stable {
+            inherit system;
             # To use chrome, we need to allow the installation of non-free software
             config.allowUnfree = true;
             config.allowBroken = true;

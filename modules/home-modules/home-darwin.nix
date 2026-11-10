@@ -46,6 +46,12 @@ in
   #     xxx
   # '';
 
+  home.sessionVariables = {
+    http_proxy = "http://127.0.0.1:7890";
+    https_proxy = "http://127.0.0.1:7890";
+    no_proxy = "";
+  };
+
   # 设置鼠标指针大小以及字体 DPI（适用于 4K 显示器）
   xresources.properties = {
     "Xcursor.size" = 16;
@@ -55,14 +61,16 @@ in
   # git 相关配置
   programs.git = {
     enable = true;
-    userName = "QuarterHeaven";
-    userEmail = "liaotx2@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "QuarterHeaven";
+      user.email = "liaotx2@gmail.com";
       github.user = "QuarterHeaven";
       credential.helper = "keepassxc --git-groups";
       core.autocrlf = false;
       http.postBuffer = 524288000;
       push = { autoSetupRemote = true; };
+      # 强制走 ipv4
+      http.version = "HTTP/1.1";
     };
   };
 
@@ -254,4 +262,8 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # Disable manual generation to avoid nixpkgs-25.11 libsForQt5 removal breaking option serialization
+  manual.manpages.enable = false;
+  manual.html.enable = false;
 }

@@ -7,8 +7,21 @@
     onActivation = {
       autoUpdate = true;
       upgrade = true;
-      cleanup = "zap";
+      # cleanup = "zap";
+      cleanup = "none";
+      extraFlags = [ "--force" ];
     };
+
+    taps = [
+      # "QuarterHeaven/selfuse"
+      # "QuarterHeaven/selfuse-cask"
+      "nikitabobko/tap"
+      "koekeishiya/formulae"
+      "FelixKratz/formulae"
+      "mrkai77/cask"
+      "laishulu/homebrew"
+      "BarutSRB/tap"
+    ];
 
     brews = [
       "autoconf"
@@ -30,7 +43,6 @@
       "ncdu"
       "libmps"
       "sbcl"
-      "koekeishiya/formulae/yabai"
     ];
 
     casks = [
@@ -39,11 +51,11 @@
       "intellij-idea-ce"
       "mos" # mouse controller
       "lulu" # defend upgrade
-      "qq"
-      "wechat"
+      "localsend"
+#      "qq"
+#      "wechat"
       "visual-studio-code"
       "squirrel-app"
-      #"nikitabobko/tap/aerospace"
       "apifox"
       "beekeeper-studio"
       "usr-sse2-rdm"
@@ -57,7 +69,8 @@
       "google-chrome"
       "microsoft-edge"
       "xquartz"
-      "jordanbaird-ice@beta"
+      # "jordanbaird-ice@beta" use thaw instead
+      "thaw"
       "windterm"
       "font-symbols-only-nerd-font"
       "font-material-symbols"
@@ -65,17 +78,7 @@
       # "zen-browser"
       "keycastr"
       "ghostty"
-      "krishkrosh/apps/trackweight"
-    ];
-
-    taps = [
-      # "QuarterHeaven/selfuse"
-      # "QuarterHeaven/selfuse-cask"
-      "nikitabobko/tap"
-      "koekeishiya/formulae"
-      "FelixKratz/formulae"
-      "mrkai77/cask"
-      "laishulu/homebrew"
+      "barutsrb/tap/omniwm"
     ];
   };
 }

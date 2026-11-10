@@ -29,7 +29,6 @@
     telegram-desktop
 
     pngpaste
-    unstable.aider-chat
     # grip-search
   ];
 

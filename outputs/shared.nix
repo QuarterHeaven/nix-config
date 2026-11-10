@@ -19,6 +19,9 @@ let
   universal_overlays = [
     inputs.emacs-overlay.overlay
     (import inputs.rust-overlay)
+    (_final: prev: {
+      direnv = prev.direnv.overrideAttrs (_old: { doCheck = false; });
+    })
   ];
 
   overlaysFor = s: import ../modules/overlays/overlays-for-systems.nix {

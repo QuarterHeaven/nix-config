@@ -6,7 +6,7 @@
     ./dotfiles.nix
     ./emacs
     ./ffmpeg.nix
-    # ./python.nix
+    ./python.nix
     ./yazi.nix
     ./television.nix
     ./tdlib.nix

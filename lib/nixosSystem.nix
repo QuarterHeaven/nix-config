@@ -14,9 +14,10 @@ let
   nixos-generators = inputs.nixos-generators or null;
 in
 nixpkgs.lib.nixosSystem {
-  inherit system specialArgs;
+  inherit specialArgs;
   modules =
-    nixos-modules
+    [ { nixpkgs.hostPlatform = system; } ]
+    ++ nixos-modules
     ++ (lib.optionals (nixos-generators != null) [
       nixos-generators.nixosModules.all-formats
     ])

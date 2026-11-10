@@ -36,12 +36,12 @@
     # nixpkgs.url = "github:NixOS/nixpkgs/master";
     # nixpkgs.url = "github:QuarterHeaven/nixpkgs/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs-stable-darwin";
+    nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs-stable";
     nixpkgs-stable = { url = "github:nixos/nixpkgs/nixos-25.11"; };
     nixpkgs-stable-darwin = { url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin"; };
     nixpkgs-unstable = { url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
-    home-manager = { url = "github:nix-community/home-manager"; inputs.nixpkgs.follows = "nixpkgs"; };
+    home-manager = { url = "github:nix-community/home-manager/release-25.11"; inputs.nixpkgs.follows = "nixpkgs"; };
     emacs-overlay = { url = "github:nix-community/emacs-overlay"; inputs.nixpkgs.follows = "nixpkgs-unstable"; };
     nixos-wsl = { url = "github:nix-community/NixOS-WSL"; inputs.nixpkgs.follows = "nixpkgs"; };
     nixos-hardware = { url = "github:NixOS/nixos-hardware/master"; };

@@ -10,6 +10,7 @@
     unison
     # gemini-cli
     just
+    jq
     gnutls
     tree-sitter
     coreutils-prefixed
